@@ -22,7 +22,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supp,ortsTablet": true
+    },
+    "androidStatusBar": {
+      "hidden": true, 
+      "translucent": true, 
+      "barStyle": "light-content", 
+      "backgroundColor": "#00000000"  
     }
   }
 }
