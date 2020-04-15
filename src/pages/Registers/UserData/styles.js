@@ -2,33 +2,19 @@ import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
   container:{
-     flex:1,
-     marginVertical:20,
-     marginHorizontal:20,
-    
-   },
-   titles:{
-     fontSize:30,
-     marginVertical:20,
-     fontWeight:'700',
-     alignItems:'center',
-     justifyContent:'center',
-     alignContent:'center'
-   },
-   paragraphs:{
-     justifyContent:'center',
-     alignContent:'center',
-     alignItems:'center',
-     
-   }, button:{
-    marginTop:20,
+    flex:1,
+    paddingHorizontal:30,
+    paddingVertical:30,
+  },button:{
+    marginTop:30,
     backgroundColor:'rgba(2,157,100, 0.7)',
     paddingVertical:10,
     justifyContent:'center',
     alignContent:'center',
     alignItems:'center',
     borderRadius:20,
-    elevation:3
+    elevation:3,
+    marginBottom:40
   },
   textButton:{
     fontSize:20,
@@ -38,7 +24,16 @@ const styles = StyleSheet.create({
     textShadowRadius:6,
     textShadowOffset:{height:1,width:1},
   },
-   
+  input:{
+
+  }, titles:{
+    fontSize:30,
+    marginVertical:40,
+    fontWeight:'700',
+    alignItems:'center',
+    justifyContent:'center',
+    alignContent:'center'
+  },
 })
 
 export default styles

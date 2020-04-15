@@ -22,7 +22,7 @@
       "**/*"
     ],
     "ios": {
-      "supp,ortsTablet": true
+      "supportsTablet": true
     },
     "androidStatusBar": {
       "hidden": true, 

@@ -1,7 +1,8 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text,Button, CheckBox, AsyncStorage,Alert} from 'react-native';
+import { View, Text,TouchableOpacity, CheckBox, AsyncStorage,Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-
+import styles from './styles'
+import keys from '../../../temporaryStorage/keys'
 // import { Container } from './styles';
 
 export default function Pergunta3() {
@@ -18,87 +19,55 @@ export default function Pergunta3() {
   const [isSelected2, setSelection2] = useState(false);
   const [isDisable2, setIsDisable2] = useState(false);
 
-  const [isSelected3, setSelection3] = useState(false);
- const [isDisable3, setIsDisable3] = useState(false);
-  
-  const [isSelected4, setSelection4] = useState(false);
-  const [isDisable4, setIsDisable4] = useState(false);
-  
  
   const [resposta1, setResposta1] = useState('')
   
 
   useEffect(() => {
 
-    if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false){
+    if (isSelected1 == false  && isSelected2 ==false ){
       setIsDisable1(false)
       setIsDisable2(false)
-      setIsDisable3(false)
-      setIsDisable4(false)
-
+     
       setResposta1('') 
 
-    }else if(isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false ){
+    }else if(isSelected1 == true  && isSelected2 ==false ){
         
         setIsDisable1(false)
         setIsDisable2(true)
-        setIsDisable3(true)
-        setIsDisable4(true)
+     
         
-        setResposta1('não') 
+        setResposta1('Não, não estou com sintomas') 
         
        
-    }else if (isSelected1 == false  && isSelected2 ==true && isSelected3 ==false && isSelected4 ==false){
+    }else if (isSelected1 == false  && isSelected2 ==true ){
         setIsDisable1(true)
         setIsDisable2(false)
-        setIsDisable3(true)
-        setIsDisable4(true)
-
-        setResposta1('sim, negativo') 
-    }else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false){
-      setIsDisable1(true)
-      setIsDisable2(true)
-      setIsDisable3(false)
-      setIsDisable4(true)
-
-      setResposta1('sim, sem resultado') 
-  }
-  else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==true){
-    setIsDisable1(true)
-    setIsDisable2(true)
-    setIsDisable3(true)
-    setIsDisable4(false)
-
-    setResposta1('sim, positivo') 
-}},[isSelected1, isSelected2, isSelected3, isSelected4])
+        
+        setResposta1('Sim, estou com sintomas') 
+    }
+  },[isSelected1, isSelected2])
  
 
 _storeData = async () => {
  
 try{
-  await AsyncStorage.setItem('USER_REPORT_1', resposta1)
-  const save = await AsyncStorage.getItem('USER_REPORT_1')
+  const respostas ={
+    estado_de_saude:resposta1
+  }
+  await AsyncStorage.setItem(keys.questionario.Q3, JSON.stringify(respostas))
+  const save = await AsyncStorage.getItem(keys.questionario.Q3)
   if(!save){
     Alert.alert('Cadastro', 'erro ao cadastrar')
   }else{
-    Alert.alert('Cadastro', 'cadastrado com sucesso')
-    switch(save){
-      case 'não':
-       nav.navigate('')
-      break
-       case 'sim, negativo':
-       nav.navigate('')
-      break
-       case 'sim, sem resultado':
-       nav.navigate('')
-      break
-       case 'sim, positivo':
-       nav.navigate('')
-      break
-       case '':
-       alert.alert('Pergunta 1', 'você precisa responder a pergunta para continuar')
-      break
-}
+    if(isSelected1){
+      nav.navigate('Pergunta7')
+    }else if(isSelected2){
+      nav.navigate('')
+    }else{
+      alert.alert('Pergunta 1', 'você precisa responder a pergunta para continuar')
+    }         
+
     console.log(save)
   }
 }catch(erro){
@@ -109,52 +78,36 @@ try{
 
    
   return (
-    <View>
+    <View style={styles.container}>
       
-     <Text>forneça algumas informações: </Text>
-     <Text>Foi testado para covid-19? </Text>
-
-     <View style={{flexDirection:'row'}}>
+    
+     <Text style={styles.titles}>Estado de saúde:  Está com sintomas ? </Text>
+     <View  style={{paddingVertical:20, paddingHorizontal:20}}>
+     <View style={styles.alternatives}>
         <CheckBox
         disabled={isDisable1}
           value={isSelected1}
           onValueChange={setSelection1}
         />
-        <Text >não</Text>
+        <Text >Não, não estou com sintomas</Text>
       </View>
 
-      <View style={{flexDirection:'row'}}>
+      <View style={styles.alternatives}>
         <CheckBox
         disabled={isDisable2}
           value={isSelected2}
           onValueChange={setSelection2}
         />
-        <Text >sim, negativo</Text>
+        <Text >Sim, estou com sintomas</Text>
       </View>
 
-      <View style={{flexDirection:'row'}}>
-        <CheckBox
-        disabled={isDisable3}
-          value={isSelected3}
-          onValueChange={setSelection3}
-        />
-        <Text >sim, sem resultado</Text>
+ 
+      <Text style={{paddingTop:20}}>sua resposta nesta etapa foi: {resposta1} </Text>
       </View>
-
-      <View style={{flexDirection:'row'}}>
-        <CheckBox
-           disabled={isDisable4}
-          value={isSelected4}
-          onValueChange={setSelection4}
-        />
-        <Text >sim, positivo</Text>
-      </View>
-
-  
-      <Text>sua resposta nesta etapa foi: {resposta1} </Text>
-      
+      <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>
+       <Text style={styles.textButton}>Próximo</Text>
+      </TouchableOpacity>
        
-       <Button title="Proximo" onPress={_storeData}/>
     
     </View>
   );

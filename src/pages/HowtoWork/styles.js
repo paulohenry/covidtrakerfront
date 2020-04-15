@@ -3,8 +3,8 @@ import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
   container:{
      flex:1,
-     marginVertical:20,
-     marginHorizontal:20,
+     paddingVertical:20,
+     paddingHorizontal:20,
     
    },
    titles:{
@@ -15,7 +15,16 @@ const styles = StyleSheet.create({
      justifyContent:'center',
      alignContent:'center'
    },
+   titles2:{
+    fontSize:20,
+    marginVertical:20,
+    fontWeight:'700',
+    alignItems:'center',
+    justifyContent:'center',
+    alignContent:'center'
+  },
    paragraphs:{
+    fontSize:15,
      justifyContent:'center',
      alignContent:'center',
      alignItems:'center',
@@ -28,7 +37,8 @@ const styles = StyleSheet.create({
     alignContent:'center',
     alignItems:'center',
     borderRadius:20,
-    elevation:3
+    elevation:3,
+    marginBottom:40
   },
   textButton:{
     fontSize:20,

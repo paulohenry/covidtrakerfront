@@ -1,7 +1,8 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text,Button, CheckBox, AsyncStorage,Alert} from 'react-native';
+import { View, Text,Button, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-
+import styles from './styles'
+import keys from '../../../temporaryStorage/keys'
 // import { Container } from './styles';
 
 export default function Pergunta1() {
@@ -54,7 +55,7 @@ export default function Pergunta1() {
         setIsDisable3(true)
         setIsDisable4(true)
 
-        setResposta1('sim, negativo') 
+        setResposta1('sim, com resultado negativo') 
     }else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false){
       setIsDisable1(true)
       setIsDisable2(true)
@@ -69,92 +70,94 @@ export default function Pergunta1() {
     setIsDisable3(true)
     setIsDisable4(false)
 
-    setResposta1('sim, positivo') 
+    setResposta1('sim, com resultado positivo') 
 }},[isSelected1, isSelected2, isSelected3, isSelected4])
  
 
 _storeData = async () => {
- 
-try{
-  await AsyncStorage.setItem('USER_REPORT_1', resposta1)
-  const save = await AsyncStorage.getItem('USER_REPORT_1')
+    const respostas={
+      testou_para_covid:resposta1
+    }
+   try{
+  await AsyncStorage.setItem(keys.questionario.Q1, JSON.stringify(respostas))
+  const save = await AsyncStorage.getItem(keys.questionario.Q1)
   if(!save){
-    Alert.alert('Cadastro', 'erro ao cadastrar')
-  }else{
-    Alert.alert('Cadastro', 'cadastrado com sucesso')
-    switch(save){
-      case 'não':
-       nav.navigate('')
-      break
-       case 'sim, negativo':
-       nav.navigate('')
-      break
-       case 'sim, sem resultado':
-       nav.navigate('')
-      break
-       case 'sim, positivo':
-       nav.navigate('')
-      break
-       case '':
-       alert.alert('Pergunta 1', 'você precisa responder a pergunta para continuar')
-      break
-}
-    console.log(save)
+    Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
   }
-}catch(erro){
-   Alert.alert('Cadastro', {erro:' erro ao cadastrar'})
-}   
+  if(isSelected1==false && isSelected2==false && isSelected3==false && isSelected4==false){
+  Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
 
+  }
+    if(isSelected1){
+      nav.navigate('Pergunta3')
+    }else if(isSelected2){
+      nav.navigate('Pergunta2')
+    }else if(isSelected3){
+      nav.navigate('Pergunta2')
+    }else if(isSelected4){
+      nav.navigate('Pergunta2')
+    } 
+        console.log(save)
+      
+    }catch(erro){
+      Alert.alert('Cadastro', {erro:' erro ao cadastrar'})
+    }   
+   
 };
 
    
   return (
-    <View>
+    <View style={styles.container}>
       
-     <Text>forneça algumas informações: </Text>
-     <Text>Foi testado para covid-19? </Text>
-
-     <View style={{flexDirection:'row'}}>
+   
+     <Text style={styles.titles} >Foi testado para covid-19? </Text>
+     <View  style={{paddingVertical:20, paddingHorizontal:20}}>
+     <View style={styles.alternatives}>
         <CheckBox
         disabled={isDisable1}
           value={isSelected1}
           onValueChange={setSelection1}
         />
-        <Text >não</Text>
+        <Text >  não</Text>
       </View>
 
-      <View style={{flexDirection:'row'}}>
+      <View style={styles.alternatives}>
         <CheckBox
         disabled={isDisable2}
           value={isSelected2}
           onValueChange={setSelection2}
         />
-        <Text >sim, negativo</Text>
+        <Text >  sim, com resultado negativo</Text>
       </View>
 
-      <View style={{flexDirection:'row'}}>
+      <View style={styles.alternatives}>
         <CheckBox
         disabled={isDisable3}
           value={isSelected3}
           onValueChange={setSelection3}
+          
         />
-        <Text >sim, sem resultado</Text>
+        <Text >  sim, mas não tive resultado</Text>
       </View>
 
-      <View style={{flexDirection:'row'}}>
+      <View style={styles.alternatives}>
         <CheckBox
            disabled={isDisable4}
           value={isSelected4}
           onValueChange={setSelection4}
+          
         />
-        <Text >sim, positivo</Text>
+        <Text >  sim, com resultado positivo</Text>
       </View>
 
   
-      <Text>sua resposta nesta etapa foi: {resposta1} </Text>
+      <Text style={{paddingTop:20}}>sua resposta nesta etapa foi: {resposta1} </Text>
       
-       
-       <Button title="Proximo" onPress={_storeData}/>
+      </View>
+      <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>
+       <Text style={styles.textButton}>Próximo</Text>
+      </TouchableOpacity>
+      
     
     </View>
   );

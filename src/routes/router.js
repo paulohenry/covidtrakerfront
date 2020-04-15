@@ -2,6 +2,9 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../pages/Login/'
+
+import HowtoWork from '../pages/HowtoWork'
+
 import Terms from '../pages/Terms'
 
 import Pergunta1 from '../pages/Registers/Pergunta1'
@@ -48,10 +51,10 @@ export default function Router() {
         <Stack.Screen options={{headerShown:false}}  name="Profile" component={Profile} />
         <Stack.Screen options={{headerShown:false}}  name="ConfirmRegister" component={ConfirmRegister} />
         <Stack.Screen options={{headerShown:false}} name="Dbg"  component={Dbg} />
-
+        <Stack.Screen options={{headerShown:false}}  name="HowToWork" component={HowtoWork} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta1" component={Pergunta1} />
-        <Stack.Screen options={{headerShown:false}}  name="Pergunta2" component={Pergunta1} />
-        <Stack.Screen options={{headerShown:false}}  name="Pergunta3" component={Pergunta1} />
+        <Stack.Screen options={{headerShown:false}}  name="Pergunta2" component={Pergunta2} />
+        <Stack.Screen options={{headerShown:false}}  name="Pergunta3" component={Pergunta3} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta4" component={Pergunta4} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta5" component={Pergunta5} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta6" component={Pergunta6} />
@@ -59,6 +62,7 @@ export default function Router() {
         <Stack.Screen options={{headerShown:false}}  name="Pergunta8" component={Pergunta8} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta9" component={Pergunta9} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta10" component={Pergunta10} />
+        <Stack.Screen options={{headerShown:false}}  name="Pergunta11" component={Pergunta11} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta12" component={Pergunta12} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta13" component={Pergunta13} />
         <Stack.Screen options={{headerShown:false}}  name="Pergunta14" component={Pergunta14} />

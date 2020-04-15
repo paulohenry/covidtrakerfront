@@ -1,8 +1,8 @@
-import React,{useState,useEffect,createRef}from 'react';
-import { View,TextInput,Text,Button, KeyboardAvoidingView,AsyncStorage,Alert,CheckBox } from 'react-native';
-
+import React,{useState,useEffect}from 'react';
+import { View,TextInput,Text,AsyncStorage,Alert,TouchableOpacity,KeyboardAvoidingView } from 'react-native';
+import { Input } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
-import styles from '../../../styles/styles'
+import styles from './styles'
 import storage from '../../../temporaryStorage/keys'
 
 // import { Container } from './styles';
@@ -18,44 +18,18 @@ export default function UserData() {
       const [senha, setSenha ] =useState('')
       const [senhaConfirmacao, setSenhaConfirmacao ] =useState('')
 
-      const [sexoM, setSexoM ] =useState('')
-      const [sexoMisDisable, setMisDisable ] =useState(false)
-
-      const [sexoF, setSexoF ] =useState('')
-      const [sexoFisDisable, setFisDisable ] =useState(false)
-
-      const [sexoT, setSexoT ] =useState('')
-      const [sexoTisDisable, setTisDisable ] =useState(false)
-
-      const [idade, setIdade ] =useState('')
-      const [sexoEscolhido, setSexoEscolhido] = useState('')
+     
 
       useEffect(() => {
-        if (sexoM == true  && sexoF ==false && sexoT ==false){
-          setMisDisable(false)
-          setTisDisable(true)
-          setFisDisable(true)
-          setSexoEscolhido('masculino')
-         }else if(sexoM == false  && sexoF ==true && sexoT ==false) {
-          setMisDisable(true)
-          setTisDisable(true)
-          setFisDisable(false)
-          setSexoEscolhido('feminino')
-         }else if(sexoM == false  && sexoF ==true && sexoT ==false) {
-          setMisDisable(true)
-          setTisDisable(false)
-          setFisDisable(true)
-          setSexoEscolhido('transsexual')
-         }
-
+     
                 setPrimeiroNome(primeiroNome)
                 setSegundoNome(segundoNome)
                 setTelefone(telefone)
                 setCep(cep)
                 setSenha(senha)
                 setSenhaConfirmacao(senhaConfirmacao)
-                setSexoEscolhido(sexoEscolhido)
-                setIdade(idade)
+                
+             
 
                
 
@@ -66,11 +40,7 @@ export default function UserData() {
          cep,
          senha,
          senhaConfirmacao,
-         sexoEscolhido,
-         sexoM,
-         sexoF,
-         sexoT,
-         idade
+               
       ])
 
       const store = async()=>{
@@ -83,44 +53,46 @@ export default function UserData() {
                 await AsyncStorage.setItem(storage.user.cep, cep)
                 await AsyncStorage.setItem(storage.user.senha,senha)
                 await AsyncStorage.setItem(storage.user.confirmSenha,senhaConfirmacao)
-                await AsyncStorage.setItem(storage.user.sexo,sexoEscolhido)
-                await AsyncStorage.setItem(storage.user.idade,idade)
+                
+              
                 const save = [
                   storage.user.primeiroNome,
                   storage.user.segundoNome,
                   storage.user.telefone,
                   storage.user.cep,
                   storage.user.senha,
-                  storage.user.confirmSenha,
-                  storage.user.sexo,
-                  storage.user.idade
+                  storage.user.confirmSenha,                 
                  ]  
                      
                 if(!save){
                   Alert.alert('Cadastro', 'erro ao cadastrar')
-                }else{
-                  Alert.alert('Cadastro', 'cadastrado com sucesso')
-                  nav.navigate('Pergunta1')
+                }else if(primeiroNome==''||segundoNome==''||telefone==''||cep==''||senha==''||senhaConfirmacao==''){
+                  Alert.alert('Cadastro', 'Preencha o formulário por completo para continuar')
+                  
                   console.log(save)
+                }else if(save){
+                 
+                  nav.navigate('Pergunta1')
                 }
               }catch(erro){
                  Alert.alert('Cadastro', erro)
               }
       }
-  return (
-    <KeyboardAvoidingView behavior="padding" enabled>
-    <View style={styles.container}>
-        
-        <TextInput value={primeiroNome} onChangeText={setPrimeiroNome} autoCapitalize="characters" placeholder="Primeiro nome"/>
-        <TextInput value={segundoNome} onChangeText={setSegundoNome} autoCapitalize="characters" placeholder="Último nome"/>
-        <TextInput value={telefone} onChangeText={setTelefone} keyboardType="number-pad" placeholder="Ex: (DDD)99999-99999"/>
-        <TextInput value={cep} onChangeText={setCep} keyboardType="number-pad" placeholder="CEP de sua residência"/>
-        <TextInput value={senha} onChangeText={setSenha} secureTextEntry={true} keyboardType="number-pad" placeholder="Senha de 6 dígitos "/>
-        <TextInput value={senhaConfirmacao} onChangeText={setSenhaConfirmacao} secureTextEntry={true} keyboardType="number-pad" placeholder="Confirme sua senha"/>
-        <TextInput value={idade} onChangeText={setIdade}  keyboardType="number-pad" placeholder="Sua idade"/>
-       
-       <Button title="Iniciar Cadastro"onPress={store}/>
-    </View>
-    </KeyboardAvoidingView>
+  return (   
+    
+      <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={-150} behavior="position" enabled>
+        <Text style={styles.titles}>Insira seus dados pessoais:</Text>
+        <Input value={primeiroNome} onChangeText={setPrimeiroNome} autoCapitalize="characters" label="Primeiro nome"/>
+        <Input value={segundoNome} onChangeText={setSegundoNome} autoCapitalize="characters" label="Último nome"/>
+        <Input value={telefone} onChangeText={setTelefone} keyboardType="number-pad" label="Ex: (DDD)99999-99999"/>
+        <Input value={cep} onChangeText={setCep} labelProps={styles.input} keyboardType="number-pad" label="CEP de onde está morando atualmente"/>
+        <Input value={senha} onChangeText={setSenha} secureTextEntry={true} keyboardType="number-pad" label="Senha de 6 dígitos "/>
+        <Input value={senhaConfirmacao} onChangeText={setSenhaConfirmacao} secureTextEntry={true} keyboardType="number-pad" label="Confirme sua senha"/>
+     <TouchableOpacity style={styles.button}onPress={store}>
+        <Text style={styles.textButton}>Iniciar cadastro</Text>
+       </TouchableOpacity>
+      </KeyboardAvoidingView>
+    
+  
   );
 }

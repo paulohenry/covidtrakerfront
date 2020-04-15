@@ -33,7 +33,7 @@ export default function Terms() {
               passou a ser integrado a softwares de editoraçã
               o eletrônica como Aldus PageMaker.              
         </Text>
-        <TouchableOpacity style={styles.buttonTermos}onPress={()=>{navigationTo('UserData')}}>
+        <TouchableOpacity style={styles.button}onPress={()=>{navigationTo('UserData')}}>
        <Text style={styles.textButton}>Entrar</Text>
       </TouchableOpacity>
     </ScrollView>

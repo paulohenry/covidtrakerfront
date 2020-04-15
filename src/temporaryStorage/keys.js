@@ -7,7 +7,7 @@ const keys = {
     senha:'USER-SENHA',
     confirmSenha:'USER-CONFIR-SENHA',
     sexo: 'USER-SEXO',
-    idade:'USER-IDADE'
+  
   },
   questionario: {
     Q1: 'Q1',
