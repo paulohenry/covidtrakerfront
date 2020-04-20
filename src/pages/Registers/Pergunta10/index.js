@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
 import { View, Text,Button, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-import styles from './styles'
+import styles from '../../../styles/formStyles'
 import keys from '../../../temporaryStorage/keys'
 // import { Container } from './styles';
 
@@ -77,10 +77,10 @@ export default function Pergunta10() {
 _storeData = async () => {
    const respostas ={
      questao10_locomocao_trabalho:{
-       nao_trabalho:isSelected1,
-       sim_normalmente:isSelected2,
-       sim_revezamento_ou_reduzida:isSelected3,
-       afastado_ou_homeoffice:isSelected4,
+       a1:isSelected1,
+       a2:isSelected2,
+       a3:isSelected3,
+       a4:isSelected4,
      }
    }
    try{
@@ -92,9 +92,9 @@ _storeData = async () => {
     if(isSelected1){
       nav.navigate('Pergunta11')
     }else if(isSelected2){
-      nav.navigate('Pergunta10')
+      nav.navigate('Pergunta11')
     }else if(isSelected3){
-      nav.navigate('Pergunta10')
+      nav.navigate('Pergunta11')
     }else if(isSelected4){
       nav.navigate('Pergunta11')
     }else{

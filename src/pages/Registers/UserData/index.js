@@ -80,7 +80,7 @@ export default function UserData() {
       }
   return (   
     
-      <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={-150} behavior="position" enabled>
+      <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={-50} behavior="position" enabled>
         <Text style={styles.titles}>Insira seus dados pessoais:</Text>
         <Input value={primeiroNome} onChangeText={setPrimeiroNome} autoCapitalize="characters" label="Primeiro nome"/>
         <Input value={segundoNome} onChangeText={setSegundoNome} autoCapitalize="characters" label="Último nome"/>

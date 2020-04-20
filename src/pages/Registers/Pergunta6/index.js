@@ -1,7 +1,8 @@
 import React, {useState, useEffect}from 'react';
 import { View, Text,Button, CheckBox, AsyncStorage,Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-
+import keys from '../../../temporaryStorage/keys'
+import styles from '../../../styles/formStyles'
 // import { Container } from './styles';
 
 export default function Pergunta6() {
@@ -76,8 +77,11 @@ export default function Pergunta6() {
 _storeData = async () => {
  
 try{
-  await AsyncStorage.setItem('USER_REPORT_1', resposta1)
-  const save = await AsyncStorage.getItem('USER_REPORT_1')
+  const respostas ={
+    
+  }
+  await AsyncStorage.setItem(keys.questionario.Q1, resposta1)
+  const save = await AsyncStorage.getItem(keys.questionario.Q1)
   if(!save){
     Alert.alert('Cadastro', 'erro ao cadastrar')
   }else{

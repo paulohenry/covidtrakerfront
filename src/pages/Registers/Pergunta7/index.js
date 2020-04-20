@@ -1,8 +1,9 @@
 import React, {useState, useEffect}from 'react';
 import { View, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-import styles from './styles'
+
 import keys from '../../../temporaryStorage/keys'
+import styles from '../../../styles/formStyles'
 // import { Container } from './styles';
 
 export default function Pergunta7() {
@@ -85,11 +86,11 @@ export default function Pergunta7() {
 _storeData = async () => {
      const respostas = {
        questao7_encontra_conhecido:{
-       beija:isSelected1,
-       abraca:isSelected2,
-       aperta_as_maos:isSelected3,
-       fica_proximo_para_conversar:isSelected4,
-       evita_tudo:isSelected5,
+       a1:isSelected1,
+       a2:isSelected2,
+       a3:isSelected3,
+       a4:isSelected4,
+       a5:isSelected5,
        }
      }
    try{

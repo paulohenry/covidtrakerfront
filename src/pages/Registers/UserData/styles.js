@@ -4,9 +4,11 @@ const styles = StyleSheet.create({
   container:{
     flex:1,
     paddingHorizontal:30,
-    paddingVertical:30,
+    paddingTop:0,
+    paddingBottom:25
+
   },button:{
-    marginTop:30,
+    marginTop:5,
     backgroundColor:'rgba(2,157,100, 0.7)',
     paddingVertical:10,
     justifyContent:'center',

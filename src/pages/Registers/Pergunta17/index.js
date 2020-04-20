@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
 import { View, Text,Button, CheckBox, AsyncStorage,Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-
+import styles from '../../../styles/formStyles'
 // import { Container } from './styles';
 
 export default function Pergunta17() {

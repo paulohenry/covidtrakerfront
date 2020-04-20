@@ -7,8 +7,13 @@ import {LinearGradient} from 'expo-linear-gradient'
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles'
 // import { Container } from './styles';
+import keys from '../../temporaryStorage/keys'
 
 export default function Login() {
+
+  
+  console.log(`tela login ID salvo ID: ${keys.device.id}`)
+
   const nav = useNavigation();
  
   const navigationTo = (screen)=>{
@@ -16,7 +21,7 @@ export default function Login() {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={-100} behavior="position" enabled>
+    <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={-150} behavior="position" enabled>
       <ImageBackground source={cristo} style={styles.background}>
       <LinearGradient colors={['rgba(2,157,100, 1)', 'transparent']} style={styles.background}>
      <View style={styles.imgContainer}>
@@ -26,8 +31,8 @@ export default function Login() {
      </View>
      
      <View style={styles.loginContainer}>
-       <Input style={styles.inputs}  placeholder="Login de acesso"/>
-       <Input style={styles.inputs}secureTextEntry={true} placeholder="Senha de acesso"/>
+       <Input style={styles.inputs}  placeholder="Insira seu celular cadastrado"/>
+       <Input style={styles.inputs}secureTextEntry={true} placeholder="Senha de acesso cadastrada"/>
        <TouchableOpacity style={styles.buttonEntrar}onPress={()=>{navigationTo('Maps')}}>
        <Text style={styles.textButton}>Entrar</Text>
       </TouchableOpacity>

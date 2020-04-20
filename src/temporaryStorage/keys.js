@@ -16,6 +16,7 @@ const keys = {
     Q4: 'Q4',
     Q5: 'Q5',
     Q6: 'Q6',
+    Q6A: 'Q6A',
     Q7: 'Q7',
     Q8: 'Q8',
     Q9: 'Q9',
@@ -38,6 +39,9 @@ const keys = {
      emogi_amarelo:'EMOGI-AMARELO',
      emogi_vermelho:'EMOGI-VERMELHO',
      emogi_azul:'EMOGI-AZUL',     
+   },
+   device:{
+     id: 'ID-DEVICE'
    }
 }
 

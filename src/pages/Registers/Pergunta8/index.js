@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
 import { View, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-import styles from './styles'
+import styles from '../../../styles/formStyles'
 import keys from '../../../temporaryStorage/keys'
 // import { Container } from './styles';
 
@@ -23,6 +23,9 @@ export default function Pergunta8() {
 
   const [isSelected5, setSelection5] = useState(false);
   const [isDisable5, setIsDisable5] = useState(false);
+
+  const [isSelected6, setSelection6] = useState(false);
+  const [isDisable6, setIsDisable6] = useState(false);
   
  
   const [resposta1, setResposta1] = useState('')
@@ -30,38 +33,41 @@ export default function Pergunta8() {
   const [resposta3, setResposta3] = useState('')
   const [resposta4, setResposta4] = useState('')
   const [resposta5, setResposta5] = useState('')
-  
+  const [resposta6, setResposta6] = useState('')
 
   useEffect(() => {
 
-    if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false){
+    if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false && isSelected6==false){
       setIsDisable1(false)
       setIsDisable2(false)
       setIsDisable3(false)
       setIsDisable4(false)
       setIsDisable5(false)
+      setIsDisable6(false)
       setResposta1('') 
       setResposta2('') 
       setResposta3('') 
       setResposta4('') 
-      setResposta5('') 
+      setResposta5('')
+      setResposta6('') 
 
-    }else if(isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==true ){
+    }else if(isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==true && isSelected6==false ){
         
         setIsDisable1(true)
         setIsDisable2(true)
         setIsDisable3(true)
         setIsDisable4(true)
+        setIsDisable6(true)
         setIsDisable5(false)
-        setResposta5 ('Não sai porque estou em isolamento')
-         
+        setResposta5 ('Não sai porque estou em isolamento')        
         
        
-    }else if(isSelected1 == false  || isSelected2 ==false || isSelected3 ==false || isSelected4 ==false && isSelected5 == false){
+    }else if(isSelected1 == false  || isSelected2 ==false || isSelected3 ==false || isSelected4 ==false || isSelected6==false && isSelected5 == false){
       setIsDisable1(false)
       setIsDisable2(false)
       setIsDisable3(false)
       setIsDisable4(false)
+      setResposta6(false)
       setIsDisable5(true)
       
     }
@@ -77,19 +83,23 @@ export default function Pergunta8() {
     if(isSelected4){
       setResposta4('Para passear ou fazer exercícios')
     }else{ setResposta4('')}
+    if(isSelected6){
+      setResposta6('Para trabalhar')
+    }else{ setResposta6('')}
   
  
-},[isSelected1, isSelected2, isSelected3, isSelected4,isSelected5])
+},[isSelected1, isSelected2, isSelected3, isSelected4,isSelected5, isSelected6])
  
 
 _storeData = async () => {
      const respostas = {
        questao8_saiu_nos_ultimos_7_dias:{
-       ps_ou_hospital:isSelected1,
-       visitar_alguem:isSelected2,
-       supermercado_feira_lojas_etc:isSelected3,
-       passear_fazer_exercicios:isSelected4,
-       em_isolamento:isSelected5,
+       a1:isSelected1,
+       a2:isSelected2,
+       a3:isSelected3,
+       a4:isSelected4,
+       a5:isSelected5,
+       a6:isSelected6
        }
      }
    try{
@@ -97,7 +107,7 @@ _storeData = async () => {
   const save = await AsyncStorage.getItem(keys.questionario.Q8)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
-  }else if(isSelected1||isSelected2||isSelected3||isSelected4|| isSelected5){ 
+  }else if(isSelected1||isSelected2||isSelected3||isSelected4|| isSelected5|| isSelected6){ 
         nav.navigate('Pergunta9')    
         console.log(save)
       }else{
@@ -155,6 +165,14 @@ _storeData = async () => {
       </View>
       <View style={styles.alternatives}>
         <CheckBox
+           disabled={isDisable6}
+          value={isSelected6}
+          onValueChange={setSelection6}          
+        />
+       <Text >Sai para trabalhar</Text>
+      </View>
+      <View style={styles.alternatives}>
+        <CheckBox
            disabled={isDisable5}
           value={isSelected5}
           onValueChange={setSelection5}          
@@ -163,7 +181,7 @@ _storeData = async () => {
       </View>
 
   
-    <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5}` } </Text>
+    <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5} ${resposta6}` } </Text>
       
       </View>
       <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>

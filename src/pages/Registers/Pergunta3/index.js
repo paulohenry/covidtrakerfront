@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
 import { View, Text,TouchableOpacity, CheckBox, AsyncStorage,Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-import styles from './styles'
+import styles from '../../../styles/formStyles'
 import keys from '../../../temporaryStorage/keys'
 // import { Container } from './styles';
 
@@ -61,7 +61,7 @@ try{
     Alert.alert('Cadastro', 'erro ao cadastrar')
   }else{
     if(isSelected1){
-      nav.navigate('Pergunta7')
+      nav.navigate('Pergunta6A')
     }else if(isSelected2){
       nav.navigate('')
     }else{
@@ -81,7 +81,7 @@ try{
     <View style={styles.container}>
       
     
-     <Text style={styles.titles}>Estado de saúde:  Está com sintomas ? </Text>
+     <Text style={styles.titles}>Estado de saúde: Está com sintomas ? </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>
         <CheckBox

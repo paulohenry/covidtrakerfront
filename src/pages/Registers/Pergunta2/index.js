@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
 import { View, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-import styles from './styles'
+import styles from '../../../styles/formStyles'
 import keys from '../../../temporaryStorage/keys'
 // import { Container } from './styles';
 
@@ -85,7 +85,8 @@ export default function Pergunta2() {
  
 
 _storeData = async () => {
-   
+    
+     
    try{
   await AsyncStorage.setItem(keys.questionario.Q2, resposta1)
   const save = await AsyncStorage.getItem(keys.questionario.Q2)

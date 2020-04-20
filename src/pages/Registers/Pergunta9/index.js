@@ -1,7 +1,7 @@
 import React, {useState, useEffect}from 'react';
 import { View, Text,Button, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-import styles from './styles'
+import styles from '../../../styles/formStyles'
 import keys from '../../../temporaryStorage/keys'
 // import { Container } from './styles';
 
@@ -24,6 +24,9 @@ export default function Pergunta9() {
   
   const [isSelected4, setSelection4] = useState(false);
   const [isDisable4, setIsDisable4] = useState(false);
+
+  const [isSelected5, setSelection5] = useState(false);
+  const [isDisable5, setIsDisable5] = useState(false);
   
  
   const [resposta1, setResposta1] = useState('')
@@ -31,56 +34,66 @@ export default function Pergunta9() {
 
   useEffect(() => {
 
-    if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false){
+    if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false){
       setIsDisable1(false)
       setIsDisable2(false)
       setIsDisable3(false)
       setIsDisable4(false)
-
+      setIsDisable5(false)
       setResposta1('') 
 
-    }else if(isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false ){
+    }else if(isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false ){
         
         setIsDisable1(false)
         setIsDisable2(true)
         setIsDisable3(true)
         setIsDisable4(true)
-        
-        setResposta1('não estou trabalhando no momento') 
+        setIsDisable5(true)
+        setResposta1('Afastado ou não estou trabalhando no momento') 
         
        
-    }else if (isSelected1 == false  && isSelected2 ==true && isSelected3 ==false && isSelected4 ==false){
+    }else if (isSelected1 == false  && isSelected2 ==true && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false){
         setIsDisable1(true)
         setIsDisable2(false)
         setIsDisable3(true)
         setIsDisable4(true)
-
+        setIsDisable5(true)
         setResposta1('sim, em jornada normal') 
-    }else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false){
+    }else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false && isSelected5 ==false){
       setIsDisable1(true)
       setIsDisable2(true)
       setIsDisable3(false)
       setIsDisable4(true)
-
-      setResposta1('sim, em jornada de revezamento ou reduzida') 
+      setIsDisable5(true)
+      setResposta1('sim, em jornada reduzida') 
   }
-  else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==true){
+  else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==true && isSelected5 ==false){
     setIsDisable1(true)
     setIsDisable2(true)
     setIsDisable3(true)
     setIsDisable4(false)
+    setIsDisable5(true)
+    setResposta1('Estou trabalhando em casa') 
+}else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==true){
+  setIsDisable1(true)
+  setIsDisable2(true)
+  setIsDisable3(true)
+  setIsDisable4(true)
+  setIsDisable5(false)
+  setResposta1('Estou trabalhando como voluntário') 
+}
 
-    setResposta1('afastado ou trabalhando em casa') 
-}},[isSelected1, isSelected2, isSelected3, isSelected4])
+},[isSelected1, isSelected2, isSelected3, isSelected4, isSelected5])
  
 
 _storeData = async () => {
    const respostas ={
      questao9_trabalho_atualmente:{
-       nao_trabalho:isSelected1,
-       sim_normalmente:isSelected2,
-       sim_revezamento_ou_reduzida:isSelected3,
-       afastado_ou_homeoffice:isSelected4,
+       a1:isSelected1,
+       a2:isSelected2,
+       a3:isSelected3,
+       a4:isSelected4,
+       a5:isSelected5,
      }
    }
    try{
@@ -97,6 +110,8 @@ _storeData = async () => {
       nav.navigate('Pergunta10')
     }else if(isSelected4){
       nav.navigate('Pergunta11')
+    }else if(isSelected5){
+      nav.navigate('Pergunta10')
     }else{
       Alert.alert('cadastro', 'Você precisa responder a pergunta para continuar')
     }     
@@ -121,7 +136,7 @@ _storeData = async () => {
           value={isSelected1}
           onValueChange={setSelection1}
         />
-        <Text >  não estou trabalhando no momento</Text>
+        <Text > afastado ou não estou trabalhando no momento</Text>
       </View>
 
       <View style={styles.alternatives}>
@@ -140,7 +155,7 @@ _storeData = async () => {
           onValueChange={setSelection3}
           
         />
-        <Text >  sim, em jornada de revezamento ou reduzida</Text>
+        <Text >  sim, em jornada reduzida</Text>
       </View>
 
       <View style={styles.alternatives}>
@@ -150,7 +165,16 @@ _storeData = async () => {
           onValueChange={setSelection4}
           
         />
-        <Text >  afastado ou trabalhando em casa</Text>
+        <Text >  Estou trabalhando em casa</Text>
+      </View>
+      <View style={styles.alternatives}>
+        <CheckBox
+           disabled={isDisable5}
+          value={isSelected5}
+          onValueChange={setSelection5}
+          
+        />
+        <Text >  Estou trabalhando como voluntário</Text>
       </View>
 
   

@@ -1,14 +1,23 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text,Button, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
+import { View, Text,Button, CheckBox, AsyncStorage,Alert, TouchableOpacity, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
-import styles from './styles'
+import styles from '../../../styles/formStyles'
 import keys from '../../../temporaryStorage/keys'
+import * as Device from 'expo-device'
+
+
 // import { Container } from './styles';
 
 export default function Pergunta1() {
-
-
-
+  
+   let id = null;
+  if(Platform.OS ==='ios'){
+   id = Device.modelId
+  }else if(Platform.OS ==='android'){
+      id= Device.designName
+  }
+  
+  
 
 
   const nav = useNavigation()
@@ -74,12 +83,13 @@ export default function Pergunta1() {
 }},[isSelected1, isSelected2, isSelected3, isSelected4])
  
 
-_storeData = async () => {
+const _storeData = async () => {
     const respostas={
       testou_para_covid:resposta1
     }
    try{
   await AsyncStorage.setItem(keys.questionario.Q1, JSON.stringify(respostas))
+  await  AsyncStorage.setItem(keys.device.id, id)
   const save = await AsyncStorage.getItem(keys.questionario.Q1)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
