@@ -33,6 +33,9 @@ const keys = {
     Q20: 'Q20',
     
    },
+   confirmScreen:{
+     CONFIRM:'CONFIRMATION'
+   },
    pontuacao:{
      total: 'TOTAL',
      emogi_verde:'EMOGI-VERDE',

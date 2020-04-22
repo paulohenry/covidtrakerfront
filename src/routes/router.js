@@ -36,10 +36,7 @@ import ConfirmRegister from '../pages/ConfirmRegister'
 import UserData from '../pages/Registers/UserData/index'
 import AlertScreen from '../pages/Registers/Alert'
 import Dbg from '../pages/Dbg/index'
-import * as Device from 'expo-device'
-import {Platform,AsyncStorage} from 'react-native'
 
-import keys from '../temporaryStorage/keys'
 
 const Stack = createStackNavigator();
 
@@ -47,105 +44,8 @@ const Stack = createStackNavigator();
 
 export default function Router() {
  
-  
-      if(Platform.OS ==='ios'){        
-        const id = Device.modelId
-         if(!keys.device.id){
-          console.log(`se nao tem ID: ${id}`)
-          return(
 
-            <NavigationContainer>
-            <Stack.Navigator >
-              <Stack.Screen options={{headerShown:false}} name="Pergunta1"  component={Login} />
-              <Stack.Screen options={{headerShown:false}}  name="Terms" component={Terms} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="UserData" component={UserData} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="AlertScreen" component={AlertScreen} />
-              <Stack.Screen options={{headerShown:false}}  name="Maps" component={Maps} />
-              <Stack.Screen options={{headerShown:false}}  name="Profile" component={Profile} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="ConfirmRegister" component={ConfirmRegister} />
-              <Stack.Screen options={{headerShown:true}} name="Dbg"  component={Dbg} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="HowToWork" component={HowtoWork} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta1" component={Pergunta1} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta2" component={Pergunta2} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta3" component={Pergunta3} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta4" component={Pergunta4} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta5" component={Pergunta5} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta6" component={Pergunta6} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta6A" component={Pergunta6A} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta7" component={Pergunta7} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta8" component={Pergunta8} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta9" component={Pergunta9} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta10" component={Pergunta10} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta11" component={Pergunta11} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta12" component={Pergunta12} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta13" component={Pergunta13} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta14" component={Pergunta14} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta15" component={Pergunta15} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta16" component={Pergunta16} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta17" component={Pergunta17} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta18" component={Pergunta18} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta19" component={Pergunta19} />
-              <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta20" component={Pergunta20} />
-      
-      
-      
-            </Stack.Navigator>
-          </NavigationContainer>
-           )
-        }else if(keys.device.id){
-          return(
-          <NavigationContainer>
-          <Stack.Navigator >
-            <Stack.Screen options={{headerShown:false}} name="Login"  component={Login} />
-            <Stack.Screen options={{headerShown:false}}  name="Terms" component={Terms} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="UserData" component={UserData} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="AlertScreen" component={AlertScreen} />
-            <Stack.Screen options={{headerShown:false}}  name="Maps" component={Maps} />
-            <Stack.Screen options={{headerShown:false}}  name="Profile" component={Profile} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="ConfirmRegister" component={ConfirmRegister} />
-            <Stack.Screen options={{headerShown:true}} name="Dbg"  component={Dbg} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="HowToWork" component={HowtoWork} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta1" component={Pergunta1} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta2" component={Pergunta2} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta3" component={Pergunta3} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta4" component={Pergunta4} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta5" component={Pergunta5} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta6" component={Pergunta6} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta6A" component={Pergunta6A} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta7" component={Pergunta7} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta8" component={Pergunta8} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta9" component={Pergunta9} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta10" component={Pergunta10} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta11" component={Pergunta11} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta12" component={Pergunta12} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta13" component={Pergunta13} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta14" component={Pergunta14} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta15" component={Pergunta15} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta16" component={Pergunta16} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta17" component={Pergunta17} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta18" component={Pergunta18} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta19" component={Pergunta19} />
-            <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta20" component={Pergunta20} />
-    
-    
-    
-          </Stack.Navigator>
-        </NavigationContainer>
-          )
-        }   
-              
-           
-         
-        }else if(Platform.OS ==='android'){
-          const id= null;
-          
-          async function rg (){
-             id = await AsyncStorage.getItem(keys.device.id)
-          }
-          rg()         
-          if(!id){                
-            console.log(`se nao te id: ${id}`)
-             return (
+   return(
 <NavigationContainer>
       <Stack.Navigator  initialRouteName="Pergunta1">
         <Stack.Screen options={{headerShown:false}} name="Login"  component={Login} />
@@ -184,49 +84,6 @@ export default function Router() {
       </Stack.Navigator>
     </NavigationContainer>
       )
-         
-        }else if (id){
-          console.log(`se tem id:  ${id}`)
-            return(
-      <NavigationContainer>
-        <Stack.Navigator  initialRouteName="Login">
-        <Stack.Screen options={{headerShown:false}} name="Login"  component={Login} />
-        <Stack.Screen options={{headerShown:false}}  name="Terms" component={Terms} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="UserData" component={UserData} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="AlertScreen" component={AlertScreen} />
-        <Stack.Screen options={{headerShown:false}}  name="Maps" component={Maps} />
-        <Stack.Screen options={{headerShown:false}}  name="Profile" component={Profile} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="ConfirmRegister" component={ConfirmRegister} />
-        <Stack.Screen options={{headerShown:true}} name="Dbg"  component={Dbg} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="HowToWork" component={HowtoWork} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta1" component={Pergunta1} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta2" component={Pergunta2} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta3" component={Pergunta3} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta4" component={Pergunta4} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta5" component={Pergunta5} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta6" component={Pergunta6} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta6A" component={Pergunta6A} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta7" component={Pergunta7} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta8" component={Pergunta8} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta9" component={Pergunta9} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta10" component={Pergunta10} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta11" component={Pergunta11} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta12" component={Pergunta12} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta13" component={Pergunta13} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta14" component={Pergunta14} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta15" component={Pergunta15} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta16" component={Pergunta16} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta17" component={Pergunta17} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta18" component={Pergunta18} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta19" component={Pergunta19} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta20" component={Pergunta20} />
-
-
-
-          </Stack.Navigator>
-        </NavigationContainer>
-            )
-        }   
-      }
+       
  
 }

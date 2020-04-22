@@ -31,7 +31,7 @@ export default function Login() {
      </View>
      
      <View style={styles.loginContainer}>
-       <Input style={styles.inputs}  placeholder="Insira seu celular cadastrado"/>
+       <Input style={styles.inputs}  placeholder="Insira o celular cadastrado"/>
        <Input style={styles.inputs}secureTextEntry={true} placeholder="Senha de acesso cadastrada"/>
        <TouchableOpacity style={styles.buttonEntrar}onPress={()=>{navigationTo('Maps')}}>
        <Text style={styles.textButton}>Entrar</Text>

@@ -93,22 +93,22 @@ _storeData = async () => {
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
   }else{
-    Alert.alert('Cadastro', 'cadastrado com sucesso')
+   
     switch(save){
       case 'De 1 a 5 dias':
-       nav.navigate('Perguntax')
+       nav.navigate('Pergunta4')
       break
        case 'De 5 a 10 dias':
-       nav.navigate('Perguntax')
+       nav.navigate('Pergunta4')
       break
        case 'De 11 a 14 dias':
-       nav.navigate('Perguntax')
+       nav.navigate('Pergunta4')
       break
        case 'De 14 a 20 dias':
-       nav.navigate('Perguntax')
+       nav.navigate('Pergunta4')
       break
       case 'Acima de 20 dias':
-       nav.navigate('Perguntax')
+       nav.navigate('Pergunta4')
       break
     }
         console.log(save)

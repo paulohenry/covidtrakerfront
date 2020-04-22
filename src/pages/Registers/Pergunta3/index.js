@@ -63,9 +63,9 @@ try{
     if(isSelected1){
       nav.navigate('Pergunta6A')
     }else if(isSelected2){
-      nav.navigate('')
+      nav.navigate('Pergunta5')
     }else{
-      alert.alert('Pergunta 1', 'você precisa responder a pergunta para continuar')
+      alert.alert('Cadastro', 'você precisa responder a pergunta para continuar')
     }         
 
     console.log(save)
