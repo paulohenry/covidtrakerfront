@@ -67,13 +67,9 @@ export default function Pergunta16() {
  
 
 _storeData = async () => {
-   const respostas ={
-     questao16_sexo:{
-       resposta:resposta1     
-     }
-   }
+   
    try{
-  await AsyncStorage.setItem(keys.questionario.Q16, JSON.stringify(respostas))
+  await AsyncStorage.setItem(keys.questionario.Q16, JSON.stringify(resposta1))
   const save = await AsyncStorage.getItem(keys.questionario.Q16)
   if(!save){
     Alert.alert('Cadastro 1', 'Você precisa responder a pergunta prara continuar')

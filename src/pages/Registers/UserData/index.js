@@ -54,23 +54,12 @@ export default function UserData() {
                 await AsyncStorage.setItem(storage.user.senha,senha)
                 await AsyncStorage.setItem(storage.user.confirmSenha,senhaConfirmacao)
                 
-              
-                const save = [
-                  storage.user.primeiroNome,
-                  storage.user.segundoNome,
-                  storage.user.telefone,
-                  storage.user.cep,
-                  storage.user.senha,
-                  storage.user.confirmSenha,                 
-                 ]  
-                     
-                if(!save){
-                  Alert.alert('Cadastro', 'erro ao cadastrar')
-                }else if(primeiroNome==''||segundoNome==''||telefone==''||cep==''||senha==''||senhaConfirmacao==''){
+             
+                if(primeiroNome==''||segundoNome==''||telefone==''||cep==''||senha==''||senhaConfirmacao==''){
                   Alert.alert('Cadastro', 'Preencha o formulário por completo para continuar')
                   
-                  console.log(save)
-                }else if(save){
+                  
+                }else{
                  
                   nav.navigate('Pergunta1')
                 }

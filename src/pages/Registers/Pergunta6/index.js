@@ -135,29 +135,27 @@ export default function Pergunta6() {
  
 
 _storeData = async () => {
-     const respostas = {
-       questao6_sintomas:{
-       a1:resposta1,
-       a2:resposta2,
-       a3:resposta3,
-       a4:resposta4,
-       a5:resposta5,
-       a6:resposta6,
-       a7:resposta7,
-       a8:resposta8,
-       a9:resposta9,
-       a10:resposta10,
-       a11:resposta11,
-       a12:resposta12,
-       a13:resposta13,
-       a14:resposta14,
-       a15:resposta15,
-      
+     
+     const res = [
+        resposta1,
+        resposta2,
+        resposta3,
+        resposta4,
+        resposta5,
+        resposta6,
+        resposta7,
+        resposta8,
+        resposta9,
+        resposta10,
+        resposta11,
+        resposta12,
+        resposta13,
+        resposta14,
+        resposta15,
+     ]
 
-       }
-     }
    try{
-  await AsyncStorage.setItem(keys.questionario.Q6, JSON.stringify(respostas))
+  await AsyncStorage.setItem(keys.questionario.Q6, JSON.stringify(res))
   const save = await AsyncStorage.getItem(keys.questionario.Q6)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')

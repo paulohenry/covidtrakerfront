@@ -26,7 +26,7 @@ export default function Pergunta10() {
   const [isDisable4, setIsDisable4] = useState(false);
   
  
-  const [resposta1, setResposta1] = useState('')
+  const [resposta1, setResposta1] = useState(null)
   
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function Pergunta10() {
       setIsDisable3(false)
       setIsDisable4(false)
 
-      setResposta1('') 
+      setResposta1(null) 
 
     }else if(isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false ){
         
@@ -75,16 +75,9 @@ export default function Pergunta10() {
  
 
 _storeData = async () => {
-   const respostas ={
-     questao10_locomocao_trabalho:{
-       a1:isSelected1,
-       a2:isSelected2,
-       a3:isSelected3,
-       a4:isSelected4,
-     }
-   }
+  
    try{
-  await AsyncStorage.setItem(keys.questionario.Q10, JSON.stringify(respostas))
+  await AsyncStorage.setItem(keys.questionario.Q10, JSON.stringify(resposta1))
   const save = await AsyncStorage.getItem(keys.questionario.Q10)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')

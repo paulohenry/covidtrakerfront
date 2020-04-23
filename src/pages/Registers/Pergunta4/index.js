@@ -52,10 +52,8 @@ export default function Pergunta4() {
 _storeData = async () => {
  
 try{
-  const respostas ={
-    estado_de_saude_q4:resposta1
-  }
-  await AsyncStorage.setItem(keys.questionario.Q4, JSON.stringify(respostas))
+ 
+  await AsyncStorage.setItem(keys.questionario.Q4, JSON.stringify(resposta1))
   const save = await AsyncStorage.getItem(keys.questionario.Q4)
   if(!save){
     Alert.alert('Cadastro', 'erro ao cadastrar')

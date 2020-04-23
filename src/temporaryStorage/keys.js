@@ -4,9 +4,12 @@ const keys = {
     segundoNome: 'USER-SEGUNDO-NOME',
     telefone: 'USER-TELEFONE',
     cep: 'USER-CEP',
+    rua:'USER-RUA',
+    numero:'USER_NUMERO',
+    bairro:'USER_BAIRRO',
     senha:'USER-SENHA',
     confirmSenha:'USER-CONFIR-SENHA',
-    sexo: 'USER-SEXO',
+   
   
   },
   questionario: {

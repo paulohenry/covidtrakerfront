@@ -47,7 +47,7 @@ export default function Router() {
 
    return(
 <NavigationContainer>
-      <Stack.Navigator  initialRouteName="Pergunta1">
+      <Stack.Navigator  initialRouteName="UserData">
         <Stack.Screen options={{headerShown:false}} name="Login"  component={Login} />
         <Stack.Screen options={{headerShown:false}}  name="Terms" component={Terms} />
         <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="UserData" component={UserData} />

@@ -85,23 +85,20 @@ export default function Pergunta15() {
  
 
 _storeData = async () => {
-     const respostas = {
-       questao15_voce_usa_acoool_etc:{
-       a1:resposta1,
-       a2:resposta2,
-       a3:resposta3,
-       a4:resposta4,
-       a5:resposta5,
-       
-       }
-     }
+     const res = [
+       resposta1,
+       resposta2,
+       resposta3,
+       resposta4,
+       resposta5,
+     ]
    try{
-  await AsyncStorage.setItem(keys.questionario.Q15, JSON.stringify(respostas))
+  await AsyncStorage.setItem(keys.questionario.Q15, JSON.stringify(res))
   const save = await AsyncStorage.getItem(keys.questionario.Q15)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
   }else if(isSelected1||isSelected2||isSelected3||isSelected4|| isSelected5){ 
-        nav.navigate('Login')    
+        nav.navigate('Pergunta16')    
         console.log(save)
       }else{
         Alert.alert('cadastro', 'Você precisa responder a pergunta para continuar')

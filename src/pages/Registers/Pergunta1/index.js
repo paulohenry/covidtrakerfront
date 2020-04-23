@@ -78,11 +78,9 @@ export default function Pergunta1() {
  
 
 const _storeData = async () => {
-    const respostas={
-      testou_para_covid:resposta1
-    }
+   
    try{
-    await AsyncStorage.setItem(keys.questionario.Q1, JSON.stringify(respostas))
+    await AsyncStorage.setItem(keys.questionario.Q1, JSON.stringify(resposta1))
     const save = await AsyncStorage.getItem(keys.questionario.Q1)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
