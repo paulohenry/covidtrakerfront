@@ -103,7 +103,7 @@ _storeData = async () => {
     }else if(isSelected4){
       nav.navigate('Pergunta11')
     }else if(isSelected5){
-      nav.navigate('Pergunta10')
+      nav.navigate('Pergunta1 ')
     }else{
       Alert.alert('cadastro', 'Você precisa responder a pergunta para continuar')
     }     

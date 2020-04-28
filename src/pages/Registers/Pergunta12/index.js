@@ -1,5 +1,5 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
+import { View, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
 import styles from '../../../styles/formStyles'
 import keys from '../../../temporaryStorage/keys'
@@ -109,7 +109,7 @@ _storeData = async () => {
 
    
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       
    
      <Text style={styles.titles} >Você esteve em contato próximo com alguém com sintomas de gripe ou que está com
@@ -165,11 +165,11 @@ a Corona vírus, nos últimos 07 dias:</Text>
     <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5}` } </Text>
       
       </View>
-      <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>
+      <TouchableOpacity style={[styles.buttonEntrar,{marginBottom:100}]}onPress={_storeData}>
        <Text style={styles.textButton}>Próximo</Text>
       </TouchableOpacity>
       
     
-    </View>
+    </ScrollView>
   );
 }

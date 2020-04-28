@@ -1,11 +1,10 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "covidtracker",
+    "slug": "covidtracker",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"      
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,7 +12,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#00B626"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,7 +21,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.magicstar.covidtrackersantos",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.magicstar.covidtrackersantos",
+      "versionCode": 1
     },
     "androidStatusBar": {
       "hidden": true, 

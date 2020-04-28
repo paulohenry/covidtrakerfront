@@ -1,5 +1,5 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
+import { ScrollView, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity,View} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
 import styles from '../../../styles/formStyles'
 import keys from '../../../temporaryStorage/keys'
@@ -98,7 +98,7 @@ _storeData = async () => {
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
   }else if(isSelected1||isSelected2||isSelected3||isSelected4|| isSelected5){ 
-        nav.navigate('Pergunta16')    
+        nav.navigate('Pergunta18')    
         console.log(save)
       }else{
         Alert.alert('cadastro', 'Você precisa responder a pergunta para continuar')
@@ -111,7 +111,7 @@ _storeData = async () => {
 
    
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       
    
      <Text style={styles.titles} >Você usa álcool, álcool gel, água sanitária e sabão?</Text>
@@ -167,11 +167,11 @@ _storeData = async () => {
     <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5}` } </Text>
       
       </View>
-      <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>
+      <TouchableOpacity style={[styles.buttonEntrar,{marginBottom:100}]}onPress={_storeData}>
        <Text style={styles.textButton}>Próximo</Text>
       </TouchableOpacity>
       
     
-    </View>
+    </ScrollView>
   );
 }

@@ -1,37 +1,82 @@
-import React,{Component} from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import React,{Component } from 'react';
+import { View,BackHandler } from 'react-native';
 import { enableScreens } from 'react-native-screens';
+import {useFocusEffect } from '@react-navigation/native'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import MapView from 'react-native-maps'
+import Estatisticas from '../Statistics/index'
+import Configuracoes from '../EditUser/index'
+import Noticias from '../Newsletter/index'
+import styles from './styles'
+
+
 enableScreens();
 
-export default class App extends Component {
+const   Tabs = createBottomTabNavigator()
+
+
+function StackTabs(){
+   
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        BackHandler.exitApp();
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+
+    }, [])
+  );
+
+     
+    
+
+
+  return(
+      <Tabs.Navigator initialRouteName="Contágio">
+        <Tabs.Screen name="Contágio" component={Maps}/>
+        <Tabs.Screen name="Estatisticas" component={Estatisticas}/>
+        <Tabs.Screen name="Notícias" component={Noticias}/>
+        <Tabs.Screen name="Configurações" component={Configuracoes}/>
+      </Tabs.Navigator>
+  )
+}
+
+class Maps extends Component {
  state={
-    latitude:-23.956683,
-    longitude:-46.343629,
+    latitude:-23.959807,
+    longitude:-46.327998,
   }
 
-  render(){  
+
+
+  render(){
+    try{  
       return (
+      
         <View style={styles.container}>
+         
          <MapView
           region={{
               latitude:this.state.latitude,
               longitude:this.state.longitude,
-              latitudeDelta:0.0042,
-              longitudeDelta:0.0031,
+              latitudeDelta:0.2000,
+              longitudeDelta:0.2000,
             }}
             style={styles.map}
             rotateEnabled={false}
             showPointsOfInterest={false}
             showsBuildings={false}>
            <MapView.Marker
-              pinColor="green"
+              pinColor="red"
               coordinate = {{
                 latitude:this.state.latitude,
                 longitude:this.state.longitude
               }}/>
               <MapView.Marker
-              pinColor="yellow"
+              pinColor="red"
               coordinate = {{
                 latitude:-23.956783,
                 longitude:-46.343619,
@@ -46,19 +91,19 @@ export default class App extends Component {
               
               coordinate = {{
                 latitude:-23.956603,
-                longitude:-46.343669,
+                longitude:-46.243669,
               }}/>
               <MapView.Marker
               pinColor="yellow"
               coordinate = {{
-                latitude:-23.956680,
-                longitude:-46.343620,
+                latitude:-23.935650,
+                longitude:-46.335520,
               }}/>
               <MapView.Marker
-              pinColor="green"
+              pinColor="red"
               coordinate = {{
-                latitude:-23.956684,
-                longitude:-46.343623,
+                latitude:-23.951623,
+                longitude:-46.398743,
               }}/>
               <MapView.Marker
               
@@ -69,8 +114,8 @@ export default class App extends Component {
               <MapView.Marker
               pinColor="yellow"
               coordinate = {{
-                latitude:-23.96559744,
-                longitude:-46.33558989,
+                latitude:-23.965411,
+                longitude:-46.315187,
               }}/>
               <MapView.Marker
               pinColor="green"
@@ -78,37 +123,39 @@ export default class App extends Component {
                 latitude:-23.96617587,
                 longitude:-46.33483887,
               }}/>
+              
+              
+              <MapView.Marker
+              pinColor="red"
+              coordinate = {{
+                latitude:-23.983550,
+                longitude:-46.305909,
+              }}/>
+
+              <MapView.Marker
+              pinColor="yellow"
+              coordinate = {{
+                latitude:-23.986823,
+                longitude:-46.303046,
+              }}/>
+
+              <MapView.Marker
+              pinColor="green"
+              coordinate = {{
+                latitude:-23.983922,
+                longitude:-46.308945,
+              }}/>        
 
           </MapView>
-         
+            
         </View>
          
       );
-  }
-}
-// const {height,width}= Dimensions.get('window')
+  }catch(err){
 
-const styles = StyleSheet.create({
-   container:{
-      flex:1,
-      justifyContent:'flex-end',
-      alignItems:'flex-end'
-   },
-  //  citiesContainer:{
-  //      width:'100%',
-  //      maxHeight: 200,
-  // },  
-  //  cities:{
-  //     width: width -40,
-  //     maxHeight:200,
-  //     backgroundColor:'#FFF',
-  //     marginHorizontal:20,
-  //  },  
-  map: {
-     position:'absolute',
-     top:0,
-     bottom:0,
-     left:0,
-     right:0
-   }
-})
+  }
+ }
+}
+
+
+export default StackTabs

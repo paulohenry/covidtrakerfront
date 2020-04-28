@@ -7,6 +7,8 @@ const keys = {
     rua:'USER-RUA',
     numero:'USER_NUMERO',
     bairro:'USER_BAIRRO',
+    cidade:'USER-CIDADE',
+    estado:'USER-ESTADO',
     senha:'USER-SENHA',
     confirmSenha:'USER-CONFIR-SENHA',
    

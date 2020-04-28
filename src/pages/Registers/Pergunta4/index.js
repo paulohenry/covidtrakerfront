@@ -56,22 +56,23 @@ try{
   await AsyncStorage.setItem(keys.questionario.Q4, JSON.stringify(resposta1))
   const save = await AsyncStorage.getItem(keys.questionario.Q4)
   if(!save){
-    Alert.alert('Cadastro', 'erro ao cadastrar')
-  }else{
+    Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
+  }
+  if(isSelected1==false && isSelected2==false){
+  Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
+
+  }
     if(isSelected1){
       nav.navigate('Pergunta6')
     }else if(isSelected2){
       nav.navigate('Pergunta6')
-    }else{
-      alert.alert('Cadastro', 'você precisa responder a pergunta para continuar')
-    }         
-
-    console.log(save)
-  }
-}catch(erro){
-   Alert.alert('Cadastro', {erro:' erro ao cadastrar'})
-}   
-
+    }
+        console.log(save)
+      
+    }catch(erro){
+      Alert.alert('Cadastro', {erro:' erro ao cadastrar'})
+    }   
+   
 };
 
    

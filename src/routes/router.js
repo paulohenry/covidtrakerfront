@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../pages/Login/'
-
+import {AsyncStorage} from 'react-native'
 import HowtoWork from '../pages/HowtoWork'
 
 import Terms from '../pages/Terms'
@@ -35,53 +35,53 @@ import Profile from '../pages/Profile'
 import ConfirmRegister from '../pages/ConfirmRegister'
 import UserData from '../pages/Registers/UserData/index'
 import AlertScreen from '../pages/Registers/Alert'
-import Dbg from '../pages/Dbg/index'
 
+import keys from '../temporaryStorage/keys'
 
 const Stack = createStackNavigator();
 
 
 
 export default function Router() {
- 
+  
+
+  
 
    return(
 <NavigationContainer>
-      <Stack.Navigator  initialRouteName="UserData">
+      <Stack.Navigator screenOptions={{headerShown:true, headerTitle:''}} initialRouteName="Login">
+        <Stack.Screen options={{headerShown:false}}  name="ConfirmRegister" component={ConfirmRegister} />
         <Stack.Screen options={{headerShown:false}} name="Login"  component={Login} />
         <Stack.Screen options={{headerShown:false}}  name="Terms" component={Terms} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="UserData" component={UserData} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="AlertScreen" component={AlertScreen} />
-        <Stack.Screen options={{headerShown:false}}  name="Maps" component={Maps} />
         <Stack.Screen options={{headerShown:false}}  name="Profile" component={Profile} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="ConfirmRegister" component={ConfirmRegister} />
-        <Stack.Screen options={{headerShown:true}} name="Dbg"  component={Dbg} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="HowToWork" component={HowtoWork} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta1" component={Pergunta1} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta2" component={Pergunta2} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta3" component={Pergunta3} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta4" component={Pergunta4} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta5" component={Pergunta5} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta6" component={Pergunta6} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta6A" component={Pergunta6A} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta7" component={Pergunta7} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta8" component={Pergunta8} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta9" component={Pergunta9} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta10" component={Pergunta10} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta11" component={Pergunta11} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta12" component={Pergunta12} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta13" component={Pergunta13} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta14" component={Pergunta14} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta15" component={Pergunta15} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta16" component={Pergunta16} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta17" component={Pergunta17} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta18" component={Pergunta18} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta19" component={Pergunta19} />
-        <Stack.Screen options={{headerShown:true, headerTitle:''}}  name="Pergunta20" component={Pergunta20} />
-
-
-
+        <Stack.Screen options={{headerShown:false}}  name="HowToWork" component={HowtoWork} />
+        <Stack.Screen name="UserData" component={UserData} />
+        <Stack.Screen name="AlertScreen" component={AlertScreen} />
+        <Stack.Screen name="Pergunta1" component={Pergunta1} />
+        <Stack.Screen name="Pergunta2" component={Pergunta2} />
+        <Stack.Screen name="Pergunta3" component={Pergunta3} />
+        <Stack.Screen name="Pergunta4" component={Pergunta4} />
+        <Stack.Screen name="Pergunta5" component={Pergunta5} />
+        <Stack.Screen name="Pergunta6" component={Pergunta6} />
+        <Stack.Screen name="Pergunta6A" component={Pergunta6A} />
+        <Stack.Screen name="Pergunta7" component={Pergunta7} />
+        <Stack.Screen name="Pergunta8" component={Pergunta8} />
+        <Stack.Screen name="Pergunta9" component={Pergunta9} />
+        <Stack.Screen name="Pergunta10" component={Pergunta10} />
+        <Stack.Screen name="Pergunta11" component={Pergunta11} />
+        <Stack.Screen name="Pergunta12" component={Pergunta12} />
+        <Stack.Screen name="Pergunta13" component={Pergunta13} />
+        <Stack.Screen name="Pergunta14" component={Pergunta14} />
+        <Stack.Screen name="Pergunta15" component={Pergunta15} />
+        <Stack.Screen name="Pergunta16" component={Pergunta16} />
+        <Stack.Screen name="Pergunta17" component={Pergunta17} />
+        <Stack.Screen name="Pergunta18" component={Pergunta18} />
+        <Stack.Screen name="Pergunta19" component={Pergunta19} />
+        <Stack.Screen name="Pergunta20" component={Pergunta20} />
+        <Stack.Screen options={{headerShown:false}}  name="Maps" component={Maps} />
+    
       </Stack.Navigator>
+     
     </NavigationContainer>
       )
        

@@ -187,7 +187,7 @@ _storeData = async () => {
   }else{    
     if(isSelected1|| isSelected2|| isSelected3|| isSelected4
       || isSelected5|| isSelected6|| isSelected7|| isSelected8){
-      nav.navigate('Pergunta18')
+      nav.navigate('ConfirmRegister')
         }else{
       Alert.alert('cadastro', 'Você precisa responder a pergunta para continuar')
     }   

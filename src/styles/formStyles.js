@@ -7,7 +7,7 @@ container:{
   paddingVertical:20
 }, 
  titles:{
-  fontSize:27,
+  fontSize:22,
   marginBottom:20,
   fontWeight:'700',
   alignItems:'center',
@@ -23,6 +23,7 @@ container:{
  },
  buttonEntrar:{
   marginTop:20,
+  marginBottom:40,
   backgroundColor:'rgba(2,157,100, 0.7)',
   paddingVertical:10,
   justifyContent:'center',

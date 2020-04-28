@@ -1,14 +1,43 @@
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity} from 'react-native';
+import { ScrollView, Text, TouchableOpacity,AsyncStorage} from 'react-native';
 import {useNavigation} from '@react-navigation/native'
 import styles from './styles'
+import keys from '../../temporaryStorage/keys'
 
 
 export default function HowToWork() {
 
   const nav = useNavigation();
 
+  async function _clearKeys(){
+    await AsyncStorage.multiRemove([
+      keys.questionario.Q1,
+      keys.questionario.Q2,
+      keys.questionario.Q3,
+      keys.questionario.Q4,
+      keys.questionario.Q5,
+      keys.questionario.Q6,
+      keys.questionario.Q6A,
+      keys.questionario.Q7,
+      keys.questionario.Q8,
+      keys.questionario.Q9,
+      keys.questionario.Q10,
+      keys.questionario.Q11,
+      keys.questionario.Q12,
+      keys.questionario.Q13,
+      keys.questionario.Q14,
+      keys.questionario.Q15,
+      keys.questionario.Q16,
+      keys.questionario.Q17,
+      keys.questionario.Q18,
+      keys.questionario.Q19,
+      keys.questionario.Q20,
+      keys.confirmScreen.CONFIRM
+    ])
+  }
+
   const navigationTo = (screen)=>{
+    _clearKeys()
     nav.navigate(screen)
   }
 

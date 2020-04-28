@@ -96,19 +96,19 @@ _storeData = async () => {
    
     switch(save){
       case 'De 1 a 5 dias':
-       nav.navigate('Pergunta4')
+       nav.navigate('Pergunta5')
       break
-       case 'De 5 a 10 dias':
-       nav.navigate('Pergunta4')
+       case 'De 6 a 10 dias':
+       nav.navigate('Pergunta5')
       break
        case 'De 11 a 14 dias':
-       nav.navigate('Pergunta4')
+       nav.navigate('Pergunta5')
       break
        case 'De 14 a 20 dias':
-       nav.navigate('Pergunta4')
+       nav.navigate('Pergunta5')
       break
       case 'Acima de 20 dias':
-       nav.navigate('Pergunta4')
+       nav.navigate('Pergunta5')
       break
     }
         console.log(save)

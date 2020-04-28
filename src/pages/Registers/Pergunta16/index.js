@@ -61,7 +61,7 @@ export default function Pergunta16() {
       setIsDisable3(false)
       
 
-      setResposta1('Transgenero') 
+      setResposta1('Outros') 
     }
   },[isSelected1, isSelected2, isSelected3])
  
@@ -119,7 +119,7 @@ _storeData = async () => {
           onValueChange={setSelection3}
           
         />
-        <Text >Transgenero</Text>
+        <Text >Outros</Text>
       </View>
 
       

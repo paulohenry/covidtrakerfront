@@ -77,6 +77,7 @@ export default function Pergunta1() {
 }},[isSelected1, isSelected2, isSelected3, isSelected4])
  
 
+
 const _storeData = async () => {
    
    try{
