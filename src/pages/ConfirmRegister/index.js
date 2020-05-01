@@ -133,6 +133,7 @@ async function _save(){
    Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
  }else{
       //chama o axios e depois manda pra tela de mapas
+      
       console.log(res)
       nav.navigate('Login')
 

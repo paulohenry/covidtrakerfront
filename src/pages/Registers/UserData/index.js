@@ -30,10 +30,7 @@ export default function UserData() {
                 setCep(cep)
                 setSenha(senha)
                 setSenhaConfirmacao(senhaConfirmacao)
-                
-             
-
-               
+                              
 
             }, [
          primeiroNome,

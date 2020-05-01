@@ -24,10 +24,12 @@
       "bundleIdentifier": "com.magicstar.covidtrackersantos",
       "buildNumber": "1.0.0",
       "supportsTablet": true
+     
     },
     "android": {
       "package": "com.magicstar.covidtrackersantos",
       "versionCode": 1
+      
     },
     "androidStatusBar": {
       "hidden": true, 

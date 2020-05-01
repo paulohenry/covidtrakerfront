@@ -49,6 +49,11 @@ class Maps extends Component {
     latitude:-23.959807,
     longitude:-46.327998,
   }
+  res={
+    [
+      
+    ]
+  }
 
 
 

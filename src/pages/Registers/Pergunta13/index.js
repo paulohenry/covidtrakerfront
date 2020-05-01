@@ -28,10 +28,7 @@ export default function Pergunta13() {
   
  
   const [resposta1, setResposta1] = useState('')
-  const [resposta2, setResposta2] = useState('')
-  const [resposta3, setResposta3] = useState('')
-  const [resposta4, setResposta4] = useState('')
-  const [resposta5, setResposta5] = useState('')
+  
  
 
   useEffect(() => {
@@ -44,11 +41,8 @@ export default function Pergunta13() {
       setIsDisable4(true)
       setIsDisable5(false)
      
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('Não costumo fazer isso') 
+      
+      setRespost1('Não costumo fazer isso') 
      
     }
     if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==true && isSelected5 ==false ){
@@ -58,11 +52,9 @@ export default function Pergunta13() {
       setIsDisable4(false)
       setIsDisable5(true)
      
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('Não me lembro') 
-      setResposta5('') 
+     
+      setResposta1('Não me lembro') 
+      
      
     }if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false && isSelected5 ==false ){
       setIsDisable1(true)
@@ -71,11 +63,9 @@ export default function Pergunta13() {
       setIsDisable4(true)
       setIsDisable5(true)
      
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('Sim, mas lavo as mãos antes, quando sinto necessidade') 
-      setResposta4('') 
-      setResposta5('') 
+     
+      setResposta1('Sim, mas lavo as mãos antes, quando sinto necessidade') 
+      
      
     }if (isSelected1 == false  && isSelected2 ==true && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false){
       setIsDisable1(true)
@@ -84,11 +74,9 @@ export default function Pergunta13() {
       setIsDisable4(true)
       setIsDisable5(true)
      
-      setResposta1('') 
-      setResposta2('Sim, mas percebo e me controlo') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
+    
+      setResposta1('Sim, mas percebo e me controlo') 
+      
      
     }if (isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false){
       setIsDisable1(false)
@@ -98,10 +86,7 @@ export default function Pergunta13() {
       setIsDisable5(true)
      
       setResposta1('Sempre e sem controle') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
+     
      
     }if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false ){
       setIsDisable1(false)
@@ -110,28 +95,18 @@ export default function Pergunta13() {
       setIsDisable4(false)
       setIsDisable5(false)
      
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
+     
      
     }
   
  
-},[isSelected1, isSelected2, isSelected3, isSelected4,isSelected5])
+},[isSelected1, isSelected2, isSelected3, isSelected4,isSelected5, resposta1])
  
 
 _storeData = async () => {
-     const res = [
-       resposta1,
-       resposta2,
-       resposta3,
-       resposta4,
-       resposta5,
-       ]
+
    try{
-  await AsyncStorage.setItem(keys.questionario.Q13, JSON.stringify(res))
+  await AsyncStorage.setItem(keys.questionario.Q13, JSON.stringify(resposta1))
   const save = await AsyncStorage.getItem(keys.questionario.Q13)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
@@ -202,7 +177,7 @@ _storeData = async () => {
       
 
   
-    <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5}` } </Text>
+    <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1}` } </Text>
       
       </View>
       <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>
