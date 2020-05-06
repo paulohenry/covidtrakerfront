@@ -12,8 +12,8 @@ export default function UserData() {
   const nav= useNavigation()
 
       const [primeiroNome, setPrimeiroNome ] =useState('')
-      const [segundoNome, setSegundoNome ] =useState('')
-      const [telefone, setTelefone ] =useState('')
+      const [ultimoNome, setultimoNome ] =useState('')
+      const [celular, setcelular ] =useState('')
       const [cep, setCep ] =useState('')
       const [senha, setSenha ] =useState('')
       const [senhaConfirmacao, setSenhaConfirmacao ] =useState('')
@@ -25,8 +25,8 @@ export default function UserData() {
       useEffect(() => {
      
                 setPrimeiroNome(primeiroNome)
-                setSegundoNome(segundoNome)
-                setTelefone(telefone)
+                setultimoNome(ultimoNome)
+                setcelular(celular)
                 setCep(cep)
                 setSenha(senha)
                 setSenhaConfirmacao(senhaConfirmacao)
@@ -34,8 +34,8 @@ export default function UserData() {
 
             }, [
          primeiroNome,
-         segundoNome,
-         telefone,
+         ultimoNome,
+         celular,
          cep,
          senha,
          senhaConfirmacao,
@@ -47,14 +47,14 @@ export default function UserData() {
         
               try{
                 await AsyncStorage.setItem(storage.user.primeiroNome,primeiroNome)
-                await AsyncStorage.setItem(storage.user.segundoNome,segundoNome)
-                await AsyncStorage.setItem(storage.user.telefone,telefone)
+                await AsyncStorage.setItem(storage.user.ultimoNome,ultimoNome)
+                await AsyncStorage.setItem(storage.user.celular,celular)
                 await AsyncStorage.setItem(storage.user.cep, cep)
                 await AsyncStorage.setItem(storage.user.senha,senha)
                 await AsyncStorage.setItem(storage.user.confirmSenha,senhaConfirmacao)
                 
              
-                if(primeiroNome==''||segundoNome==''||telefone==''||cep==''||senha==''||senhaConfirmacao==''){
+                if(primeiroNome==''||ultimoNome==''||celular==''||cep==''||senha==''||senhaConfirmacao==''){
                   Alert.alert('Cadastro', 'Preencha o formulário por completo para continuar')
                   
                   
@@ -71,8 +71,8 @@ export default function UserData() {
       <KeyboardAvoidingView  style={styles.container} keyboardVerticalOffset={-50} behavior="position" enabled>
         <Text style={styles.titles}>Insira seus dados pessoais:</Text>
         <Input value={primeiroNome} onChangeText={setPrimeiroNome} autoCapitalize="characters" label="Primeiro nome"/>
-        <Input value={segundoNome} onChangeText={setSegundoNome} autoCapitalize="characters" label="Último nome"/>
-        <Input value={telefone} onChangeText={setTelefone} keyboardType="number-pad" label="Ex: (DDD)99999-99999"/>
+        <Input value={ultimoNome} onChangeText={setultimoNome} autoCapitalize="characters" label="Último nome"/>
+        <Input value={celular} onChangeText={setcelular} keyboardType="number-pad" label="Ex: (DDD)99999-99999"/>
         <Input value={cep} onChangeText={setCep} labelProps={styles.input} keyboardType="number-pad" label="CEP de onde está morando atualmente"/>
         <Input value={senha} onChangeText={setSenha} secureTextEntry={true} keyboardType="number-pad" label="Senha de 6 dígitos "/>
         <Input value={senhaConfirmacao} onChangeText={setSenhaConfirmacao} secureTextEntry={true} keyboardType="number-pad" label="Confirme sua senha"/>
