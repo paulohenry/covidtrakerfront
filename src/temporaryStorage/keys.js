@@ -11,7 +11,8 @@ const keys = {
     estado:'USER-ESTADO',
     senha:'USER-SENHA',
     confirmSenha:'USER-CONFIR-SENHA',
-   
+    lat: 'LAT',
+    long:' LONG'
   
   },
   questionario: {
@@ -41,13 +42,7 @@ const keys = {
    confirmScreen:{
      CONFIRM:'CONFIRMATION'
    },
-   pontuacao:{
-     total: 'TOTAL',
-     emogi_verde:'EMOGI-VERDE',
-     emogi_amarelo:'EMOGI-AMARELO',
-     emogi_vermelho:'EMOGI-VERMELHO',
-     emogi_azul:'EMOGI-AZUL',     
-   },
+   pontuacao:'CLASSIFY',
    device:{
      id: 'ID-DEVICE'
    }
