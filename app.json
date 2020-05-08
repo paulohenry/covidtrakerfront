@@ -4,7 +4,7 @@
     "slug": "covidtracker",
     "platforms": [
       "ios",
-      "android"      
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,18 +24,17 @@
       "bundleIdentifier": "com.magicstar.covidtrackersantos",
       "buildNumber": "1.0.0",
       "supportsTablet": true
-     
     },
     "android": {
       "package": "com.magicstar.covidtrackersantos",
       "versionCode": 1
-      
     },
     "androidStatusBar": {
-      "hidden": true, 
-      "translucent": true, 
-      "barStyle": "light-content", 
-      "backgroundColor": "#00000000"  
-    }
+      "hidden": true,
+      "translucent": true,
+      "barStyle": "light-content",
+      "backgroundColor": "#00000000"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
