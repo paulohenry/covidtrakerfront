@@ -55,7 +55,8 @@ export default function Pergunta6() {
   const [isSelected15, setSelection15] = useState(false);
   const [isDisable15, setIsDisable15] = useState(false);
 
-
+  const [isSelected16, setSelection16] = useState(false);
+  const [isDisable16, setIsDisable16] = useState(false);
   
  
   const [resposta1, setResposta1] = useState('')
@@ -73,6 +74,7 @@ export default function Pergunta6() {
   const [resposta13, setResposta13] = useState('')
   const [resposta14, setResposta14] = useState('')
   const [resposta15, setResposta15] = useState('')
+  const [resposta16, setResposta16] = useState('')
  
 
   
@@ -124,13 +126,15 @@ export default function Pergunta6() {
     if(isSelected15){
       setResposta15('Dores nas articulações ou nos olhos')
     }else{ setResposta15('')}
- 
+    if(isSelected16){
+      setResposta16('Dedos inchados com pontas rocheadas')
+    }else{ setResposta16('')}
 
   
  
 },[isSelected1, isSelected2, isSelected3, isSelected4,isSelected5,
   isSelected6, isSelected7, isSelected8, isSelected9,isSelected10,
-  isSelected11, isSelected12, isSelected13, isSelected14,isSelected15
+  isSelected11, isSelected12, isSelected13, isSelected14,isSelected15, isSelected16
   ])
  
 
@@ -152,6 +156,7 @@ _storeData = async () => {
         resposta13,
         resposta14,
         resposta15,
+        resposta16,
      ]
 
    try{
@@ -161,7 +166,7 @@ _storeData = async () => {
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
   }else if(isSelected1||isSelected2||isSelected3||isSelected4|| isSelected5 ||
     isSelected6||isSelected7||isSelected8||isSelected9|| isSelected10||
-    isSelected11||isSelected12||isSelected13||isSelected14|| isSelected15){ 
+    isSelected11||isSelected12||isSelected13||isSelected14|| isSelected15||isSelected16){ 
         nav.navigate('Pergunta6A')    
         console.log(save)
       }else{
@@ -306,11 +311,20 @@ _storeData = async () => {
         />
        <Text >Dores nas articulações ou nos olhos</Text>
       </View>
+      <View style={styles.alternatives}>
+        <CheckBox
+           disabled={isDisable16}
+          value={isSelected16}
+          onValueChange={setSelection16}          
+        />
+       <Text >Dedos inchados com pontas rocheadas</Text>
+      </View>
 
 
   
     <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5}
-        ${resposta6} ${resposta7} ${resposta8} ${resposta9} ${resposta10}${resposta11} ${resposta12} ${resposta13} ${resposta14} ${resposta15}
+        ${resposta6} ${resposta7} ${resposta8} ${resposta9} ${resposta10}${resposta11} ${resposta12} ${resposta13} ${resposta14}
+         ${resposta15}  ${resposta16}
         ` } </Text>
       
       </View>

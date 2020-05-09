@@ -33,12 +33,7 @@ export default function Pergunta6A() {
   
  
   const [resposta1, setResposta1] = useState('')
-  const [resposta2, setResposta2] = useState('')
-  const [resposta3, setResposta3] = useState('')
-  const [resposta4, setResposta4] = useState('')
-  const [resposta5, setResposta5] = useState('')
-  const [resposta6, setResposta6] = useState('')
-  const [resposta7, setResposta7] = useState('')
+
 
   useEffect(() => {
 
@@ -50,13 +45,8 @@ export default function Pergunta6A() {
       setIsDisable5(true)
       setIsDisable6(true)
       setIsDisable7(false)
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('')
-      setResposta7('Não estou nesta lista')
+    
+      setResposta1('Não estou nesta lista')
 
     }if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false && isSelected6==true && isSelected7==false){
       setIsDisable1(true)
@@ -66,30 +56,10 @@ export default function Pergunta6A() {
       setIsDisable5(true)
       setIsDisable6(false)
       setIsDisable7(true)
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('Serviços funerários em geral')
-      setResposta7('')
-    }if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false && isSelected6==true && isSelected7==false){
-      setIsDisable1(true)
-      setIsDisable2(true)
-      setIsDisable3(true)
-      setIsDisable4(true)
-      setIsDisable5(true)
-      setIsDisable6(false)
-      setIsDisable7(true)
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('Serviços funerários em geral')
-      setResposta7('')
-    }
-    if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==true && isSelected6==false && isSelected7==false){
+     
+      setResposta1('Serviços funerários em geral')
+     
+    }if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==true && isSelected6==false && isSelected7==false){
       setIsDisable1(true)
       setIsDisable2(true)
       setIsDisable3(true)
@@ -97,13 +67,9 @@ export default function Pergunta6A() {
       setIsDisable5(false)
       setIsDisable6(true)
       setIsDisable7(true)
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('Atendente') 
-      setResposta6('')
-      setResposta7('')
+   
+      setResposta1('Atendente') 
+     
     }
     if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==true && isSelected5 ==false && isSelected6==false && isSelected7==false){
       setIsDisable1(true)
@@ -113,13 +79,9 @@ export default function Pergunta6A() {
       setIsDisable5(true)
       setIsDisable6(true)
       setIsDisable7(true)
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('enfermeiro(a)') 
-      setResposta5('') 
-      setResposta6('')
-      setResposta7('')
+     
+      setResposta1('enfermeiro(a)') 
+     
     }if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false && isSelected5 ==false && isSelected6==false && isSelected7==false){
       setIsDisable1(true)
       setIsDisable2(true)
@@ -128,28 +90,9 @@ export default function Pergunta6A() {
       setIsDisable5(true)
       setIsDisable6(true)
       setIsDisable7(true)
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('Remoção de doentes') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('')
-      setResposta7('')
-    }if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false && isSelected5 ==false && isSelected6==false && isSelected7==false){
-      setIsDisable1(true)
-      setIsDisable2(true)
-      setIsDisable3(false)
-      setIsDisable4(true)
-      setIsDisable5(true)
-      setIsDisable6(true)
-      setIsDisable7(true)
-      setResposta1('') 
-      setResposta2('') 
-      setResposta3('Remoção de doentes') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('')
-      setResposta7('')
+       
+      setResposta1('Remoção de doentes') 
+     
     }if (isSelected1 == false  && isSelected2 ==true && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false && isSelected6==false && isSelected7==false){
       setIsDisable1(true)
       setIsDisable2(false)
@@ -158,13 +101,8 @@ export default function Pergunta6A() {
       setIsDisable5(true)
       setIsDisable6(true)
       setIsDisable7(true)
-      setResposta1('') 
-      setResposta2('Clínica Médica') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('')
-      setResposta7('')
+      setResposta1('Clínica Médica') 
+     
     }if (isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false && isSelected6==false && isSelected7==false){
       setIsDisable1(false)
       setIsDisable2(true)
@@ -174,27 +112,7 @@ export default function Pergunta6A() {
       setIsDisable6(true)
       setIsDisable7(true)
       setResposta1('Médico intensivista') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('')
-      setResposta7('')
-    }if (isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false && isSelected6==false && isSelected7==false){
-      setIsDisable1(false)
-      setIsDisable2(true)
-      setIsDisable3(true)
-      setIsDisable4(true)
-      setIsDisable5(true)
-      setIsDisable6(true)
-      setIsDisable7(true)
-      setResposta1('Médico intensivista') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('')
-      setResposta7('')
+     
     }if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false && isSelected6==false && isSelected7==false){
       setIsDisable1(false)
       setIsDisable2(false)
@@ -204,12 +122,7 @@ export default function Pergunta6A() {
       setIsDisable6(false)
       setIsDisable7(false)
       setResposta1('') 
-      setResposta2('') 
-      setResposta3('') 
-      setResposta4('') 
-      setResposta5('') 
-      setResposta6('')
-      setResposta7('')
+     
     }
   
  
@@ -217,17 +130,9 @@ export default function Pergunta6A() {
  
 
 _storeData = async () => {
-     const res = [
-       resposta1,
-       resposta2,
-       resposta3,
-       resposta4,
-       resposta5,
-       resposta6,
-       resposta7,
-     ]
+    
    try{
-  await AsyncStorage.setItem(keys.questionario.Q6A, JSON.stringify(res))
+  await AsyncStorage.setItem(keys.questionario.Q6A, JSON.stringify(resposta1))
   const save = await AsyncStorage.getItem(keys.questionario.Q6A)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
@@ -313,7 +218,7 @@ _storeData = async () => {
       </View>
 
   
-    <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5} ${resposta6} ${resposta7}` } </Text>
+    <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1}` } </Text>
       
       </View>
       <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>
