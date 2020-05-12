@@ -1,16 +1,14 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text,Button, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native'
-import styles from '../../../styles/formStyles'
-import keys from '../../../temporaryStorage/keys'
+import { View, Text, Platform, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import styles from '../../../styles/formStyles';
+import keys from '../../../temporaryStorage/keys';
+import CheckBoxIOS from '../../../components/CheckBoxIOS';
 // import { Container } from './styles';
 
+const os = Platform.OS
+
 export default function Pergunta10() {
-
-
-
-
-
   const nav = useNavigation()
 
   const [isSelected1, setSelection1] = useState(false);
@@ -25,8 +23,13 @@ export default function Pergunta10() {
   const [isSelected4, setSelection4] = useState(false);
   const [isDisable4, setIsDisable4] = useState(false);
   
+  //Ios disable Check
+  const [disable1, setDisable1] = useState(true)
+  const [disable2, setDisable2] = useState(true)
+  const [disable3, setDisable3] = useState(true)
+  const [disable4, setDisable4] = useState(true)
  
-  const [resposta1, setResposta1] = useState(null)
+  const [resposta1, setResposta1] = useState('')
   
 
   useEffect(() => {
@@ -37,7 +40,7 @@ export default function Pergunta10() {
       setIsDisable3(false)
       setIsDisable4(false)
 
-      setResposta1(null) 
+      setResposta1('') 
 
     }else if(isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false ){
         
@@ -62,7 +65,7 @@ export default function Pergunta10() {
       setIsDisable3(false)
       setIsDisable4(true)
 
-      setResposta1('sozinho') 
+      setResposta1('Sozinho') 
   }
   else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==true){
     setIsDisable1(true)
@@ -109,41 +112,115 @@ _storeData = async () => {
      <Text style={styles.titles} >Como está indo ao trabalho? </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>
+     {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected1}
+          disable={disable1}
+          onPress={() => {
+             setDisable1(false)
+             setDisable2(true)
+             setDisable3(true)
+             setDisable4(true)
+
+             setSelection1(true)
+             setSelection2(false)
+             setSelection3(false)
+             setSelection4(false)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable1}
           value={isSelected1}
           onValueChange={setSelection1}
         />
-        <Text >  De transporte público</Text>
+      }
+        <Text >De transporte público</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected2}
+          disable={disable2}
+          onPress={() => {
+             setDisable1(true)
+             setDisable2(false)
+             setDisable3(true)
+             setDisable4(true)
+
+             setSelection1(false)
+             setSelection2(true)
+             setSelection3(false)
+             setSelection4(false)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable2}
           value={isSelected2}
           onValueChange={setSelection2}
         />
-        <Text >  De carona, ou dando carona</Text>
+      }
+        <Text >De carona, ou dando carona</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected3}
+          disable={disable3}
+          onPress={() => {
+             setDisable1(true)
+             setDisable2(true)
+             setDisable3(false)
+             setDisable4(true)
+
+             setSelection1(false)
+             setSelection2(false)
+             setSelection3(true)
+             setSelection4(false)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable3}
           value={isSelected3}
           onValueChange={setSelection3}
-          
         />
-        <Text >  Sozinho</Text>
+      }
+        <Text >Sozinho</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected4}
+          disable={disable4}
+          onPress={() => {
+             setDisable1(true)
+             setDisable2(true)
+             setDisable3(true)
+             setDisable4(false)
+
+             setSelection1(false)
+             setSelection2(false)
+             setSelection3(false)
+             setSelection4(true)
+
+          }}
+          />
+        :
         <CheckBox
            disabled={isDisable4}
           value={isSelected4}
           onValueChange={setSelection4}
-          
         />
-        <Text >  Com motorista de aplicativo</Text>
+      }
+        <Text >Com motorista de aplicativo</Text>
       </View>
 
   

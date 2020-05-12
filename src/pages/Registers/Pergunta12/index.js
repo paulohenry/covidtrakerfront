@@ -1,9 +1,12 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity, ScrollView} from 'react-native';
-import {useNavigation} from '@react-navigation/native'
-import styles from '../../../styles/formStyles'
-import keys from '../../../temporaryStorage/keys'
+import { View, Text, CheckBox, Platform, AsyncStorage,Alert, TouchableOpacity, ScrollView} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import styles from '../../../styles/formStyles';
+import keys from '../../../temporaryStorage/keys';
+import CheckBoxIOS from '../../../components/CheckBoxIOS';
 // import { Container } from './styles';
+
+const os = Platform.OS
 
 export default function Pergunta12() {
 
@@ -24,6 +27,12 @@ export default function Pergunta12() {
   const [isSelected5, setSelection5] = useState(false);
   const [isDisable5, setIsDisable5] = useState(false);
   
+  //Ios disable Check
+  const [disable1, setDisable1] = useState(true)
+  const [disable2, setDisable2] = useState(true)
+  const [disable3, setDisable3] = useState(true)
+  const [disable4, setDisable4] = useState(true)
+  const [disable5, setDisable5] = useState(true)
  
   const [resposta1, setResposta1] = useState('')
   const [resposta2, setResposta2] = useState('')
@@ -63,6 +72,8 @@ export default function Pergunta12() {
       setIsDisable3(false)
       setIsDisable4(false)
       setIsDisable5(true)
+
+      setResposta5('')
       
     }
     if(isSelected1){
@@ -111,53 +122,132 @@ _storeData = async () => {
   return (
     <ScrollView style={styles.container}>
       
-   
      <Text style={styles.titles} >Você esteve em contato próximo com alguém com sintomas de gripe ou que está com
 a Corona vírus, nos últimos 07 dias:</Text>
      <Text style={{color:'#FE0000', fontSize:17}} >Responda quantas alternativas quiser </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>
+     {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected1}
+          disable={disable1}
+          onPress={() => {
+             isSelected1 ? setSelection1(false) : setSelection1(true)
+ 
+             disable1 ? setDisable1(false) : setDisable1(true)
+             setSelection5(false)
+             setDisable5(true)
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable1}
           value={isSelected1}
           onValueChange={setSelection1}
         />
+      }
         <Text >Na rua</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected2}
+          disable={disable2}
+          onPress={() => {
+             isSelected2 ? setSelection2(false) : setSelection2(true)
+ 
+             disable2 ? setDisable2(false) : setDisable2(true)
+             setSelection5(false)
+             setDisable5(true)
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable2}
           value={isSelected2}
           onValueChange={setSelection2}
         />
+      }
        <Text >Em lugares fechados, pronto socorro ou hospitais</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected3}
+          disable={disable3}
+          onPress={() => {
+             isSelected3 ? setSelection3(false) : setSelection3(true)
+ 
+             disable3 ? setDisable3(false) : setDisable3(true)
+             setSelection5(false)
+             setDisable5(true)
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable3}
           value={isSelected3}
           onValueChange={setSelection3}
-          
         />
+      }
        <Text >No trabalho</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected4}
+          disable={disable4}
+          onPress={() => {
+             isSelected4 ? setSelection4(false) : setSelection4(true)
+ 
+             disable4 ? setDisable4(false) : setDisable4(true)
+             setSelection5(false)
+             setDisable5(true)
+
+          }}
+          />
+        :
         <CheckBox
            disabled={isDisable4}
           value={isSelected4}
           onValueChange={setSelection4}          
         />
+      }
        <Text >Em casa</Text>
       </View>
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected5}
+          disable={disable5}
+          onPress={() => {
+             isSelected5 ? setSelection5(false) : setSelection5(true)
+ 
+             disable5 ? setDisable5(false) : setDisable5(true)
+             setDisable1(true)
+             setDisable2(true)
+             setDisable3(true)
+             setDisable4(true)
+             setDisable5(false)
+
+             setSelection1(false)
+             setSelection2(false)
+             setSelection3(false)
+             setSelection4(false)
+             setSelection5(true)
+
+          }}
+          />
+        :
         <CheckBox
            disabled={isDisable5}
           value={isSelected5}
           onValueChange={setSelection5}          
         />
+      }
        <Text >Não que eu saiba ou tenha percebido</Text>
       </View>
 

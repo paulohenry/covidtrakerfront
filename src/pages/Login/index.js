@@ -35,7 +35,6 @@ export default function Login() {
     const celularKey = await AsyncStorage.getItem(keys.user.telefone)
     const senhaKey = await AsyncStorage.getItem(keys.user.senha)
       
-
     if(celular==celularKey && senha==senhaKey){
 
         if(Device.isDevice){

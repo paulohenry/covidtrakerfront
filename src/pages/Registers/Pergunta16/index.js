@@ -1,16 +1,14 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text,Button, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native'
-import styles from '../../../styles/formStyles'
-import keys from '../../../temporaryStorage/keys'
+import { View, Text, Platform, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import styles from '../../../styles/formStyles';
+import keys from '../../../temporaryStorage/keys';
+import CheckBoxIOS from '../../../components/CheckBoxIOS';
 // import { Container } from './styles';
 
+const os = Platform.OS
+
 export default function Pergunta16() {
-
-
-
-
-
   const nav = useNavigation()
 
   const [isSelected1, setSelection1] = useState(false);
@@ -20,10 +18,12 @@ export default function Pergunta16() {
   const [isDisable2, setIsDisable2] = useState(false);
 
   const [isSelected3, setSelection3] = useState(false);
- const [isDisable3, setIsDisable3] = useState(false);
-  
-  
-  
+  const [isDisable3, setIsDisable3] = useState(false);
+
+  //Ios disable Check
+  const [disable1, setDisable1] = useState(true)
+  const [disable2, setDisable2] = useState(true)
+  const [disable3, setDisable3] = useState(true)
  
   const [resposta1, setResposta1] = useState('')
   
@@ -90,48 +90,94 @@ _storeData = async () => {
    
   return (
     <View style={styles.container}>
-      
    
      <Text style={styles.titles} >Qual o seu sexo ? </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>
+     {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected1}
+          disable={disable1}
+          onPress={() => {
+             setSelection1(true)
+             setSelection2(false)
+             setSelection3(false)
+
+             setDisable1(false)
+             setDisable2(true)
+             setDisable3(true)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable1}
           value={isSelected1}
           onValueChange={setSelection1}
         />
+      }
         <Text >Masculino</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected2}
+          disable={disable2}
+          onPress={() => {
+             setSelection1(false)
+             setSelection2(true)
+             setSelection3(false)
+
+             setDisable1(true)
+             setDisable2(false)
+             setDisable3(true)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable2}
           value={isSelected2}
           onValueChange={setSelection2}
         />
+      }
         <Text >Feminino</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected3}
+          disable={disable3}
+          onPress={() => {
+             setSelection1(false)
+             setSelection2(false)
+             setSelection3(true)
+
+             setDisable1(true)
+             setDisable2(true)
+             setDisable3(false)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable3}
           value={isSelected3}
           onValueChange={setSelection3}
-          
         />
+      }
         <Text >Outros</Text>
       </View>
 
-      
-  
       <Text style={{paddingTop:20}}>sua resposta nesta etapa foi: {resposta1} </Text>
       
       </View>
       <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>
        <Text style={styles.textButton}>Próximo</Text>
       </TouchableOpacity>
-      
-    
+
     </View>
   );
 }
