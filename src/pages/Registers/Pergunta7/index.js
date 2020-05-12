@@ -1,10 +1,13 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native'
+import { View, Text, Platform, CheckBox, AsyncStorage,Alert, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-import keys from '../../../temporaryStorage/keys'
-import styles from '../../../styles/formStyles'
+import keys from '../../../temporaryStorage/keys';
+import styles from '../../../styles/formStyles';
+import CheckBoxIOS from '../../../components/CheckBoxIOS';
 // import { Container } from './styles';
+
+const os  = Platform.OS
 
 export default function Pergunta7() {
 
@@ -24,8 +27,14 @@ export default function Pergunta7() {
 
   const [isSelected5, setSelection5] = useState(false);
   const [isDisable5, setIsDisable5] = useState(false);
+
+  //Ios disable Check
+  const [disable1, setDisable1] = useState(true)
+  const [disable2, setDisable2] = useState(true)
+  const [disable3, setDisable3] = useState(true)
+  const [disable4, setDisable4] = useState(true)
+  const [disable5, setDisable5] = useState(true)
   
- 
   const [resposta1, setResposta1] = useState('')
   const [resposta2, setResposta2] = useState('')
   const [resposta3, setResposta3] = useState('')
@@ -64,6 +73,8 @@ export default function Pergunta7() {
       setIsDisable3(false)
       setIsDisable4(false)
       setIsDisable5(true)
+
+      setResposta5('')
       
     }
     if(isSelected1){
@@ -80,7 +91,7 @@ export default function Pergunta7() {
     }else{ setResposta4('')}
   
  
-},[isSelected1, isSelected2, isSelected3, isSelected4,isSelected5])
+},[isSelected1, isSelected2, isSelected3, isSelected4, isSelected5])
  
 
 _storeData = async () => {
@@ -90,8 +101,6 @@ _storeData = async () => {
         resposta3,
         resposta4,
         resposta5,
-
-
      ]
    try{
   await AsyncStorage.setItem(keys.questionario.Q7, JSON.stringify(res))
@@ -119,52 +128,138 @@ _storeData = async () => {
      <Text style={{color:'#FE0000', fontSize:17}} >Responda quantas alternativas quiser </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>
+     {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected1}
+          disable={disable1}
+          onPress={() => {
+             isSelected1 ? setSelection1(false) : setSelection1(true)
+ 
+             disable1 ? setDisable1(false) : setDisable1(true)
+             setSelection5(false)
+             setDisable5(true)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable1}
           value={isSelected1}
           onValueChange={setSelection1}
         />
+      }
         <Text >Beija</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected2}
+          disable={disable2}
+          onPress={() => {
+             isSelected2 ? setSelection2(false) : setSelection2(true)
+ 
+             disable2 ? setDisable2(false) : setDisable2(true)
+             setSelection5(false)
+             setDisable5(true)
+             
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable2}
           value={isSelected2}
           onValueChange={setSelection2}
         />
+      }
        <Text >Abraça</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected3}
+          disable={disable3}
+          onPress={() => {
+             isSelected3 ? setSelection3(false) : setSelection3(true)
+ 
+             disable3 ? setDisable3(false) : setDisable3(true)
+             setDisable5(true)
+             setSelection5(false)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable3}
           value={isSelected3}
           onValueChange={setSelection3}
-          
         />
+      }
        <Text >Aperta as mãos</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected4}
+          disable={disable4}
+          onPress={() => {
+             isSelected4 ? setSelection4(false) : setSelection4(true)
+ 
+             disable4 ? setDisable4(false) : setDisable4(true)
+             setDisable5(true)
+             setSelection5(false)
+
+          }}
+          />
+        :
         <CheckBox
            disabled={isDisable4}
           value={isSelected4}
           onValueChange={setSelection4}          
         />
+      }
        <Text >Fica próximo para conversar</Text>
       </View>
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected5}
+          disable={disable5}
+          onPress={() => {
+             if(disable5){
+              setDisable5(false)
+              setDisable1(true)
+              setDisable2(true)
+              setDisable3(true)
+              setDisable4(true)
+
+              setSelection1(false)
+              setSelection2(false)
+              setSelection3(false)
+              setSelection4(false)
+              setSelection5(true)
+             }else{
+              setDisable5(true)
+              setSelection5(false)
+             }
+
+          }}
+          />
+        :
         <CheckBox
            disabled={isDisable5}
           value={isSelected5}
           onValueChange={setSelection5}          
         />
+      }
        <Text >Evita os comportamentos acima e mantém o contato a distância de 2 metros </Text>
       </View>
 
   
-    <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5}` } </Text>
+    <Text style={{paddingTop:20}}> {`Sua resposta nesta etapa: ${resposta1} ${resposta2} ${resposta3} ${resposta4} ${resposta5}`} </Text>
       
       </View>
       <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>

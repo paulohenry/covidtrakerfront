@@ -18,10 +18,6 @@ export default function UserData() {
       const [senha, setSenha ] =useState('')
       const [senhaConfirmacao, setSenhaConfirmacao ] =useState('')
 
-      
-
-     
-
       useEffect(() => {
      
                 setPrimeiroNome(primeiroNome)
@@ -44,7 +40,6 @@ export default function UserData() {
 
       const store = async()=>{
            
-        
               try{
                 await AsyncStorage.setItem(storage.user.primeiroNome,primeiroNome)
                 await AsyncStorage.setItem(storage.user.ultimoNome,ultimoNome)

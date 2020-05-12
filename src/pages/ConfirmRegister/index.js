@@ -39,12 +39,6 @@ export default function ConfirmRegister() {
  const [senha,setSenha]=useState('')
  const [confirmSenha,setConfirmSenha]=useState('')
  
-
- 
-   
- 
- 
-
  async function  _storeData (){   
   try{
 
@@ -76,8 +70,6 @@ export default function ConfirmRegister() {
  setResposta19(await AsyncStorage.getItem(keys.questionario.Q19))
  setResposta20(await AsyncStorage.getItem(keys.questionario.Q20))
  setResposta21(await AsyncStorage.getItem(keys.questionario.Q6A))
-
- 
    
    }catch(erro){
      Alert.alert('Cadastro', {erro:' erro ao cadastrar'})
@@ -118,10 +110,6 @@ const res = {
          resposta21:resposta21,
       }
   }
-
-
-
-  
 }
 async function _save(){
       
@@ -143,7 +131,6 @@ async function _save(){
 useEffect(() => { 
     _storeData()  
 },[])
-
 
   return (
     <ScrollView style={[styles.container,{backgroundColor:'#FFF'}]}>

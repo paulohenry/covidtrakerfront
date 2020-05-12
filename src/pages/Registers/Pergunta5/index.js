@@ -1,16 +1,14 @@
 import React, {useState, useEffect}from 'react';
-import { View, Text,TouchableOpacity, CheckBox, AsyncStorage,Alert} from 'react-native';
-import {useNavigation} from '@react-navigation/native'
-import styles from '../../../styles/formStyles'
-import keys from '../../../temporaryStorage/keys'
+import { View, Platform, Text,TouchableOpacity, CheckBox, AsyncStorage,Alert} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import styles from '../../../styles/formStyles';
+import keys from '../../../temporaryStorage/keys';
+import CheckBoxIOS from '../../../components/CheckBoxIOS';
 // import { Container } from './styles';
 
+const os = Platform.OS
+
 export default function Pergunta5() {
-
-
-
-
-
   const nav = useNavigation()
 
   const [isSelected1, setSelection1] = useState(false);
@@ -21,12 +19,14 @@ export default function Pergunta5() {
 
   const [isSelected3, setSelection3] = useState(false);
   const [isDisable3, setIsDisable3] = useState(false);
-
-  const [isSelected4, setSelection4] = useState(false);
-  const [isDisable4, setIsDisable4] = useState(false);
  
   const [resposta1, setResposta1] = useState('')
   
+  //Ios disable Check
+  const [disable1, setDisable1] = useState(true)
+  const [disable2, setDisable2] = useState(true)
+  const [disable3, setDisable3] = useState(true)
+  const [disable4, setDisable4] = useState(true)
 
   useEffect(() => {
 
@@ -35,7 +35,7 @@ export default function Pergunta5() {
       setIsDisable2(true)
       setIsDisable3(true)
       setIsDisable4(false)
-      setResposta1('nenhuma das anteriores') 
+      setResposta1('Nenhuma das anteriores') 
     }
     if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false ){
       setIsDisable1(false)
@@ -106,46 +106,86 @@ try{
     <View style={styles.container}>
       
     
-     <Text style={styles.titles}>Estado de saúde:Quais das alternativas abaixo você melhor se enquadra ? </Text>
+     <Text style={styles.titles}>Você sai de máscara? </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>
-        <CheckBox
+        {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected1}
+          disable={disable1}
+          onPress={() => {
+             setSelection1(true) 
+             setSelection2(false)
+             setSelection3(false)
+ 
+             setDisable1(false)
+             setDisable2(true)
+             setDisable3(true)
+
+          }}
+          />
+        :
+          <CheckBox
         disabled={isDisable1}
           value={isSelected1}
           onValueChange={setSelection1}
-        />
+        />}
         <Text >Tenho sintomas</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected2}
+          disable={disable2}
+          onPress={() => {
+             setSelection1(false) 
+             setSelection2(true)
+             setSelection3(false)
+ 
+             setDisable1(true)
+             setDisable2(false)
+             setDisable3(true)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable2}
           value={isSelected2}
           onValueChange={setSelection2}
         />
+      }
         <Text >Estive internado(alta médica)</Text>
       </View>
 
       <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected3}
+          disable={disable3}
+          onPress={() => {
+             setSelection1(false) 
+             setSelection2(false)
+             setSelection3(true)
+ 
+             setDisable1(true)
+             setDisable2(true)
+             setDisable3(false)
+
+          }}
+          />
+        :
         <CheckBox
         disabled={isDisable3}
           value={isSelected3}
           onValueChange={setSelection3}
         />
+      }
         <Text >Estou internado agora</Text>
       </View>
 
-      <View style={styles.alternatives}>
-        <CheckBox
-        disabled={isDisable4}
-          value={isSelected4}
-          onValueChange={setSelection4}
-        />
-        <Text >nenhuma das anteriores</Text>
-      </View>
-
- 
-      <Text style={{paddingTop:20}}>sua resposta nesta etapa foi: {resposta1} </Text>
+      <Text style={{paddingTop:20}}>sua resposta nesta etapa foi: {resposta1 == '' ? 'Nenhuma das resposta selecionadas.' : resposta1} </Text>
       </View>
       <TouchableOpacity style={styles.buttonEntrar}onPress={_storeData}>
        <Text style={styles.textButton}>Próximo</Text>

@@ -9,11 +9,9 @@ import Configuracoes from '../EditUser/index'
 import Noticias from '../Newsletter/index'
 import styles from './styles'
 
-
 enableScreens();
 
 const   Tabs = createBottomTabNavigator()
-
 
 function StackTabs(){
    
@@ -30,10 +28,6 @@ function StackTabs(){
     }, [])
   );
 
-     
-    
-
-
   return(
       <Tabs.Navigator initialRouteName="Contágio">
         <Tabs.Screen name="Contágio" component={Maps}/>
@@ -49,14 +43,12 @@ class Maps extends Component {
     latitude:-23.959807,
     longitude:-46.327998,
   }
-  res={
-    [
+  // res={
+  //   [
       
-    ]
-  }
-
-
-
+  //   ]
+  // }
+  
   render(){
     try{  
       return (
