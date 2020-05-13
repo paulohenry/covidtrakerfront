@@ -48,7 +48,18 @@ const styles = StyleSheet.create({
           justifyContent:'center',
           alignContent:'center',
           alignItems:'center',
-          
+      },
+      inputMasked: {
+        width: '93%',
+        height: 40,
+        fontSize: 20,
+        paddingTop: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 11,
+        marginBottom: 15,
+        borderBottomWidth: 0.3,
+        borderBottomColor: '#000'
       },
       buttonEntrar:{
         marginTop:20,
