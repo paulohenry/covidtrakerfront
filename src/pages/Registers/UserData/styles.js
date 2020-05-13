@@ -27,8 +27,27 @@ const styles = StyleSheet.create({
     textShadowOffset:{height:1,width:1},
   },
   input:{
-
-  }, titles:{
+    
+  },
+  inputMasked: {
+    width: '93%',
+    height: 40,
+    fontSize: 19,
+    paddingTop: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 11,
+    marginBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#99a4ad'
+  },
+  textMaskedInput:{
+    fontSize: 16,
+    paddingLeft: 11,
+    color: '#607D8B',
+    fontWeight: 'bold',
+  },
+   titles:{
     fontSize:30,
     marginVertical:40,
     fontWeight:'700',
