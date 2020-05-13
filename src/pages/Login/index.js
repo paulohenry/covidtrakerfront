@@ -9,11 +9,13 @@ import styles from './styles'
 // import { Container } from './styles';
 import keys from '../../temporaryStorage/keys'
 import * as Device from 'expo-device'
+import api from '../../services/api'
 
 export default function Login() {
   
   const[celular, setCelular] = useState('')
   const[senha, setSenha] = useState('')
+  const[errorMsg, setErrorMsg] = useState(null)
 
   //quando tiver o backend lembre de limpar todas as chaves ao entrar em lo0gin
   
@@ -31,34 +33,22 @@ export default function Login() {
   
   }
 
-  const navigationToMap = async (screen)=>{
-    const celularKey = await AsyncStorage.getItem(keys.user.telefone)
-    const senhaKey = await AsyncStorage.getItem(keys.user.senha)
-      
-    if(celular==celularKey && senha==senhaKey){
+  const signIn = async ()=>{
+    try{
+    const response = await api.post('/session', {
+      celular:celular,
+      senha:senha
+     })
+        nav.navigate('Maps')
+        
+    }catch(response){      
+      Alert.alert('CovidTracker',  'login ou senha incorretos')  
+      } 
+   }    
+  
+ 
 
-        if(Device.isDevice){
-        if(Platform=='android'){
-            const deviceIDandroid= Device.designName
-            try{
-              await AsyncStorage.setItem(keys.device.id,deviceIDandroid)
-           }catch(err){
-             Alert.alert('Covidtracker', 'erro ao tentar logar, entre em contato com a equipe de suport')
-           }
-        }else if(Platform=='ios'){
-            const deviceIDiOS = Device.modelId
-            try{
-              await AsyncStorage.setItem(keys.device.id,deviceIDiOS)
-           }catch(err){
-             Alert.alert('Covidtracker', 'erro ao tentar logar, entre em contato com a equipe de suport')
-           }
-        }
-      }         
-        nav.navigate(screen)
-    }else{
-      Alert.alert('CovidTracker', 'celular ou Senha incorretos')
-    }
-  }
+ 
 
   return (
     <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset={-150} behavior="position" enabled>
@@ -71,9 +61,9 @@ export default function Login() {
      </View>
      
      <View style={styles.loginContainer}>
-       <Input style={styles.inputs} value={celular} onChangeText={setCelular} placeholder="Insira o celular cadastrado"/>
-       <Input style={styles.inputs} value={senha} onChangeText={setSenha}   secureTextEntry={true} placeholder="Senha de acesso cadastrada"/>
-       <TouchableOpacity style={styles.buttonEntrar}onPress={()=>{navigationToMap('Maps')}}>
+       <Input style={styles.inputs} value={celular}keyboardType="number-pad"  onChangeText={setCelular} placeholder="Insira o celular cadastrado"/>
+       <Input style={styles.inputs} value={senha} keyboardType="number-pad" onChangeText={setSenha}   secureTextEntry={true} placeholder="Senha de acesso cadastrada"/>
+       <TouchableOpacity style={styles.buttonEntrar}onPress={()=>{signIn()}}>
        <Text style={styles.textButton}>Entrar</Text>
       </TouchableOpacity>
       
