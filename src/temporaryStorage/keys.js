@@ -13,8 +13,8 @@ const keys = {
     confirmSenha:'USER-CONFIR-SENHA',
     lat: 'LAT',
     long:' LONG'
-  
   },
+
   questionario: {
     Q1: 'Q1',
     Q2: 'Q2',
