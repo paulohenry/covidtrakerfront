@@ -86,13 +86,7 @@ export default function Login() {
           </View>
 
           <View style={styles.loginContainer}>
-            {/* {<Input
-              style={styles.inputs}
-              value={celular}
-              onChangeText={setCelular}
-              placeholder="Insira o celular cadastrado"
-            />} */}
-            {/* <TextInputMask
+             <TextInputMask
               type={"cel-phone"}
               options={{
                 maskType: 'BRL',
@@ -101,9 +95,14 @@ export default function Login() {
               }}
               value={celular}
               placeholder='Insira o celular cadastrado'
-              onChangeText={text => setCelular(text)  }
+              onChangeText={text => {
+                text = text.replace(/[^\d]+/g,'')
+                text = parseInt(text)
+                setCelular(text) 
+                //return numero inteiro sem caracteres especiais.
+              } }
               style={styles.inputMasked}
-            /> */}
+            />
             <Input
               style={styles.inputs}
               value={celular}

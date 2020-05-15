@@ -25,7 +25,7 @@ export default function UserData() {
 
   const [primeiro_nome, setprimeiro_nome] = useState("");
   const [ultimo_nome, setultimo_nome] = useState("");
-  const [celular, setcelular] = useState("");
+  const [celular, setCelular] = useState("");
   const [cep, setCep] = useState("");
   const [senha, setSenha] = useState("");
   const [senha_confirmacao, setsenha_confirmacao] = useState("");
@@ -36,7 +36,7 @@ export default function UserData() {
   useEffect(() => {
     setprimeiro_nome(primeiro_nome);
     setultimo_nome(ultimo_nome);
-    setcelular(celular);
+    setCelular(celular);
     setCep(cep);
     setSenha(senha);
     setsenha_confirmacao(senha_confirmacao);
@@ -105,15 +105,8 @@ export default function UserData() {
         labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B', fontWeight: 'bold'}}
         
         />
-        <Input
-        value={celular}
-        onChangeText={setcelular}
-      
-        keyboardType="number-pad"pm2
-        label="Celular ex: 13 99999 9999 sem espaço"
-        labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
-        />
-      {/* <Text style={styles.textMaskedInput}>Ex: (DDD) 99999-9999</Text>
+
+      <Text style={styles.textMaskedInput}>Ex: (DDD) 99999-9999</Text>
       <TextInputMask
         type={"cel-phone"}
         options={{
@@ -122,19 +115,16 @@ export default function UserData() {
           dddMask: "(99) ",
         }}
         value={celular}
-        onChangeText={text => setcelular(text)}
+        onChangeText={text => {
+          text = text.replace(/[^\d]+/g,'')
+          text = parseInt(text)
+          setCelular(text)
+        }}
         style={[styles.inputMasked, {borderBottomColor: '#607D8B', marginBottom: 20}]}
-        />  */}
-      {/* <Text style={styles.textMaskedInput}>CEP de onde está morando atualmente</Text> */}
-      <Input
-        value={cep}
-        onChangeText={setCep}
-      
-        keyboardType="number-pad"
-        label="CEP de onde está morando atualmente"
-        labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
         />
-      {/* <TextInputMask
+      <Text style={styles.textMaskedInput}>CEP de onde está morando atualmente</Text> */}
+      
+      <TextInputMask
         type={'zip-code'}
         options={{
           maskType: "BRL",
@@ -142,9 +132,13 @@ export default function UserData() {
           dddMask: "(99) ",
         }}
         value={cep}
-        onChangeText={text => setCep(text)}
+        onChangeText={text => {
+          text = text.replace(/[^\d]+/g,'')
+          text = parseInt(text)
+          setCep(text)
+        }}
         style={[styles.inputMasked, {borderBottomColor: '#607D8B', marginBottom: 20}]}
-        /> */}
+        />
         <Input
         value={rua}
         onChangeText={setRua}
