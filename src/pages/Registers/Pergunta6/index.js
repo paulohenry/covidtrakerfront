@@ -204,7 +204,7 @@ _storeData = async () => {
   return (
     <ScrollView style={styles.container}>
    
-     <Text style={styles.titles} >Quais destes sintomas você teve nos últimos 07 dias? </Text>
+     <Text style={styles.titles} >Quais destes sintomas você teve nos últimos 05 dias? </Text>
      <Text style={{color:'#FE0000', fontSize:17}} >Responda quantas alternativas quiser </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>

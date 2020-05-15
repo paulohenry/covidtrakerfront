@@ -18,37 +18,46 @@ export default function Pergunta4() {
   const [isSelected2, setSelection2] = useState(false);
   const [isDisable2, setIsDisable2] = useState(false);
 
+  const [isSelected3, setSelection3] = useState(false);
+  const [isDisable3, setIsDisable3] = useState(false);
+
   //Ios disable Check
   const [disable1, setDisable1] = useState(true)
   const [disable2, setDisable2] = useState(true)
+  const [disable3, setDisable3] = useState(true)
 
   const [resposta1, setResposta1] = useState('')
   
 
   useEffect(() => {
 
-    if (isSelected1 == false  && isSelected2 ==false ){
+    if (isSelected1 == false  && isSelected2 ==false  && isSelected3 ==false ){
       setIsDisable1(false)
       setIsDisable2(false)
-     
+      setIsDisable3(false)
       setResposta1('') 
 
-    }else if(isSelected1 == true  && isSelected2 ==false ){
+    }else if(isSelected1 == true  && isSelected2 ==false && isSelected3 ==false ){
         
         setIsDisable1(false)
         setIsDisable2(true)
-     
+        setIsDisable3(true)
         
         setResposta1('Estou de quarentena obrigatória') 
         
        
-    }else if (isSelected1 == false  && isSelected2 ==true ){
+    }else if (isSelected1 == false  && isSelected2 ==true && isSelected3 ==false ){
         setIsDisable1(true)
         setIsDisable2(false)
-        
+        setIsDisable3(true)
         setResposta1('Tive alta médica da quarentena') 
-    }
-  },[isSelected1, isSelected2])
+    }else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true ){
+      setIsDisable1(true)
+      setIsDisable2(true)
+      setIsDisable3(false)
+      setResposta1('Nenhuma das anteriores') 
+  }
+  },[isSelected1, isSelected2, isSelected3])
  
 
 _storeData = async () => {
@@ -60,13 +69,15 @@ try{
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
   }
-  if(isSelected1==false && isSelected2==false){
+  if(isSelected1==false && isSelected2==false && isSelected3==false){
   Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
 
   }
     if(isSelected1){
       nav.navigate('Pergunta5A')
     }else if(isSelected2){
+      nav.navigate('Pergunta5A')
+    }else if(isSelected3){
       nav.navigate('Pergunta5A')
     }
         console.log(save)
@@ -90,10 +101,10 @@ try{
          onPress={() => {
             setSelection1(true) 
             setSelection2(false)
-
+            setSelection3(false)
             setDisable1(false)
             setDisable2(true)
-            
+            setDisable3(true)
          }}
          />
         : 
@@ -109,15 +120,15 @@ try{
       <View style={styles.alternatives}>
       {os == 'ios' ? 
          <CheckBoxIOS
-         value={isSelected1}
+         value={isSelected2}
          disable={disable2}
          onPress={() => {
             setSelection1(false) 
             setSelection2(true)
-
+            setSelection3(false) 
             setDisable1(true)
             setDisable2(false)
-            
+            setDisable3(true)
          }}
          />
         : 
@@ -128,6 +139,32 @@ try{
         />
       }
         <Text>Tive alta médica da quarentena</Text>
+      </View>
+
+      <View style={styles.alternatives}>
+      {os == 'ios' ? 
+         <CheckBoxIOS
+         value={isSelected3}
+         disable={disable3}
+         onPress={() => {
+            setSelection1(false) 
+            setSelection2(false)
+            setSelection3(true)
+
+            setDisable1(true)
+            setDisable2(true)
+            setDisable3(false)
+            
+         }}
+         />
+        : 
+        <CheckBox
+        disabled={isDisable3}
+          value={isSelected3}
+          onValueChange={setSelection3}
+        />
+      }
+        <Text>Nenhuma das anteriores</Text>
       </View>
 
       <Text style={{paddingTop:20}}>sua resposta nesta etapa foi: {resposta1 == '' ? 'Nenhuma resposta selecionada' : resposta1} </Text>
