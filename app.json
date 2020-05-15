@@ -27,7 +27,10 @@
     },
     "android": {
       "package": "com.magicstar.covidtrackersantos",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": { 
+        "googleMaps": {"apiKey": "AIzaSyCswupYIIm-6xBirc41bwlpqnI9Njw5JfI"}    
+     }
     },
     "androidStatusBar": {
       "hidden": true,

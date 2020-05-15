@@ -6,6 +6,8 @@ import keys from '../../temporaryStorage/keys'
 import {Ionicons} from '@expo/vector-icons'
 // import { Container } from './styles';
 
+
+
 export default function ConfirmRegister() {
  const nav = useNavigation();
 
@@ -15,6 +17,8 @@ export default function ConfirmRegister() {
  const [resposta4, setResposta4]=useState('')
  const [resposta5, setResposta5]=useState('')
  const [resposta6, setResposta6]=useState('')
+ const [resposta6A, setResposta6A]=useState('')
+ const [resposta5A, setResposta5A]=useState('')
  const [resposta7, setResposta7]=useState('')
  const [resposta8, setResposta8]=useState('')
  const [resposta9, setResposta9]=useState('')
@@ -55,6 +59,8 @@ export default function ConfirmRegister() {
  setResposta4(await AsyncStorage.getItem(keys.questionario.Q4))
  setResposta5(await AsyncStorage.getItem(keys.questionario.Q5))
  setResposta6(await AsyncStorage.getItem(keys.questionario.Q6))
+ setResposta6A(await AsyncStorage.getItem(keys.questionario.Q6A))
+ setResposta5A(await AsyncStorage.getItem(keys.questionario.Q5A))
  setResposta7(await AsyncStorage.getItem(keys.questionario.Q7))
  setResposta8(await AsyncStorage.getItem(keys.questionario.Q8))
  setResposta9(await AsyncStorage.getItem(keys.questionario.Q9))
@@ -76,56 +82,13 @@ export default function ConfirmRegister() {
    }   
   
 };
-const res = {
-  confirmScreen:{
-      user_data:{
-         primeiroNome:primeiroNome ,
-         segundoNome:segundoNome ,
-         telefone:telefone ,
-         cep:cep ,
-         senha:senha ,
-         confirmSenha:confirmSenha,
-      },
-      questionario:{
-         resposta1:resposta1 ,
-         resposta2:resposta2 ,
-         resposta3:resposta3 ,
-         resposta4:resposta4 ,
-         resposta5 :resposta5,
-         resposta6 :resposta6,
-         resposta7 :resposta7,
-         resposta8 :resposta8,
-         resposta9 :resposta9,
-         resposta10 :resposta10,
-         resposta11 :resposta11,
-         resposta12 :resposta12,
-         resposta13 :resposta13,
-         resposta14 :resposta14,
-         resposta15 :resposta15,
-         resposta16 :resposta16,
-         resposta17 :resposta17,
-         resposta18 :resposta18,
-         resposta19 :resposta19,
-         resposta20 :resposta20,
-         resposta21:resposta21,
-      }
-  }
-}
-async function _save(){
-      
-    
-  await AsyncStorage.setItem(keys.confirmScreen.CONFIRM, JSON.stringify(res))
-  //// manda pro backend
- const save = await AsyncStorage.getItem(keys.confirmScreen.CONFIRM)
- if(!save){
-   Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
- }else{
-      //chama o axios e depois manda pra tela de mapas
-      
-      console.log(res)
-      nav.navigate('Login')
 
- } 
+
+async function _save(){
+    
+              nav.navigate('Login')
+     
+ 
 }
 
 useEffect(() => { 

@@ -37,17 +37,24 @@ export default function Login() {
 
   const nav = useNavigation();
 
-  const signIn = async ()=>{
+  const signIn = async()=>{
+    
     try{
-    const response = await api.post('/session', {
+    const response = await api.post('/session/', {
       celular:celular,
       senha:senha
      })
+        console.log(response.data.token,response.data.user.id)
+         await AsyncStorage.setItem(keys.token, JSON.stringify(response.data.token))
+         await AsyncStorage.setItem(keys.user_id,  JSON.stringify(response.data.user.id))        
+         
         nav.navigate('Maps')
+         Alert.alert('Covidtracker', 'Logado com sucesso')
         
-    }catch(response){      
-      Alert.alert('CovidTracker',  'login ou senha incorretos')  
-      } 
+    }catch(error){
+       
+      Alert.alert('CovidTracker', error.response.data.message)  
+    }
    }    
   
 
@@ -85,7 +92,7 @@ export default function Login() {
               onChangeText={setCelular}
               placeholder="Insira o celular cadastrado"
             />} */}
-            <TextInputMask
+            {/* <TextInputMask
               type={"cel-phone"}
               options={{
                 maskType: 'BRL',
@@ -96,19 +103,26 @@ export default function Login() {
               placeholder='Insira o celular cadastrado'
               onChangeText={text => setCelular(text)  }
               style={styles.inputMasked}
+            /> */}
+            <Input
+              style={styles.inputs}
+              value={celular}
+              onChangeText={setCelular}
+             
+              keyboardType="number-pad"
+              placeholder="Celular usado no cadastro"
             />
             <Input
               style={styles.inputs}
               value={senha}
               onChangeText={setSenha}
               secureTextEntry={true}
+              keyboardType="number-pad"
               placeholder="Senha de acesso cadastrada"
             />
             <TouchableOpacity
               style={styles.buttonEntrar}
-              onPress={() => {
-                navigationToMap("Maps");
-              }}
+              onPress={()=>{signIn()}}
             >
               <Text style={styles.textButton}>Entrar</Text>
             </TouchableOpacity>

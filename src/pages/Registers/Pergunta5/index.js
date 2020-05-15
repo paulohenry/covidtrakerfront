@@ -19,6 +19,9 @@ export default function Pergunta5() {
 
   const [isSelected3, setSelection3] = useState(false);
   const [isDisable3, setIsDisable3] = useState(false);
+
+  const [isSelected4, setSelection4] = useState(false);
+  const [isDisable4, setIsDisable4] = useState(false);
  
   const [resposta1, setResposta1] = useState('')
   
@@ -106,7 +109,7 @@ try{
     <View style={styles.container}>
       
     
-     <Text style={styles.titles}>Você sai de máscara? </Text>
+     <Text style={styles.titles}> Estado de saúde:Quais das alternativas abaixo você melhor se enquadra ? </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>
         {os == 'ios' ?
@@ -117,10 +120,11 @@ try{
              setSelection1(true) 
              setSelection2(false)
              setSelection3(false)
- 
+             setSelection4(false)
              setDisable1(false)
              setDisable2(true)
              setDisable3(true)
+             setDisable4(true)
 
           }}
           />
@@ -130,7 +134,7 @@ try{
           value={isSelected1}
           onValueChange={setSelection1}
         />}
-        <Text >Tenho sintomas</Text>
+        <Text >Tenho apenas sintomas</Text>
       </View>
 
       <View style={styles.alternatives}>
@@ -142,10 +146,11 @@ try{
              setSelection1(false) 
              setSelection2(true)
              setSelection3(false)
- 
+             setSelection4(false)
              setDisable1(true)
              setDisable2(false)
              setDisable3(true)
+             setDisable4(true)
 
           }}
           />
@@ -168,11 +173,11 @@ try{
              setSelection1(false) 
              setSelection2(false)
              setSelection3(true)
- 
+             setSelection4(false)
              setDisable1(true)
              setDisable2(true)
              setDisable3(false)
-
+             setDisable4(true) 
           }}
           />
         :
@@ -183,6 +188,34 @@ try{
         />
       }
         <Text >Estou internado agora</Text>
+      </View>
+
+      <View style={styles.alternatives}>
+      {os == 'ios' ?
+          <CheckBoxIOS
+          value={isSelected4}
+          disable={disable4}
+          onPress={() => {
+             setSelection1(false) 
+             setSelection2(false)
+             setSelection3(false)
+             setSelection4(true)
+ 
+             setDisable1(true)
+             setDisable2(true)
+             setDisable3(true)
+             setDisable4(false)
+
+          }}
+          />
+        :
+        <CheckBox
+        disabled={isDisable4}
+          value={isSelected4}
+          onValueChange={setSelection4}
+        />
+      }
+        <Text >Nenhuma das anteriores</Text>
       </View>
 
       <Text style={{paddingTop:20}}>sua resposta nesta etapa foi: {resposta1 == '' ? 'Nenhuma das resposta selecionadas.' : resposta1} </Text>

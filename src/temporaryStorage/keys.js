@@ -1,4 +1,6 @@
 const keys = {
+  token:'TOKEN',
+  user_id:'USER-ID',
   user:{
     primeiroNome: 'USER-PRIMEIRO-NOME',
     segundoNome: 'USER-SEGUNDO-NOME',

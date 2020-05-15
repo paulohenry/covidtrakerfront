@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import styles from '../../../styles/formStyles';
 import keys from '../../../temporaryStorage/keys';
 import CheckBoxIOS from '../../../components/CheckBoxIOS';
-
+import api from '../../../services/api'
 // import { Container } from './styles';
 
 //Plataforma corrente.

@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableOpacity,
   KeyboardAvoidingView,
+  ScrollView
 } from "react-native";
 import { Input } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
@@ -22,52 +23,63 @@ import api from '../../../services/api'
 export default function UserData() {
   const nav = useNavigation();
 
-  const [primeiroNome, setPrimeiroNome] = useState("");
-  const [ultimoNome, setultimoNome] = useState("");
+  const [primeiro_nome, setprimeiro_nome] = useState("");
+  const [ultimo_nome, setultimo_nome] = useState("");
   const [celular, setcelular] = useState("");
   const [cep, setCep] = useState("");
   const [senha, setSenha] = useState("");
-  const [senhaConfirmacao, setSenhaConfirmacao] = useState("");
+  const [senha_confirmacao, setsenha_confirmacao] = useState("");
   const [numero, setNumero] = useState("")
   const [rua, setRua]= useState("")
   const [complemento, setComplemento]= useState("")
 
   useEffect(() => {
-    setPrimeiroNome(primeiroNome);
-    setultimoNome(ultimoNome);
+    setprimeiro_nome(primeiro_nome);
+    setultimo_nome(ultimo_nome);
     setcelular(celular);
     setCep(cep);
     setSenha(senha);
-    setSenhaConfirmacao(senhaConfirmacao);
+    setsenha_confirmacao(senha_confirmacao);
     setRua(rua)
     setNumero(numero)
     setComplemento(complemento)
-  }, [primeiroNome, ultimoNome, celular, cep, senha, senhaConfirmacao,rua,numero,complemento]);
+  }, [primeiro_nome, ultimo_nome, celular, cep, senha, senha_confirmacao,rua,numero,complemento]);
 
   const store = async () => {
-    try {
-      
+     
+   
+    if(senha != senha_confirmacao){
+      Alert.alert('CovidTracker',  "a confirmação de senha deve ser igual a senha")
+    }else{
+    if(primeiro_nome=="" || ultimo_nome =="" || celular=="" || cep=="" || senha=="" || senha_confirmacao=="" ||rua=="" ||numero == ""){
+      Alert.alert('CovidTracker',  "todos os campos são obrigatórios exceto o complemento")
+    }else{
 
-      if (
-        primeiroNome == "" ||
-        ultimoNome == "" ||
-        celular == "" ||
-        cep == "" ||
-        senha == "" ||
-        senhaConfirmacao == ""||
-        rua == ""||
-        numero ==""
-      ) {
-        Alert.alert(
-          "Cadastro",
-          "Preencha o formulário por completo para continuar"
-        );
-      } else {
-        nav.navigate("Pergunta1");
+    try{
+    parseInt(numero)
+    parseInt(cep)
+      const data = {
+          primeiro_nome,
+          ultimo_nome,
+          celular,
+          cep,
+          rua,
+          numero,
+          complemento,
+          senha
       }
-    } catch (erro) {
-      Alert.alert("Cadastro", erro);
+     
+        const response = await api.post('/users/', data)
+        Alert.alert('CovidTracker', 'cadastrado com sucesso')
+        nav.navigate("Pergunta1");
+      
+    }catch(response){
+        Alert.alert('CovidTracker',  'celular já cadastrado')
+
     }
+  }
+}
+  
   };
   return (
     <KeyboardAvoidingView
@@ -76,23 +88,32 @@ export default function UserData() {
       behavior="position"
       enabled
     >
+    <ScrollView>
       <Text style={styles.titles}>Insira seus dados pessoais:</Text>
       <Input
-        value={primeiroNome}
-        onChangeText={setPrimeiroNome}
-        autoCapitalize="characters"
+        value={primeiro_nome}
+        onChangeText={setprimeiro_nome}
+       
         label="Primeiro nome"
         labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B', fontWeight: 'bold'}}
       />
       <Input
-        value={ultimoNome}
-        onChangeText={setultimoNome}
-        autoCapitalize="characters"
+        value={ultimo_nome}
+        onChangeText={setultimo_nome}
+       
         label="Último nome"
         labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B', fontWeight: 'bold'}}
-
-      />
-      <Text style={styles.textMaskedInput}>Ex: (DDD) 99999-9999</Text>
+        
+        />
+        <Input
+        value={celular}
+        onChangeText={setcelular}
+      
+        keyboardType="number-pad"pm2
+        label="Celular ex: 13 99999 9999 sem espaço"
+        labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
+        />
+      {/* <Text style={styles.textMaskedInput}>Ex: (DDD) 99999-9999</Text>
       <TextInputMask
         type={"cel-phone"}
         options={{
@@ -103,9 +124,17 @@ export default function UserData() {
         value={celular}
         onChangeText={text => setcelular(text)}
         style={[styles.inputMasked, {borderBottomColor: '#607D8B', marginBottom: 20}]}
-      /> 
-      <Text style={styles.textMaskedInput}>CEP de onde está morando atualmente</Text>
-      <TextInputMask
+        />  */}
+      {/* <Text style={styles.textMaskedInput}>CEP de onde está morando atualmente</Text> */}
+      <Input
+        value={cep}
+        onChangeText={setCep}
+      
+        keyboardType="number-pad"
+        label="CEP de onde está morando atualmente"
+        labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
+        />
+      {/* <TextInputMask
         type={'zip-code'}
         options={{
           maskType: "BRL",
@@ -115,18 +144,18 @@ export default function UserData() {
         value={cep}
         onChangeText={text => setCep(text)}
         style={[styles.inputMasked, {borderBottomColor: '#607D8B', marginBottom: 20}]}
-      />
+        /> */}
         <Input
         value={rua}
         onChangeText={setRua}
-        secureTextEntry={true}
+        
         label="Lougradouro ex: rua ou avenida"
         labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
-      />
+        />
         <Input
         value={numero}
         onChangeText={setNumero}
-        secureTextEntry={true}
+        
         keyboardType="number-pad"
         label="número da sua residência"
         labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
@@ -134,11 +163,11 @@ export default function UserData() {
       <Input
         value={complemento}
         onChangeText={setComplemento}
-        secureTextEntry={true}
+      
         keyboardType="number-pad"
         label="complemento"
         labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
-      />
+        />
       <Input
         value={senha}
         onChangeText={setSenha}
@@ -146,19 +175,20 @@ export default function UserData() {
         keyboardType="number-pad"
         label="Senha de 6 dígitos "
         labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
-      />
+        />
       <Input
-        value={senhaConfirmacao}
-        onChangeText={setSenhaConfirmacao}
+        value={senha_confirmacao}
+        onChangeText={setsenha_confirmacao}
         secureTextEntry={true}
         keyboardType="number-pad"
         label="Confirme sua senha"
         labelStyle={{color: '#607D8B', borderBottomColor: '#607D8B'}}
-
-      />
+        
+        />
       <TouchableOpacity style={styles.button} onPress={store}>
         <Text style={styles.textButton}>Iniciar Cadastro</Text>
       </TouchableOpacity>
+        </ScrollView>
     </KeyboardAvoidingView>
 
   );

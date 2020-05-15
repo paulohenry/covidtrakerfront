@@ -1,5 +1,5 @@
-import React,{Component } from 'react';
-import { View,BackHandler } from 'react-native';
+import React ,{Component } from 'react';
+import { View,BackHandler  } from 'react-native';
 import { enableScreens } from 'react-native-screens';
 import {useFocusEffect } from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
@@ -8,10 +8,13 @@ import Estatisticas from '../Statistics/index'
 import Configuracoes from '../EditUser/index'
 import Noticias from '../Newsletter/index'
 import styles from './styles'
-
+import api from '../../services/api'
 enableScreens();
 
 const   Tabs = createBottomTabNavigator()
+
+
+
 
 function StackTabs(){
    
@@ -39,20 +42,18 @@ function StackTabs(){
 }
 
 class Maps extends Component {
+    
+    
+
  state={
     latitude:-23.959807,
-    longitude:-46.327998,
+    longitude:-46.327998,    
   }
-  // res={
-  //   [
-      
-  //   ]
-  // }
   
   render(){
     try{  
       return (
-      
+        
         <View style={styles.container}>
          
          <MapView
@@ -142,7 +143,7 @@ class Maps extends Component {
                 latitude:-23.983922,
                 longitude:-46.308945,
               }}/>        
-
+             
           </MapView>
             
         </View>
