@@ -15,18 +15,20 @@ import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { TextInputMask } from "react-native-masked-text";
+import Icon from "react-native-vector-icons/Entypo";
 import styles from "./styles";
 // import { Container } from './styles';
 
-import keys from '../../temporaryStorage/keys'
-import * as Device from 'expo-device'
-import api from '../../services/api'
+import keys from "../../temporaryStorage/keys";
+import * as Device from "expo-device";
+import api from "../../services/api";
 
 export default function Login() {
-  
-  const[celular, setCelular] = useState('')
-  const[senha, setSenha] = useState('')
-  const[errorMsg, setErrorMsg] = useState(null)
+  const [celular, setCelular] = useState("");
+  const [senha, setSenha] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
+  const [showIconPassword, setShowIconPassword] = useState('eye')
+  const [errorMsg, setErrorMsg] = useState(null);
 
   //quando tiver o backend lembre de limpar todas as chaves ao entrar em lo0gin
 
@@ -37,32 +39,44 @@ export default function Login() {
 
   const nav = useNavigation();
 
-  const signIn = async()=>{
-    
-    try{
-    const response = await api.post('/session/', {
-      celular:celular,
-      senha:senha
-     })
-        console.log(response.data.token,response.data.user.id)
-         await AsyncStorage.setItem(keys.token, JSON.stringify(response.data.token))
-         await AsyncStorage.setItem(keys.user_id,  JSON.stringify(response.data.user.id))        
-         
-        nav.navigate('Maps')
-         Alert.alert('Covidtracker', 'Logado com sucesso')
-        
-    }catch(error){
-       
-      Alert.alert('CovidTracker', error.response.data.message)  
+  const signIn = async () => {
+    try {
+      const response = await api.post("/session/", {
+        celular: celular,
+        senha: senha,
+      });
+      console.log(response.data.token, response.data.user.id);
+      await AsyncStorage.setItem(
+        keys.token,
+        JSON.stringify(response.data.token)
+      );
+      await AsyncStorage.setItem(
+        keys.user_id,
+        JSON.stringify(response.data.user.id)
+      );
+
+      nav.navigate("Maps");
+      Alert.alert("Covidtracker", "Logado com sucesso");
+    } catch (error) {
+      Alert.alert("CovidTracker", error.response.data.message);
     }
-   }    
-  
+  };
 
   const navigationTo = async (screen) => {
     nav.navigate(screen);
   };
 
-   return (
+  function handleShowPassword(){
+    if(showIconPassword === 'eye'){
+      setShowPassword(false)
+      setShowIconPassword('eye-with-line')
+    }else{
+      setShowPassword(true)
+      setShowIconPassword('eye')
+    }
+  }
+  
+  return (
     <KeyboardAvoidingView
       style={styles.container}
       keyboardVerticalOffset={-150}
@@ -86,42 +100,43 @@ export default function Login() {
           </View>
 
           <View style={styles.loginContainer}>
-             <TextInputMask
+            <TextInputMask
               type={"cel-phone"}
               options={{
-                maskType: 'BRL',
+                maskType: "BRL",
                 withDDD: true,
-                dddMask: '(99) ',
+                dddMask: "(99) ",
               }}
               value={celular}
-              placeholder='Insira o celular cadastrado'
-              onChangeText={text => {
-                text = text.replace(/[^\d]+/g,'')
-                text = parseInt(text)
-                setCelular(text) 
-                //return numero inteiro sem caracteres especiais.
-              } }
+              placeholder="Insira o celular cadastrado"
+              onChangeText={(text) => {
+                text = text.replace(/[^\d]+/g, "");
+                setCelular(text);
+              }}
+            
               style={styles.inputMasked}
             />
-            <Input
-              style={styles.inputs}
-              value={celular}
-              onChangeText={setCelular}
-             
-              keyboardType="number-pad"
-              placeholder="Celular usado no cadastro"
-            />
+
             <Input
               style={styles.inputs}
               value={senha}
               onChangeText={setSenha}
-              secureTextEntry={true}
+              secureTextEntry={showPassword}
               keyboardType="number-pad"
               placeholder="Senha de acesso cadastrada"
+              maxLength={6}
+              rightIcon={
+                <TouchableOpacity onPress={() => handleShowPassword()}>
+                  <Icon name={showIconPassword} size={25} />
+                </TouchableOpacity>
+              }
             />
+
             <TouchableOpacity
               style={styles.buttonEntrar}
-              onPress={()=>{signIn()}}
+              onPress={() => {
+                signIn();
+              }}
             >
               <Text style={styles.textButton}>Entrar</Text>
             </TouchableOpacity>
