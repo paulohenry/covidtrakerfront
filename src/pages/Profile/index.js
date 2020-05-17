@@ -1,12 +1,11 @@
-import React from 'react';
-import { View, Text} from 'react-native';
-
+import React from "react";
+import { View, Text, SafeAreaView } from "react-native";
 // import { Container } from './styles';
 
 export default function Profile() {
   return (
-    <View>
-      <Text>ok profile </Text>
-    </View>
+    <SafeAreaView style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+      <Text>Profile</Text>
+    </SafeAreaView>
   );
 }
