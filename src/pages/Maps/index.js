@@ -53,21 +53,19 @@ class Maps extends Component {
     longitude: -46.327998,
     data: [],
     loading: true,
-
   };
 
   async componentDidMount() {
     const response = await api.get("/users");
 
     this.setState({ data: response.data });
-    
+
     this.setState({ loading: false });
   }
 
   render() {
     if (this.state.loading) {
       return <Loading />;
-
     } else {
       return (
         <View style={styles.container}>
@@ -84,23 +82,15 @@ class Maps extends Component {
             showsBuildings={false}
           >
 
-            <MapView.Marker
-              pinColor="red"
-              coordinate={{
-                latitude: this.state.latitude,
-                longitude: this.state.longitude,
-              }}
-            />
-
-            {this.state.data.map(item =>  
-            <MapView.Marker  
-              pinColor={item.classify === null ? 'red' : item.classify}
-              coordinate={{
-                latitude: item.lat,
-                longitude: item.long
-              }}
-            />
-            )}
+            {this.state.data.map((item) => (
+              <MapView.Marker
+                pinColor={item.classify === null ? "red" : item.classify}
+                coordinate={{
+                  latitude: item.lat,
+                  longitude: item.long,
+                }}
+              />
+            ))}
             
           </MapView>
         </View>
