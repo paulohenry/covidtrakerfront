@@ -1,5 +1,12 @@
 import React, { Component, useState } from "react";
-import { View, BackHandler, SafeAreaView, Text, FlatList, Animated } from "react-native";
+import {
+  View,
+  BackHandler,
+  SafeAreaView,
+  Text,
+  FlatList,
+  Animated,
+} from "react-native";
 import { enableScreens } from "react-native-screens";
 import { useFocusEffect } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,7 +16,7 @@ import Configuracoes from "../EditUser/index";
 import Noticias from "../Newsletter/index";
 import styles from "./styles";
 import api from "../../services/api";
-import Loading from '../../components/Loading';
+import Loading from "../../components/Loading";
 
 enableScreens();
 
@@ -44,23 +51,23 @@ class Maps extends Component {
   state = {
     latitude: -23.959807,
     longitude: -46.327998,
-    data: null,
+    data: [],
     loading: true,
-    opacity: new Animated.Value(0)
+
   };
 
   async componentDidMount() {
-    const response = await api.get("/positions");
+    const response = await api.get("/users");
+
     this.setState({ data: response.data });
     
-    this.setState({loading: false})
+    this.setState({ loading: false });
   }
 
   render() {
     if (this.state.loading) {
-      return (
-        <Loading />
-      );
+      return <Loading />;
+
     } else {
       return (
         <View style={styles.container}>
@@ -76,6 +83,7 @@ class Maps extends Component {
             showPointsOfInterest={false}
             showsBuildings={false}
           >
+
             <MapView.Marker
               pinColor="red"
               coordinate={{
@@ -84,86 +92,16 @@ class Maps extends Component {
               }}
             />
 
-            <MapView.Marker
-              pinColor="red"
+            {this.state.data.map(item =>  
+            <MapView.Marker  
+              pinColor={item.classify === null ? 'red' : item.classify}
               coordinate={{
-                latitude: -23.956783,
-                longitude: -46.343619,
+                latitude: item.lat,
+                longitude: item.long
               }}
             />
-
-            <MapView.Marker
-              pinColor="green"
-              coordinate={{
-                latitude: -23.956673,
-                longitude: -46.343669,
-              }}
-            />
-
-            <MapView.Marker
-              coordinate={{
-                latitude: -23.956603,
-                longitude: -46.243669,
-              }}
-            />
-            <MapView.Marker
-              pinColor="yellow"
-              coordinate={{
-                latitude: -23.93565,
-                longitude: -46.33552,
-              }}
-            />
-            <MapView.Marker
-              pinColor="red"
-              coordinate={{
-                latitude: -23.951623,
-                longitude: -46.398743,
-              }}
-            />
-            <MapView.Marker
-              coordinate={{
-                latitude: -23.956681,
-                longitude: -46.343624,
-              }}
-            />
-            <MapView.Marker
-              pinColor="yellow"
-              coordinate={{
-                latitude: -23.965411,
-                longitude: -46.315187,
-              }}
-            />
-            <MapView.Marker
-              pinColor="green"
-              coordinate={{
-                latitude: -23.96617587,
-                longitude: -46.33483887,
-              }}
-            />
-
-            <MapView.Marker
-              pinColor="red"
-              coordinate={{
-                latitude: -23.98355,
-                longitude: -46.305909,
-              }}
-            />
-
-            <MapView.Marker
-              pinColor="yellow"
-              coordinate={{
-                latitude: -23.986823,
-                longitude: -46.303046,
-              }}
-            />
-
-            <MapView.Marker
-              pinColor="green"
-              coordinate={{
-                latitude: -23.983922,
-                longitude: -46.308945,
-              }}
-            />
+            )}
+            
           </MapView>
         </View>
       );
