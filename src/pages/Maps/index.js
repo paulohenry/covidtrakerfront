@@ -17,6 +17,7 @@ import Noticias from "../Newsletter/index";
 import styles from "./styles";
 import api from "../../services/api";
 import Loading from "../../components/Loading";
+import Pergunta1 from "../Registers/Pergunta1";
 
 enableScreens();
 
@@ -42,7 +43,7 @@ function StackTabs() {
       <Tabs.Screen name="Contágio" component={Maps} />
       <Tabs.Screen name="Estatisticas" component={Estatisticas} />
       <Tabs.Screen name="Notícias" component={Noticias} />
-      <Tabs.Screen name="Configurações" component={Configuracoes} />
+      <Tabs.Screen name="Atualizar dados" component={Pergunta1} />
     </Tabs.Navigator>
   );
 }
@@ -62,7 +63,7 @@ class Maps extends Component {
 
     this.setState({ loading: false });
   }
-
+ 
   render() {
     if (this.state.loading) {
       return <Loading />;
@@ -83,6 +84,7 @@ class Maps extends Component {
           >
 
             {this.state.data.map((item) => (
+              
               <MapView.Marker
                 pinColor={item.classify === null ? "red" : item.classify}
                 coordinate={{

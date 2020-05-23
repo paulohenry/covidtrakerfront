@@ -1,16 +1,20 @@
 import React,{useEffect, useState} from 'react';
-import { ScrollView, Text,TouchableOpacity, AsyncStorage,Alert, View} from 'react-native';
+import { ScrollView, Text,TouchableOpacity, AsyncStorage,Alert, View,Platform,CheckBox} from 'react-native';
 import styles from '../../styles/formStyles'
 import { useNavigation } from '@react-navigation/native'
 import keys from '../../temporaryStorage/keys'
 import {Ionicons} from '@expo/vector-icons'
+import CheckBoxIOS from '../../components/CheckBoxIOS/';
 // import { Container } from './styles';
 
 
 
 export default function ConfirmRegister() {
  const nav = useNavigation();
-
+ const os = Platform.OS
+ const [isSelected1, setSelection1] = useState(false);
+  const [isDisable1, setIsDisable1] = useState(false);
+ 
  const [resposta1, setResposta1]=useState('')
  const [resposta2, setResposta2]=useState('')
  const [resposta3, setResposta3]=useState('')
@@ -85,10 +89,25 @@ export default function ConfirmRegister() {
 
 
 async function _save(){
-    
+        if(isSelected1==false){
+          Alert.alert('Covidtracker', 'voce precisa aceitar os termos para continuar')
+        }else{
+          Alert.alert('Covidtracker', 'Cadastrado com sucesso, faça o login para acessar o mapa de contágio')
               nav.navigate('Login')
-     
+        }
  
+}
+async function _politicas(){
+    
+  nav.navigate('Politicas')
+
+
+}
+async function _termos(){
+    
+  nav.navigate('Termos')
+
+
 }
 
 useEffect(() => { 
@@ -97,12 +116,37 @@ useEffect(() => {
 
   return (
     <ScrollView style={[styles.container,{backgroundColor:'#FFF'}]}>
-      <View style={{alignItems:'center', marginVertical:100}}>
-
-        <Ionicons  name="ios-checkmark-circle"size={200} color="#33733F" />
+      <View style={{alignItems:'center', marginVertical:80}}>
+        <Ionicons  name="ios-checkmark-circle"size={200} color="rgba(0,150,64,1)" />
       </View>
-        
-        <TouchableOpacity style={styles.buttonEntrar}onPress={_save}>
+      <View style={styles.alternatives}>
+       {os == 'ios' ? 
+         <CheckBoxIOS
+         value={isSelected1}
+         disable={disable1}
+         onPress={() => {
+            setSelection1(true) 
+            setDisable1(false)
+          
+         }}
+          />
+        : 
+         <CheckBox
+         disabled={isDisable1}
+         value={isSelected1}
+         onValueChange={setSelection1}
+       />
+       }
+        <Text style={{marginBottom:10}}>concordo com os termos de uso e políticas de privacidade</Text>
+      </View>
+      
+      <TouchableOpacity onPress={_politicas}>
+       <Text style={{color:'blue',textAlign:'center'}}>Ver políticas de privacidade de uso</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={_termos}>
+       <Text style={{color:'blue',textAlign:'center'}}>Ver termos de uso</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[styles.buttonEntrar,{marginBottom:5}]}onPress={_save}>
        <Text style={styles.textButton}>Concluir cadastro</Text>
       </TouchableOpacity>
       <TouchableOpacity style={[styles.buttonEntrar,{marginBottom:50}]}onPress={()=>{nav.navigate('HowToWork')}}>

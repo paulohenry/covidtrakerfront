@@ -6,7 +6,7 @@ import {AsyncStorage} from 'react-native';
 import HowtoWork from '../pages/HowtoWork';
 
 import Terms from '../pages/Terms';
-
+import Termos from '../pages/Termos/index';
 import Pergunta1 from '../pages/Registers/Pergunta1';
 import Pergunta2 from '../pages/Registers/Pergunta2';
 import Pergunta3 from '../pages/Registers/Pergunta3';
@@ -32,6 +32,7 @@ import Pergunta20 from '../pages/Registers/Pergunta20';
 
 import Maps from '../pages/Maps';
 import Profile from '../pages/Profile';
+import Politicas from '../pages/Politicas';
 import ConfirmRegister from '../pages/ConfirmRegister';
 import UserData from '../pages/Registers/UserData/index';
 import AlertScreen from '../pages/Registers/Alert';
@@ -47,7 +48,9 @@ export default function Router() {
         <Stack.Screen options={{headerShown:false}}  name="ConfirmRegister" component={ConfirmRegister} />
         <Stack.Screen options={{headerShown:false}} name="Login"  component={Login} />
         <Stack.Screen options={{headerShown:false}}  name="Terms" component={Terms} />
+        <Stack.Screen options={{headerShown:false}}  name="Termos" component={Termos} />
         <Stack.Screen options={{headerShown:false}}  name="Profile" component={Profile} />
+        <Stack.Screen options={{headerShown:false}}  name="Politicas" component={Politicas} />
         <Stack.Screen options={{headerShown:false}}  name="HowToWork" component={HowtoWork} />
         <Stack.Screen name="UserData" component={UserData} />
         <Stack.Screen name="AlertScreen" component={AlertScreen} />

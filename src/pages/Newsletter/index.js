@@ -6,7 +6,7 @@ import { View,Text } from 'react-native';
 export default function Newsletter() {
   return (
     <View>
-      <Text>Noticias</Text>
+      <Text>Ainda em fase de criação</Text>
     </View>
   );
 }

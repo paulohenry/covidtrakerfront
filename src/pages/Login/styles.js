@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
     width:'100%',
     height:'100%',
   },
+  imageLogo:{   
+    width:'100%',
+    height:'35%',
+   
+  },  
   imgContainer:{
        flexDirection:'row',
        justifyContent:'center',
@@ -38,8 +43,8 @@ const styles = StyleSheet.create({
         borderRadius:8,
         paddingHorizontal:10,
         paddingTop:40,
-        paddingBottom:20
-              
+        paddingBottom:20,
+       
                
       },
       inputs:{
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
       },
       buttonEntrar:{
         marginTop:20,
-        backgroundColor:'rgba(2,157,100, 0.7)',
+        backgroundColor:'rgba(0,150,64,1)',
         paddingVertical:10,
         justifyContent:'center',
         alignContent:'center',

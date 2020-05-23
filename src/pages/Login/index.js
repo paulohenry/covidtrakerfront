@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Platform,
+  Image,
   AsyncStorage,
   Alert,
   Text,
@@ -18,7 +19,7 @@ import { TextInputMask } from "react-native-masked-text";
 import Icon from "react-native-vector-icons/Entypo";
 import styles from "./styles";
 // import { Container } from './styles';
-
+import Logo from '../../assets/covidtrackerLogo.png'
 import keys from "../../temporaryStorage/keys";
 import * as Device from "expo-device";
 import api from "../../services/api";
@@ -83,21 +84,8 @@ export default function Login() {
       behavior="position"
       enabled
     >
-      <ImageBackground source={cristo} style={styles.background}>
-        <LinearGradient
-          colors={["rgba(2,157,100, 1)", "transparent"]}
-          style={styles.background}
-        >
-          <View style={styles.imgContainer}>
-            <Text style={styles.textlogo}>COVIDTRACKER</Text>
-
-            <Ionicons
-              style={styles.icon}
-              name="md-pin"
-              size={82}
-              color="white"
-            />
-          </View>
+       <Image style={styles.imageLogo} source={Logo} />
+         
 
           <View style={styles.loginContainer}>
             <TextInputMask
@@ -108,7 +96,7 @@ export default function Login() {
                 dddMask: "(99) ",
               }}
               value={celular}
-              placeholder="Insira o celular cadastrado"
+              placeholder="  Celular cadastrado"
               onChangeText={(text) => {
                 text = text.replace(/[^\d]+/g, "");
                 setCelular(text);
@@ -123,7 +111,7 @@ export default function Login() {
               onChangeText={setSenha}
               secureTextEntry={showPassword}
               keyboardType="number-pad"
-              placeholder="Senha de acesso cadastrada"
+              placeholder="  Senha cadastrada"
               maxLength={6}
               rightIcon={
                 <TouchableOpacity onPress={() => handleShowPassword()}>
@@ -149,8 +137,7 @@ export default function Login() {
           >
             <Text style={styles.registerText}>Ainda nao tenho cadastro</Text>
           </TouchableOpacity>
-        </LinearGradient>
-      </ImageBackground>
+    
     </KeyboardAvoidingView>
   );
 }

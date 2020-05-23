@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 
   },button:{
     marginTop:5,
-    backgroundColor:'rgba(2,157,100, 0.7)',
+    backgroundColor:'rgba(0,150,64,1)',
     paddingVertical:10,
     justifyContent:'center',
     alignContent:'center',

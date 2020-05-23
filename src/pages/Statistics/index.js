@@ -6,7 +6,7 @@ import { View,Text } from 'react-native';
 export default function Statistics() {
   return (
     <View>
-      <Text>estatísticas</Text>
+      <Text>Ainda em fase de criação</Text>
     </View>
   );
 }
