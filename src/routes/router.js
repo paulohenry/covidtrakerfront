@@ -44,7 +44,7 @@ const Stack = createStackNavigator();
 export default function Router() {
    return(
 <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:true, headerTitle:''}} initialRouteName="Maps">
+      <Stack.Navigator screenOptions={{headerShown:true, headerTitle:''}} initialRouteName="Login">
         <Stack.Screen options={{headerShown:false}}  name="ConfirmRegister" component={ConfirmRegister} />
         <Stack.Screen options={{headerShown:false}} name="Login"  component={Login} />
         <Stack.Screen options={{headerShown:false}}  name="Terms" component={Terms} />
