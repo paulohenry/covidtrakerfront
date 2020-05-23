@@ -10,6 +10,8 @@ import {
 import { enableScreens } from "react-native-screens";
 import { useFocusEffect } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import IconMaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import MapView from "react-native-maps";
 import Estatisticas from "../Statistics/index";
 import Configuracoes from "../EditUser/index";
@@ -24,7 +26,6 @@ enableScreens();
 const Tabs = createBottomTabNavigator();
 
 function StackTabs() {
-  const [loading, setLoading] = useState(true);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -39,8 +40,48 @@ function StackTabs() {
   );
 
   return (
-    <Tabs.Navigator initialRouteName="Contágio">
-      <Tabs.Screen name="Contágio" component={Maps} />
+    <Tabs.Navigator 
+    initialRouteName="Contágio" 
+    screenOptions={({route}) => ({
+      tabBarIcon: ({focused, color, size}) => {
+        let iconName
+        let routeName = route.name
+
+        if(routeName === 'Contágio'){
+          iconName = focused
+          ? 'map-marker-radius'
+          : 'map-marker'
+
+          return <IconMaterialCommunity name={iconName} size={size} color={color} />
+        }else if(routeName === 'Estatisticas'){
+          iconName = focused
+          ? 'chart-bar'
+          : 'chart-bar'
+
+          return <IconMaterialCommunity name={iconName} size={size} color={color} />
+        }else if(routeName === 'Notícias'){
+          iconName = focused 
+          ? 'newspaper'
+          : 'newspaper'
+          
+          return <IconMaterialCommunity name={iconName} size={size} color={color} />
+        }else if(routeName === 'Atualizar dados'){
+          iconName = focused
+          ? 'database-refresh'
+          : 'database-refresh'
+
+          return <IconMaterialCommunity name={iconName} size={size} color={color} />
+          
+        }
+      }
+    })}
+    tabBarOptions={{
+      activeTintColor: 'rgba(2,157,100, 0.7)',
+      inactiveTintColor: 'gray',
+    }}
+
+    >
+      <Tabs.Screen name="Contágio" component={Maps}/>
       <Tabs.Screen name="Estatisticas" component={Estatisticas} />
       <Tabs.Screen name="Notícias" component={Noticias} />
       <Tabs.Screen name="Atualizar dados" component={Pergunta1} />

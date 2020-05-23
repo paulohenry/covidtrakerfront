@@ -56,8 +56,7 @@ export default function Login() {
         JSON.stringify(response.data.user.id)
       );
 
-      nav.navigate("Maps");
-      Alert.alert("Covidtracker", "Logado com sucesso");
+      nav.navigate("Maps");;
     } catch (error) {
       Alert.alert("CovidTracker", error.response.data.message);
     }
