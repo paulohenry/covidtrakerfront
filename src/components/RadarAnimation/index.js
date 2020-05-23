@@ -5,7 +5,7 @@ export default function RadarAnimation() {
   return (
     <LottieView
       source={require("../../animations/radarAnimation.json")}
-      resizeMode='center'
+      resizeMode='cover'
       autoSize
       autoPlay
       loop

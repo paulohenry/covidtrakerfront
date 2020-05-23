@@ -1,12 +1,10 @@
-import React from 'react';
-import { View,Text } from 'react-native';
+import React from "react";
+import Development from '../../components/Development';
 
 // import { Container } from './styles';
 
 export default function Newsletter() {
   return (
-    <View>
-      <Text>Ainda em fase de criação</Text>
-    </View>
+    <Development />
   );
 }
