@@ -1,5 +1,6 @@
 {
   "expo": {
+    "privacy":"public",
     "name": "covidtracker",
     "slug": "covidtracker",
     "platforms": [
