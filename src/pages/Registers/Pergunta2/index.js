@@ -138,7 +138,7 @@ _storeData = async () => {
   return (
     <View style={styles.container}>
    
-     <Text style={styles.titles} >A quanto tempo você testou? </Text>
+     <Text style={styles.titles} >Há quanto tempo você testou? </Text>
      <View  style={{paddingVertical:20, paddingHorizontal:20}}>
      <View style={styles.alternatives}>
      {os == 'ios' ? 
