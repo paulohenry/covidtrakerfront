@@ -127,7 +127,8 @@ class Maps extends Component {
             {this.state.data.map((item) => (
               
               <MapView.Marker
-                pinColor={item.classify === null ? "red" : item.classify}
+                key={item.id}
+                pinColor={item.classify === null ? "yellow" : item.classify}
                 coordinate={{
                   latitude: item.lat,
                   longitude: item.long,

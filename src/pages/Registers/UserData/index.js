@@ -16,8 +16,6 @@ import Icon from "react-native-vector-icons/Entypo";
 
 import api from "../../../services/api";
 
-// import { Container } from './styles';
-
 export default function UserData() {
   const nav = useNavigation();
 
@@ -35,6 +33,7 @@ export default function UserData() {
   const [inputConfirmPasswordDisable,setInputConfirmPasswordDisable,] = useState(true);
   const [showPassword, setShowPassword] = useState(true);
   const [showIconPassword, setShowIconPassword] = useState("eye");
+  const [focusInput, setFocusInput] = useState(false)
 
   useEffect(() => {
     if (senha !== '') {
@@ -132,6 +131,8 @@ export default function UserData() {
     }
   }
 
+  const input2 = null
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -142,15 +143,17 @@ export default function UserData() {
       <ScrollView
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        ß
       >
         <Text style={styles.titles}>Insira seus dados pessoais:</Text>
         <Input
           value={primeiro_nome}
           onChangeText={setprimeiro_nome}
+          returnKeyType={'next'}
+          onSubmitEditing={() => {}}
+          blurOnSubmit={false}
           label="Primeiro nome"
           labelStyle={{
-            color: "#607D8B",
+            color: focusInput ? "#607D8B" : 'green',
             borderBottomColor: "#607D8B",
             fontWeight: "bold",
           }}
@@ -158,7 +161,9 @@ export default function UserData() {
         <Input
           value={ultimo_nome}
           onChangeText={setultimo_nome}
+          ref={() => {}}
           label="Último nome"
+          autoFocus={true}
           labelStyle={{
             color: "#607D8B",
             borderBottomColor: "#607D8B",
