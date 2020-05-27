@@ -12,6 +12,8 @@ const os = Platform.OS
 
 export default function Pergunta1() {
   const nav = useNavigation()
+   
+ 
 
   const [isSelected1, setSelection1] = useState(false);
   const [isDisable1, setIsDisable1] = useState(false);
@@ -42,7 +44,7 @@ export default function Pergunta1() {
       setIsDisable3(false)
       setIsDisable4(false)
 
-      setResposta1('') 
+      setResposta1("") 
 
     }else if(isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false ){
         
@@ -51,7 +53,7 @@ export default function Pergunta1() {
         setIsDisable3(true)
         setIsDisable4(true)
         
-        setResposta1('Não') 
+        setResposta1("Não") 
         
     }else if (isSelected1 == false  && isSelected2 ==true && isSelected3 ==false && isSelected4 ==false){
         setIsDisable1(true)
@@ -59,14 +61,14 @@ export default function Pergunta1() {
         setIsDisable3(true)
         setIsDisable4(true)
 
-        setResposta1('Sim, com resultado negativo') 
+        setResposta1("Sim, com resultado negativo") 
     }else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false){
         setIsDisable1(true)
         setIsDisable2(true)
         setIsDisable3(false)
         setIsDisable4(true)
 
-        setResposta1('Sim, mas sem resultado') 
+        setResposta1("Sim, mas sem resultado") 
   }
   else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==true){
         setIsDisable1(true)
@@ -74,13 +76,15 @@ export default function Pergunta1() {
         setIsDisable3(true)
         setIsDisable4(false)
 
-    setResposta1('Sim, com resultado positivo') 
+    setResposta1("Sim, com resultado positivo") 
 }},[isSelected1, isSelected2, isSelected3, isSelected4])
  
 const _storeData = async () => {
    try{
-    await AsyncStorage.setItem(keys.questionario.Q1, JSON.stringify(resposta1))
+    
+    await AsyncStorage.setItem(keys.questionario.Q1, resposta1)
     const save = await AsyncStorage.getItem(keys.questionario.Q1)
+    console.log(save)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
   }
@@ -97,7 +101,7 @@ const _storeData = async () => {
     }else if(isSelected4){
       nav.navigate('Pergunta2')
     } 
-        console.log(save)
+       
       
     }catch(erro){
       Alert.alert('Cadastro', {erro:' erro ao cadastrar'})

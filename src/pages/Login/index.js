@@ -134,7 +134,7 @@ export default function Login() {
               navigationTo("HowToWork");
             }}
           >
-            <Text style={styles.registerText}>Ainda nao tenho cadastro</Text>
+            <Text style={{fontSize:18}}>Ainda nao tenho cadastro</Text>
           </TouchableOpacity>
     
     </KeyboardAvoidingView>

@@ -36,7 +36,7 @@ export default function Pergunta2() {
   const [disable5, setDisable5] = useState(true)
   
  
-  const [resposta1, setResposta1] = useState('')
+  const [resposta1, setResposta1] = useState("")
   
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function Pergunta2() {
       setIsDisable4(false)
       setIsDisable5(false)
 
-      setResposta1('') 
+      setResposta1("") 
 
     }else if(isSelected1 == true  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false ){
         
@@ -58,7 +58,7 @@ export default function Pergunta2() {
         setIsDisable4(true)
         setIsDisable5(true)
         
-        setResposta1('De 1 a 5 dias') 
+        setResposta1("De 1 a 5 dias") 
         
        
     }else if (isSelected1 == false  && isSelected2 ==true && isSelected3 ==false && isSelected4 ==false && isSelected5 ==false){
@@ -68,7 +68,7 @@ export default function Pergunta2() {
         setIsDisable4(true)
         setIsDisable5(true)
 
-        setResposta1('De 6 a 10 dias') 
+        setResposta1("De 6 a 10 dias") 
     }else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==true && isSelected4 ==false && isSelected5 ==false){
       setIsDisable1(true)
       setIsDisable2(true)
@@ -76,7 +76,7 @@ export default function Pergunta2() {
       setIsDisable4(true)
       setIsDisable5(true)
 
-      setResposta1('De 11 a 14 dias') 
+      setResposta1("De 11 a 14 dias") 
   }
   else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==true && isSelected5 ==false){
     setIsDisable1(true)
@@ -85,7 +85,7 @@ export default function Pergunta2() {
     setIsDisable4(false)
     setIsDisable5(true)
 
-    setResposta1('De 14 a 20 dias') 
+    setResposta1("De 14 a 20 dias") 
     }
     else if (isSelected1 == false  && isSelected2 ==false && isSelected3 ==false && isSelected4 ==false && isSelected5 ==true){
       setIsDisable1(true)
@@ -94,7 +94,7 @@ export default function Pergunta2() {
       setIsDisable4(true)
       setIsDisable5(false)
 
-      setResposta1('Acima de 20 dias') 
+      setResposta1("Acima de 20 dias") 
       }
 },[isSelected1, isSelected2, isSelected3, isSelected4,isSelected5])
  
@@ -105,28 +105,13 @@ _storeData = async () => {
    try{
   await AsyncStorage.setItem(keys.questionario.Q2, resposta1)
   const save = await AsyncStorage.getItem(keys.questionario.Q2)
+  console.log(save)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
   }else{
    
-    switch(save){
-      case 'De 1 a 5 dias':
-       nav.navigate('Pergunta5')
-      break
-       case 'De 6 a 10 dias':
-       nav.navigate('Pergunta5')
-      break
-       case 'De 11 a 14 dias':
-       nav.navigate('Pergunta5')
-      break
-       case 'De 14 a 20 dias':
-       nav.navigate('Pergunta5')
-      break
-      case 'Acima de 20 dias':
-       nav.navigate('Pergunta5')
-      break
-    }
-        console.log(save)
+    nav.navigate("Pergunta5")
+       
       }
     }catch(erro){
       Alert.alert('Cadastro', {erro:' erro ao cadastrar'})

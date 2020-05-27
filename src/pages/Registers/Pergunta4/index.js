@@ -64,7 +64,7 @@ _storeData = async () => {
  
 try{
  
-  await AsyncStorage.setItem(keys.questionario.Q4, JSON.stringify(resposta1))
+  await AsyncStorage.setItem(keys.questionario.Q4, resposta1)
   const save = await AsyncStorage.getItem(keys.questionario.Q4)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')

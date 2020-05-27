@@ -10,7 +10,7 @@ import {
 import { Input } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
-import storage from "../../../temporaryStorage/keys";
+import keys from "../../../temporaryStorage/keys";
 import { TextInputMask } from "react-native-masked-text";
 import Icon from "react-native-vector-icons/Entypo";
 
@@ -110,10 +110,13 @@ export default function UserData() {
           };
 
           const response = await api.post("/users/", data);
+         
+          await AsyncStorage.setItem(keys.user_id, JSON.stringify(response.data.id))
           Alert.alert("CovidTracker", "cadastrado com sucesso");
           nav.navigate("Pergunta1");
-        } catch (response) {
-          Alert.alert("CovidTracker", "celular já cadastrado");
+         
+        } catch (error) {
+          Alert.alert("CovidTracker", error.response.data.error  );
         }
       }
     }
@@ -203,7 +206,7 @@ export default function UserData() {
         <Input
           value={rua}
           onChangeText={setRua}
-          label="Lougradouro ex: Rua ou Avenida"
+          label="Endereço ex: Rua ou Avenida"
           labelStyle={{ color: "#607D8B", borderBottomColor: "#607D8B" }}
         />
         <Input

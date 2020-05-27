@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import keys from '../../temporaryStorage/keys'
 import {Ionicons} from '@expo/vector-icons'
 import CheckBoxIOS from '../../components/CheckBoxIOS/';
+import api from '../../services/api'
 // import { Container } from './styles';
 
 
@@ -14,7 +15,9 @@ export default function ConfirmRegister() {
  const os = Platform.OS
  const [isSelected1, setSelection1] = useState(false);
   const [isDisable1, setIsDisable1] = useState(false);
- 
+
+  const [token,setToken]=useState(null)
+  const [ID, setID]=useState(null)
  const [resposta1, setResposta1]=useState('')
  const [resposta2, setResposta2]=useState('')
  const [resposta3, setResposta3]=useState('')
@@ -39,23 +42,23 @@ export default function ConfirmRegister() {
  const [resposta20, setResposta20]=useState('')
  const [resposta21, setResposta21]=useState('')
 
- const [primeiroNome,setPrimeiroNome]=useState('')
- const [segundoNome,setSegundoNome]=useState('')
- const [telefone,setTelefone]=useState('')
- const [cep,setCep]=useState('')
 
- const [senha,setSenha]=useState('')
- const [confirmSenha,setConfirmSenha]=useState('')
+ const [arrayq6, setq6]=useState([''])
+ const [arrayq7, setq7]=useState([''])
+ const [arrayq8, setq8]=useState([''])
+ const [arrayq11, setq11]=useState([''])
+ const [arrayq12, setq12]=useState([''])
+ const [arrayq14, setq14]=useState([''])
+ const [arrayq15, setq15]=useState([''])
+
+
  
  async function  _storeData (){   
   try{
 
- setPrimeiroNome(await AsyncStorage.getItem(keys.user.primeiroNome))
- setSegundoNome(await AsyncStorage.getItem(keys.user.segundoNome))
- setTelefone(await AsyncStorage.getItem(keys.user.telefone))
- setCep(await AsyncStorage.getItem(keys.user.cep))
- setSenha(await AsyncStorage.getItem(keys.user.senha))
- setConfirmSenha(await AsyncStorage.getItem(keys.user.confirmSenha))
+
+ setID(await AsyncStorage.getItem(keys.user_id))
+setToken(await AsyncStorage.getItem(keys.token))
 
  setResposta1(await AsyncStorage.getItem(keys.questionario.Q1))
  setResposta2(await AsyncStorage.getItem(keys.questionario.Q2))
@@ -82,37 +85,108 @@ export default function ConfirmRegister() {
  setResposta21(await AsyncStorage.getItem(keys.questionario.Q6A))
    
    }catch(erro){
-     Alert.alert('Cadastro', {erro:' erro ao cadastrar'})
+     Alert.alert('Cadastro', {erro:'erro ao recuperar informações do cache'})
    }   
   
-};
+}; 
+  useEffect(() => { 
+  _storeData()
 
+},[])
 
+function transforArray (){
+     
+    
+      if(resposta6!= null){
+       setq6(JSON.parse(resposta6))
+      }
+      
+      if(resposta7!= null){
+      setq7(JSON.parse(resposta7))
+      }
+      if(resposta8!= null){
+      setq8(JSON.parse(resposta8))
+      }
+     
+      if(resposta11!= null){
+      setq11(JSON.parse(resposta11))
+      }
+      if(resposta12!= null){
+      setq12(JSON.parse(resposta12))
+      }
+     
+      if(resposta14!= null){
+      setq14(JSON.parse(resposta14))
+      }
+      if(resposta15!= null){
+      setq15(JSON.parse(resposta15))
+      }
+     
+     }
+ 
 async function _save(){
+  transforArray()
+  const obj = {
+    id:ID,
+    resposta1:resposta1,
+    resposta2:resposta2,
+    resposta3:resposta3,
+    resposta4:resposta4,
+    resposta5:resposta5,
+    resposta5_a:resposta5A,
+    resposta6:arrayq6,
+    resposta6_a:resposta6A,
+    resposta7:arrayq7,
+    resposta8:arrayq8,
+    resposta9:resposta9,
+    resposta10:resposta10,
+    resposta11:arrayq11,
+    resposta12:arrayq12,
+    resposta13:resposta13,
+    resposta14:arrayq14,
+    resposta15:arrayq15,
+    resposta16:resposta16,
+    resposta17:resposta17,
+    resposta18:resposta18,
+    resposta19:resposta19,
+    resposta20:resposta20,
+  }
+          // console.log(obj)
         if(isSelected1==false){
-          Alert.alert('Covidtracker', 'voce precisa aceitar os termos para continuar')
-        }else{
-          Alert.alert('Covidtracker', 'Cadastrado com sucesso, faça o login para acessar o mapa de contágio')
-              nav.navigate('Login')
+          Alert.alert("Covidtracker", "voce precisa aceitar os termos para continuar")
+        }else{          
+               if(token == null){ 
+                  try{
+                     const response = await api.put('/form/', obj)
+                     console.log(response.data)
+                        Alert.alert("Covidtracker", "Cadastrado com sucesso, faça o login para acessar o mapa de contágio")
+                        nav.navigate('Login')
+                    }catch(error){
+                        Alert.alert("covidtracker", error.response.data.error || error.response.data.message)
+                    }
+                  
+                }else if(token!= null){
+                  try{
+                    const response = await api.put('/form/', obj)
+                    console.log(response.data)
+                        Alert.alert("Covidtracker", "formulário salvo com sucesso")
+                        nav.navigate('Maps')
+                }catch(error){
+                        Alert.alert("covidtracker", error.response.data.error || error.response.data.message)
+                }
+                
+               }
         }
  
 }
-async function _politicas(){
-    
+async function _politicas(){    
   nav.navigate('Politicas')
-
-
 }
-async function _termos(){
-    
+async function _termos(){    
   nav.navigate('Termos')
-
-
 }
 
-useEffect(() => { 
-    _storeData()  
-},[])
+
 
   return (
     <ScrollView style={[styles.container,{backgroundColor:'#FFF'}]}>
@@ -149,7 +223,7 @@ useEffect(() => {
       <TouchableOpacity style={[styles.buttonEntrar,{marginBottom:5}]}onPress={_save}>
        <Text style={styles.textButton}>Concluir cadastro</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.buttonEntrar,{marginBottom:50}]}onPress={()=>{nav.navigate('HowToWork')}}>
+      <TouchableOpacity style={[styles.buttonEntrar,{marginBottom:50}]}onPress={()=>{nav.navigate('Pergunta1')}}>
        <Text style={styles.textButton}>Refazer cadastro</Text>
       </TouchableOpacity>
 

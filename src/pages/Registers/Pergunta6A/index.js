@@ -144,7 +144,7 @@ export default function Pergunta6A() {
 _storeData = async () => {
     
    try{
-  await AsyncStorage.setItem(keys.questionario.Q6A, JSON.stringify(resposta1))
+  await AsyncStorage.setItem(keys.questionario.Q6A, resposta1)
   const save = await AsyncStorage.getItem(keys.questionario.Q6A)
   if(!save){
     Alert.alert('Cadastro', 'Você precisa responder a pergunta prara continuar')
