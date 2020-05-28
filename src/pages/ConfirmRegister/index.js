@@ -6,9 +6,6 @@ import keys from '../../temporaryStorage/keys'
 import {Ionicons} from '@expo/vector-icons'
 import CheckBoxIOS from '../../components/CheckBoxIOS/';
 import api from '../../services/api'
-// import { Container } from './styles';
-
-
 
 export default function ConfirmRegister() {
  const nav = useNavigation();
@@ -50,8 +47,6 @@ export default function ConfirmRegister() {
  const [arrayq12, setq12]=useState([''])
  const [arrayq14, setq14]=useState([''])
  const [arrayq15, setq15]=useState([''])
-
-
  
  async function  _storeData (){   
   try{
@@ -193,26 +188,6 @@ async function _termos(){
       <View style={{alignItems:'center', marginVertical:80}}>
         <Ionicons  name="ios-checkmark-circle"size={200} color="rgba(0,150,64,1)" />
       </View>
-      <View style={styles.alternatives}>
-       {os == 'ios' ? 
-         <CheckBoxIOS
-         value={isSelected1}
-         disable={disable1}
-         onPress={() => {
-            setSelection1(true) 
-            setDisable1(false)
-          
-         }}
-          />
-        : 
-         <CheckBox
-         disabled={isDisable1}
-         value={isSelected1}
-         onValueChange={setSelection1}
-       />
-       }
-        <Text style={{marginBottom:10}}>concordo com os termos de uso e políticas de privacidade</Text>
-      </View>
       
       <TouchableOpacity onPress={_politicas}>
        <Text style={{color:'blue',textAlign:'center'}}>Ver políticas de privacidade de uso</Text>
@@ -227,7 +202,25 @@ async function _termos(){
        <Text style={styles.textButton}>Refazer cadastro</Text>
       </TouchableOpacity>
 
-      
+      <View style={styles.alternatives}>
+       {os == 'ios' ? 
+         <CheckBoxIOS
+         value={isSelected1}
+         disable={disable1}
+         onPress={() => {
+            setSelection1(true) 
+            setDisable1(false)
+         }}
+          />
+        : 
+         <CheckBox
+         disabled={isDisable1}
+         value={isSelected1}
+         onValueChange={setSelection1}
+       />
+       }
+        <Text style={{marginBottom:10}}>Concordo com os termos de uso e políticas de privacidade</Text>
+      </View>
         
      
     </ScrollView>

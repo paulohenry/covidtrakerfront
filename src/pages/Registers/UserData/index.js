@@ -153,7 +153,7 @@ export default function UserData() {
           blurOnSubmit={false}
           label="Primeiro nome"
           labelStyle={{
-            color: focusInput ? "#607D8B" : 'green',
+            color: "#607D8B",
             borderBottomColor: "#607D8B",
             fontWeight: "bold",
           }}
