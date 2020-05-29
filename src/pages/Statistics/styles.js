@@ -48,7 +48,7 @@ export const HeaderInfo = styled.View`
   height: 50px;
   justify-content: center;
   border-bottom-width: 1;
-  border-bottom-color: #eee
+  border-bottom-color: #eee;
 `;
 
 export const InforTitle = styled.Text`
@@ -105,4 +105,17 @@ export const LongCardTitle = styled.Text`
   font-size: 20px;
   color: #fff;
   font-weight: bold;
+`;
+
+export const World = styled.View`
+    padding: 15px;
+`;
+
+export const WorldDetails = styled.View`
+`;
+
+export const TitleDetailsWorld = styled.Text`
+    font-size: 15px;
+    font-weight: bold;
+    color: #080808;
 `;

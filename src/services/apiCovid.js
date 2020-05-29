@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiCovid = axios.create({
-    baseURL: 'https://api.covid19api.com/'
+    baseURL: 'https://covid19-brazil-api.now.sh/api/'
 })
 
 export default apiCovid;

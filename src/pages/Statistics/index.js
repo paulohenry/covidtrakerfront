@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MaterialIcons, Entypo, FontAwesome5 } from "@expo/vector-icons";
-import { StyleSheet, ScrollView, Text } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet, ScrollView, Text, FlatList, View, TouchableOpacity } from "react-native";
 import { Badge } from "react-native-elements";
 import { Modalize } from "react-native-modalize";
 
@@ -23,6 +22,9 @@ import {
   LongCardContainer,
   LongCard,
   LongCardTitle,
+  World,
+  WorldDetails,
+  TitleDetailsWorld,
 } from "./styles";
 
 import CurrentDate from "../../components/CurrentDate";
@@ -34,6 +36,17 @@ export default function Newsletter() {
   const [covidData, setCovidData] = useState([]);
   const [notifications, setNotifications] = useState(2);
 
+  useEffect(() => {
+    async function getStatus() {
+      const response = await apiCovid.get("report/v1");
+      const data = response.data;
+      setCovidData(data);
+    }
+    getStatus();
+    console.log(covidData)
+    //Nao to conseguindo utilizar esses malditos dados;
+  }, []);
+
   //Open Modal
   const modalizeRef = useRef(null);
   function onOpen() {
@@ -42,45 +55,46 @@ export default function Newsletter() {
 
   return (
     <Wrapper>
-      <Header>
-        <HeaderTitle>Situação Atual</HeaderTitle>
-        <NotificationsButton onPress={onOpen}>
-          <MaterialIcons
-            name="notifications"
-            size={30}
-            color="#eee"
-            style={{ marginRight: 5 }}
-          />
-          <Badge
-            status="error"
-            containerStyle={{
-              position: "absolute",
-              top: -4,
-              right: -4,
-              marginRight: 5,
-              opacity: notifications < 1 ? 0 : 9,
-            }}
-            value={notifications}
-          />
-        </NotificationsButton>
-      </Header>
-      <CountryContainer>
-        <HeaderTitleCountry>Brasil</HeaderTitleCountry>
-        <CurrentDate style={{ fontSize: 16, color: "#fff" }} />
-      </CountryContainer>
-      <InfoContainer>
-        <HeaderInfo>
-          <InforTitle>Últimas Atualizações</InforTitle>
-          <MaterialIcons
-            name="update"
-            size={24}
-            color="rgba(2, 157, 100, 0.7)"
-          />
-        </HeaderInfo>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-        >
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+      >
+        <Header>
+          <HeaderTitle>Situação Atual</HeaderTitle>
+          <NotificationsButton onPress={onOpen}>
+            <MaterialIcons
+              name="notifications"
+              size={30}
+              color="#eee"
+              style={{ marginRight: 5 }}
+            />
+            <Badge
+              status="error"
+              containerStyle={{
+                position: "absolute",
+                top: -4,
+                right: -4,
+                marginRight: 5,
+                opacity: notifications < 1 ? 0 : 9,
+              }}
+              value={notifications}
+            />
+          </NotificationsButton>
+        </Header>
+        <CountryContainer>
+          <HeaderTitleCountry>Brasil</HeaderTitleCountry>
+          <CurrentDate style={{ fontSize: 16, color: "#fff" }} />
+        </CountryContainer>
+        <InfoContainer>
+          <HeaderInfo>
+            <InforTitle>Últimas Atualizações</InforTitle>
+            <MaterialIcons
+              name="update"
+              size={24}
+              color="rgba(2, 157, 100, 0.7)"
+            />
+          </HeaderInfo>
+
           <DetailsContainer>
             <CardContainer>
               <Card style={[styles.cardShadow, { backgroundColor: "#FEBF50" }]}>
@@ -111,46 +125,67 @@ export default function Newsletter() {
                 <CardDetails>230</CardDetails>
               </LongCard>
             </LongCardContainer>
+            <World>
+              <WorldDetails>
+                <TitleDetailsWorld>Em todo o Brasil</TitleDetailsWorld>
+                <FlatList
+                  data={covidData}
+                  keyExtractor={(item) => item.uid}
+                  renderItem={({ item }) => {
+                    <TouchableOpacity key={item.uid}>
+                      <Text>estados</Text>
+                    </TouchableOpacity>;
+                  }}
+                />
+              </WorldDetails>
+            </World>
           </DetailsContainer>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-          <Text>s</Text>
-        </ScrollView>
-      </InfoContainer>
-      <Modalize ref={modalizeRef}>
-        <Modal />
-      </Modalize>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+          <Text>l</Text>
+        </InfoContainer>
+        <Modalize ref={modalizeRef}>
+          <Modal />
+        </Modalize>
+      </ScrollView>
     </Wrapper>
   );
 }
