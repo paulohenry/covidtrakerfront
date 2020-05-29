@@ -1,4 +1,22 @@
 PODS:
+  - appcenter-analytics (3.0.2):
+    - AppCenter/Analytics
+    - AppCenterReactNativeShared
+    - React
+  - appcenter-core (3.0.2):
+    - AppCenterReactNativeShared
+    - React
+  - appcenter-crashes (3.0.2):
+    - AppCenter/Crashes
+    - AppCenterReactNativeShared
+    - React
+  - AppCenter/Analytics (3.2.0):
+    - AppCenter/Core
+  - AppCenter/Core (3.2.0)
+  - AppCenter/Crashes (3.2.0):
+    - AppCenter/Core
+  - AppCenterReactNativeShared (3.0.3):
+    - AppCenter/Core (= 3.2.0)
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
   - EXConstants (9.0.0):
@@ -56,7 +74,7 @@ PODS:
     - glog
   - glog (0.3.5)
   - lottie-ios (3.1.3)
-  - lottie-react-native (3.3.2):
+  - lottie-react-native (3.4.0):
     - lottie-ios (~> 3.1.3)
     - React
   - RCTRequired (0.61.5)
@@ -226,6 +244,8 @@ PODS:
     - React
   - react-native-safe-area-context (0.7.3):
     - React
+  - react-native-webview (10.2.2):
+    - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
   - React-RCTAnimation (0.61.5):
@@ -289,6 +309,9 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
+  - appcenter-analytics (from `../node_modules/appcenter-analytics/ios`)
+  - appcenter-core (from `../node_modules/appcenter/ios`)
+  - appcenter-crashes (from `../node_modules/appcenter-crashes/ios`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
   - EXDevice (from `../node_modules/expo-device/ios`)
@@ -322,6 +345,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -354,9 +378,17 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AppCenter
+    - AppCenterReactNativeShared
     - boost-for-react-native
 
 EXTERNAL SOURCES:
+  appcenter-analytics:
+    :path: "../node_modules/appcenter-analytics/ios"
+  appcenter-core:
+    :path: "../node_modules/appcenter/ios"
+  appcenter-crashes:
+    :path: "../node_modules/appcenter-crashes/ios"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXConstants:
@@ -419,6 +451,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -477,6 +511,11 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  AppCenter: ca66175050d538b157959382dd43f1ab96cdab84
+  appcenter-analytics: f819aa9bd41c43b8b9ae53aa5dfd862b48a65f50
+  appcenter-core: 74a3db7d48a720fc3a70e0cf5cbda720decac008
+  appcenter-crashes: 0aea510872e4f9186553941b75ba0e9e6c7d9e07
+  AppCenterReactNativeShared: d1218878427a69d4b76f73883256455ed20f12b3
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   EXConstants: 5304709b1bea70a4828f48ba4c7fc3ec3b2d9b17
@@ -497,7 +536,7 @@ SPEC CHECKSUMS:
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   lottie-ios: 496ac5cea1bbf1a7bd1f1f472f3232eb1b8d744b
-  lottie-react-native: 2a1a82bb326ae51331a5520de0cf706733c6db69
+  lottie-react-native: a664f59f1f298c2696dd0ae07b15cbdfc433cb02
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -509,6 +548,7 @@ SPEC CHECKSUMS:
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
+  react-native-webview: 28882de179b44905cf570f18a7a1515525e28f3b
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
