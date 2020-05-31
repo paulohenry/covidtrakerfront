@@ -1,121 +1,139 @@
 import styled from "styled-components/native";
+import {Platform} from 'react-native';
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
   background: rgba(2, 157, 100, 0.7);
+  
 `;
 
 export const Header = styled.View`
-  height: 50px;
-  margin-top: 10px;
-  padding: 15px;
-  align-items: center;
+  margin-top: ${Platform.OS == 'android' ? '30px' : '0'  };
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+  padding: 0 15px;
+  height: 60px;
+
 `;
 
-export const HeaderTitle = styled.Text`
-  font-size: 22px;
+export const TextHeader = styled.Text`
+  font-size: 26px;
+  color: #fff;
+  font-weight: bold; 
+`;
+
+export const ActionNotification = styled.TouchableOpacity``;
+
+export const TextAtualization = styled.Text`
+  color: #fff;
+  padding-left: 15px;
+`;
+
+export const CountryName = styled.Text`
+  font-size: 45px;
   font-weight: bold;
   color: #fff;
+  padding-left: 15px;
+  padding-top: 15px;
 `;
 
-export const CountryContainer = styled.View`
-  height: 120px;
-  padding-left: 12px;
-  justify-content: center;
-`;
-
-export const HeaderTitleCountry = styled.Text`
-  font-size: 42px;
-  color: #fff;
-  font-weight: bold;
-`;
-
-export const NotificationsButton = styled.TouchableOpacity``;
-
-export const InfoContainer = styled.View`
-  padding: 10px;
+export const StatisticsContainer = styled.View`
   background: #fff;
-  border-top-right-radius: 50px;
-  border-top-left-radius: 50px;
-  height: 100%;
-`;
-
-export const HeaderInfo = styled.View`
-  flex-direction: row;
-  align-items: center;
-  height: 50px;
-  justify-content: center;
-  border-bottom-width: 1;
-  border-bottom-color: #eee;
-`;
-
-export const InforTitle = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
-  margin-right: 5px;
-  color: rgba(2, 157, 100, 0.7);
-`;
-
-export const DetailsContainer = styled.View`
-  height: 100px;
+  margin-top: 20px;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
   flex: 1;
+  padding: 10px;
 `;
 
-export const CardContainer = styled.View`
-  margin-top: 10px;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-export const Card = styled.View`
-  width: 160px;
-  align-items: center;
-  height: 120px;
-  justify-content: space-around;
+export const CardRecuperados = styled.View`
+  background: #5CBEA6;
+  margin-top: 40px;
+  padding: 15px;
   border-radius: 15px;
 `;
 
-export const CardTitle = styled.Text`
-  font-size: 19px;
+export const TitleRecovered = styled.Text`
+  color: #BBE4DA;
+  font-size: 23px;
+  
+`;
+
+export const NumberCasesRecovered = styled.Text`
+  color: #fff;
+  font-size: 35px;
   font-weight: bold;
-  color: #fff;
 `;
 
-export const CardDetails = styled.Text`
-  font-size: 25px;
-  color: #fff;
+export const TitleAcompanhamento = styled.Text`
+  color: #BBE4DA;
+  font-size: 16px;
 `;
 
-export const LongCardContainer = styled.View`
+export const NumberCasesAcompanhamento = styled.Text`
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+export const CardConfirmados = styled.View`
+  margin-top: 10px;
   padding: 15px;
+  border-radius: 15px;
+  border-color: #5CBEA6;
+  border-width: 1px;
 `;
 
-export const LongCard = styled.View`
-  background: #34c635;
-  padding: 10px;
+export const HeaderConfirmados =styled.View`
+  flex-direction: row;
+  padding-left: 15px;
+  padding-right: 15px;
+  justify-content: space-between;
   align-items: center;
-  height: 120px;
-  border-radius: 10px;
-  justify-content: space-around;
 `;
 
-export const LongCardTitle = styled.Text`
-  font-size: 20px;
-  color: #fff;
+export const TitleConfirmados =styled.Text`
+  font-size: 18px;
+  color: #5CBEA6;
   font-weight: bold;
 `;
 
-export const World = styled.View`
-    padding: 15px;
+export const Circle = styled.View`
+  background: ${props => props.color};
+  width: 35px;
+  height: 35px;
+  border-radius: 17.5px;
+  align-items: center;
+  justify-content: center;
 `;
 
-export const WorldDetails = styled.View`
+export const InfoConfirmadosContainer =styled.View`
+  flex-direction: row;
 `;
 
-export const TitleDetailsWorld = styled.Text`
-    font-size: 15px;
-    font-weight: bold;
-    color: #080808;
+export const DadosContainer = styled.View`
+  flex-direction: column;
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const NumberAcumulados =styled.Text`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+export const NumberCasosNovos =styled.Text`
+  font-size: 25px;
+  font-weight: bold;
+`;
+
+export const TitleCasosNovos =styled.Text`
+  font-size: 15px;
+  color: #969FA5;
 `;

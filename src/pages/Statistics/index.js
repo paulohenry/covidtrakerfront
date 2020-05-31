@@ -1,30 +1,45 @@
 import React, { useState, useEffect, useRef } from "react";
-import { MaterialIcons, Entypo, FontAwesome5 } from "@expo/vector-icons";
-import { StyleSheet, ScrollView, Text, FlatList, View, TouchableOpacity } from "react-native";
+import {
+  MaterialIcons,
+  Entypo,
+  FontAwesome5,
+  MaterialCommunityIcons,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
+import {
+  StyleSheet,
+  ScrollView,
+  Text,
+  FlatList,
+  View,
+  TouchableOpacity,
+  StatusBar,
+} from "react-native";
 import { Badge } from "react-native-elements";
 import { Modalize } from "react-native-modalize";
 
 import {
   Wrapper,
   Header,
-  HeaderTitle,
-  HeaderTitleCountry,
-  CountryContainer,
-  NotificationsButton,
-  InfoContainer,
-  HeaderInfo,
-  InforTitle,
-  DetailsContainer,
-  CardContainer,
-  Card,
-  CardTitle,
-  CardDetails,
-  LongCardContainer,
-  LongCard,
-  LongCardTitle,
-  World,
-  WorldDetails,
-  TitleDetailsWorld,
+  TextHeader,
+  ActionNotification,
+  TextAtualization,
+  CountryName,
+  StatisticsContainer,
+  CardRecuperados,
+  TitleRecovered,
+  NumberCasesRecovered,
+  TitleAcompanhamento,
+  NumberCasesAcompanhamento,
+  CardConfirmados,
+  HeaderConfirmados,
+  TitleConfirmados,
+  Circle,
+  InfoConfirmadosContainer,
+  DadosContainer,
+  NumberAcumulados,
+  NumberCasosNovos,
+  TitleCasosNovos,
 } from "./styles";
 
 import CurrentDate from "../../components/CurrentDate";
@@ -32,19 +47,27 @@ import Modal from "../../components/Modal";
 
 import apiCovid from "../../services/apiCovid";
 
-export default function Newsletter() {
-  const [covidData, setCovidData] = useState([]);
-  const [notifications, setNotifications] = useState(2);
+export default function Statistics() {
+  const [globalData, setGlobalData] = useState([]);
+  const [brasilData, setBrasilData] = useState([]);
+  const {
+    TotalRecovered,
+    NewRecovered,
+    TotalConfirmed,
+    NewConfirmed,
+    TotalDeaths,
+    NewDeaths,
+  } = globalData;
+  const [notifications, setNotifications] = useState(12);
 
   useEffect(() => {
     async function getStatus() {
-      const response = await apiCovid.get("report/v1");
-      const data = response.data;
-      setCovidData(data);
+      const response = await apiCovid.get("/summary");
+      const data = await response.data;
+      setGlobalData(data.Global);
+      console.log(globalData);
     }
     getStatus();
-    console.log(covidData)
-    //Nao to conseguindo utilizar esses malditos dados;
   }, []);
 
   //Open Modal
@@ -53,139 +76,113 @@ export default function Newsletter() {
     modalizeRef.current?.open();
   }
 
+  function formatarNumero(n) {
+    var n = n.toString();
+    var r = "";
+    var x = 0;
+
+    for (var i = n.length; i > 0; i--) {
+      r += n.substr(i - 1, 1) + (x == 2 && i != 1 ? "." : "");
+      x = x == 2 ? 0 : x + 1;
+    }
+
+    return r.split("").reverse().join("");
+  }
+
+  //Pega pega sempre a data de ontem para mostrar que esta atualizado
+  // const updateData = new Date();
+  // const updateApiData = `${updateData.getDate() - 1}/${
+  //   updateData.getMonth() + 1 < 9
+  //     ? `0${updateData.getMonth() + 1}`
+  //     : `${updateData.getMonth() + 1}`
+  // }/${updateData.getFullYear()}`;
+
+  StatusBar.setHidden(false);
   return (
     <Wrapper>
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-      >
-        <Header>
-          <HeaderTitle>Situação Atual</HeaderTitle>
-          <NotificationsButton onPress={onOpen}>
-            <MaterialIcons
-              name="notifications"
-              size={30}
-              color="#eee"
-              style={{ marginRight: 5 }}
-            />
-            <Badge
-              status="error"
-              containerStyle={{
-                position: "absolute",
-                top: -4,
-                right: -4,
-                marginRight: 5,
-                opacity: notifications < 1 ? 0 : 9,
-              }}
-              value={notifications}
-            />
-          </NotificationsButton>
-        </Header>
-        <CountryContainer>
-          <HeaderTitleCountry>Brasil</HeaderTitleCountry>
-          <CurrentDate style={{ fontSize: 16, color: "#fff" }} />
-        </CountryContainer>
-        <InfoContainer>
-          <HeaderInfo>
-            <InforTitle>Últimas Atualizações</InforTitle>
-            <MaterialIcons
-              name="update"
-              size={24}
-              color="rgba(2, 157, 100, 0.7)"
-            />
-          </HeaderInfo>
-
-          <DetailsContainer>
-            <CardContainer>
-              <Card style={[styles.cardShadow, { backgroundColor: "#FEBF50" }]}>
-                <Entypo
-                  name="users"
-                  size={24}
-                  color="#fff"
-                  style={styles.iconCard}
-                />
-                <CardTitle>Contaminados</CardTitle>
-                <CardDetails>300</CardDetails>
-              </Card>
-              <Card style={[styles.cardShadow, { backgroundColor: "#F44336" }]}>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={true}
+        barStyle="light-content"
+      />
+      <Header>
+        <TextHeader>Situação atual</TextHeader>
+        <ActionNotification onPress={onOpen}>
+          <MaterialIcons name="notifications" size={35} color="#fff" />
+          <Badge
+            status="error"
+            containerStyle={{
+              position: "absolute",
+              top: -4,
+              right: -4,
+              opacity: notifications === 0 ? 0 : 9,
+            }}
+            value={notifications}
+          />
+        </ActionNotification>
+      </Header>
+      <ScrollView>
+        <TextAtualization>Atualizado em:  </TextAtualization>
+        <CountryName>Global</CountryName>
+        <CurrentDate style={{ paddingLeft: 15, color: "#fff" }} />
+        <StatisticsContainer>
+          <CardRecuperados style={styles.cardShadow}>
+            <TitleRecovered>Casos recuperados</TitleRecovered>
+            <NumberCasesRecovered>{TotalRecovered}</NumberCasesRecovered>
+            <TitleAcompanhamento>Novos recuperados</TitleAcompanhamento>
+            <NumberCasesAcompanhamento>
+              {NewRecovered}
+            </NumberCasesAcompanhamento>
+          </CardRecuperados>
+          <CardConfirmados>
+            <HeaderConfirmados>
+              <TitleConfirmados>CASOS CONFIRMADOS</TitleConfirmados>
+              <Circle color="#D1EDE6">
                 <MaterialIcons
-                  name="cancel"
+                  name="arrow-downward"
                   size={24}
-                  color="#fff"
-                  style={styles.iconCard}
+                  color="#5CBEA6"
                 />
-                <CardTitle>Fatalidades</CardTitle>
-                <CardDetails>230</CardDetails>
-              </Card>
-            </CardContainer>
-            <LongCardContainer>
-              <LongCard style={styles.cardShadow}>
-                <FontAwesome5 name="user-shield" size={24} color="#fff" />
-                <LongCardTitle>Recuperados</LongCardTitle>
-                <CardDetails>230</CardDetails>
-              </LongCard>
-            </LongCardContainer>
-            <World>
-              <WorldDetails>
-                <TitleDetailsWorld>Em todo o Brasil</TitleDetailsWorld>
-                <FlatList
-                  data={covidData}
-                  keyExtractor={(item) => item.uid}
-                  renderItem={({ item }) => {
-                    <TouchableOpacity key={item.uid}>
-                      <Text>estados</Text>
-                    </TouchableOpacity>;
-                  }}
+              </Circle>
+            </HeaderConfirmados>
+            <InfoConfirmadosContainer>
+              <DadosContainer>
+                <NumberAcumulados>{TotalConfirmed}</NumberAcumulados>
+              </DadosContainer>
+              <DadosContainer>
+                <NumberCasosNovos>{NewConfirmed}</NumberCasosNovos>
+                <TitleCasosNovos>Novos confirmados</TitleCasosNovos>
+              </DadosContainer>
+            </InfoConfirmadosContainer>
+          </CardConfirmados>
+          <CardConfirmados style={{ borderColor: "#D90909" }}>
+            <HeaderConfirmados>
+              <TitleConfirmados style={{ color: "#D90909" }}>
+                ÓBITOS
+              </TitleConfirmados>
+              <Circle color="#FC9B9B">
+                <MaterialIcons
+                  name="arrow-downward"
+                  size={24}
+                  color="#D90909"
                 />
-              </WorldDetails>
-            </World>
-          </DetailsContainer>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-          <Text>l</Text>
-        </InfoContainer>
-        <Modalize ref={modalizeRef}>
-          <Modal />
-        </Modalize>
+              </Circle>
+            </HeaderConfirmados>
+            <InfoConfirmadosContainer>
+              <DadosContainer>
+                <NumberAcumulados>{TotalDeaths}</NumberAcumulados>
+              </DadosContainer>
+              <DadosContainer>
+                <NumberCasosNovos>{NewDeaths}</NumberCasosNovos>
+                <TitleCasosNovos>Óbitos recentes</TitleCasosNovos>
+              </DadosContainer>
+            </InfoConfirmadosContainer>
+          </CardConfirmados>
+        </StatisticsContainer>
       </ScrollView>
+      <Modalize ref={modalizeRef}>
+        <Modal notifications={notifications} />
+      </Modalize>
     </Wrapper>
   );
 }
