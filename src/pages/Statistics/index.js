@@ -13,7 +13,7 @@ import {
   FlatList,
   View,
   TouchableOpacity,
-  StatusBar
+  StatusBar,
 } from "react-native";
 import { Badge } from "react-native-elements";
 import { Modalize } from "react-native-modalize";
@@ -34,10 +34,10 @@ import {
   CardConfirmados,
   HeaderConfirmados,
   TitleConfirmados,
+  Circle,
   InfoConfirmadosContainer,
   DadosContainer,
   NumberAcumulados,
-  TitleAcumulados,
   NumberCasosNovos,
   TitleCasosNovos,
 } from "./styles";
@@ -47,18 +47,19 @@ import Modal from "../../components/Modal";
 
 import apiCovid from "../../services/apiCovid";
 
-export default function Newsletter() {
+export default function Statistics() {
   const [covidData, setCovidData] = useState([]);
-  const [notifications, setNotifications] = useState(2);
+
+  const [notifications, setNotifications] = useState(12);
 
   useEffect(() => {
     async function getStatus() {
-      const response = await apiCovid.get("report/v1");
-      const data = response.data;
+      const response = await apiCovid.get("report/v1/brazil");
+      const data = await response.data;
       setCovidData(data);
+      console.log(covidData)
     }
     getStatus();
-    console.log(covidData);
     //Nao to conseguindo utilizar esses malditos dados;
   }, []);
 
@@ -68,9 +69,14 @@ export default function Newsletter() {
     modalizeRef.current?.open();
   }
 
-  StatusBar.setHidden(false)
+  StatusBar.setHidden(false);
   return (
     <Wrapper>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={true}
+        barStyle="light-content"
+      />
       <Header>
         <TextHeader>Situação atual</TextHeader>
         <ActionNotification onPress={onOpen}>
@@ -91,25 +97,54 @@ export default function Newsletter() {
           />
         </ActionNotification>
       </Header>
-        <TextAtualization>Atualizado em: 23/23/23</TextAtualization>
+      <ScrollView>
+        <TextAtualization>Atualizado em: </TextAtualization>
         <CountryName>Brasil</CountryName>
         <CurrentDate style={{ paddingLeft: 15, color: "#fff" }} />
         <StatisticsContainer>
           <CardRecuperados style={styles.cardShadow}>
             <TitleRecovered>Casos recuperados</TitleRecovered>
-            <NumberCasesRecovered>300.000</NumberCasesRecovered>
+            <NumberCasesRecovered>22222</NumberCasesRecovered>
             <TitleAcompanhamento>Em acompanhamento</TitleAcompanhamento>
             <NumberCasesAcompanhamento>234.222</NumberCasesAcompanhamento>
           </CardRecuperados>
           <CardConfirmados>
             <HeaderConfirmados>
               <TitleConfirmados>CASOS CONFIRMADOS</TitleConfirmados>
-              <MaterialIcons name="arrow-downward" size={24} color="#5CBEA6" />
+              <Circle color="#D1EDE6">
+                <MaterialIcons
+                  name="arrow-downward"
+                  size={24}
+                  color="#5CBEA6"
+                />
+              </Circle>
             </HeaderConfirmados>
             <InfoConfirmadosContainer>
               <DadosContainer>
-                <NumberAcumulados>123.123</NumberAcumulados>
-                <TitleAcumulados>Acumulado</TitleAcumulados>
+                <NumberAcumulados>{covidData.data.confirmed}</NumberAcumulados>
+              </DadosContainer>
+              <DadosContainer>
+                <NumberCasosNovos>12.111</NumberCasosNovos>
+                <TitleCasosNovos>Novos casos</TitleCasosNovos>
+              </DadosContainer>
+            </InfoConfirmadosContainer>
+          </CardConfirmados>
+          <CardConfirmados style={{ borderColor: "#D90909" }}>
+            <HeaderConfirmados>
+              <TitleConfirmados style={{ color: "#D90909" }}>
+                ÓBITOS CONFIRMADOS
+              </TitleConfirmados>
+              <Circle color="#FC9B9B">
+                <MaterialIcons
+                  name="arrow-downward"
+                  size={24}
+                  color="#D90909"
+                />
+              </Circle>
+            </HeaderConfirmados>
+            <InfoConfirmadosContainer>
+              <DadosContainer>
+                <NumberAcumulados>123123</NumberAcumulados>
               </DadosContainer>
               <DadosContainer>
                 <NumberCasosNovos>12.111</NumberCasosNovos>
@@ -118,8 +153,9 @@ export default function Newsletter() {
             </InfoConfirmadosContainer>
           </CardConfirmados>
         </StatisticsContainer>
+      </ScrollView>
       <Modalize ref={modalizeRef}>
-        <Modal />
+        <Modal notifications={notifications} />
       </Modalize>
     </Wrapper>
   );

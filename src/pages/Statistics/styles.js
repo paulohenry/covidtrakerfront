@@ -1,11 +1,14 @@
 import styled from "styled-components/native";
+import {Platform} from 'react-native';
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
   background: rgba(2, 157, 100, 0.7);
+  
 `;
 
 export const Header = styled.View`
+  margin-top: ${Platform.OS == 'android' ? '30px' : '0'  };
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -79,7 +82,7 @@ export const CardConfirmados = styled.View`
   padding: 15px;
   border-radius: 15px;
   border-color: #5CBEA6;
-  border-width: 1;
+  border-width: 1px;
 `;
 
 export const HeaderConfirmados =styled.View`
@@ -93,6 +96,16 @@ export const HeaderConfirmados =styled.View`
 export const TitleConfirmados =styled.Text`
   font-size: 18px;
   color: #5CBEA6;
+  font-weight: bold;
+`;
+
+export const Circle = styled.View`
+  background: ${props => props.color};
+  width: 35px;
+  height: 35px;
+  border-radius: 17.5px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const InfoConfirmadosContainer =styled.View`
@@ -111,13 +124,8 @@ export const DadosContainer = styled.View`
 `;
 
 export const NumberAcumulados =styled.Text`
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bold;
-`;
-
-export const TitleAcumulados =styled.Text`
-  font-size: 15px;
-  color: #969FA5;
 `;
 
 export const NumberCasosNovos =styled.Text`
