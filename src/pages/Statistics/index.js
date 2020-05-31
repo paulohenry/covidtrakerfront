@@ -48,19 +48,26 @@ import Modal from "../../components/Modal";
 import apiCovid from "../../services/apiCovid";
 
 export default function Statistics() {
-  const [covidData, setCovidData] = useState([]);
-
+  const [globalData, setGlobalData] = useState([]);
+  const [brasilData, setBrasilData] = useState([]);
+  const {
+    TotalRecovered,
+    NewRecovered,
+    TotalConfirmed,
+    NewConfirmed,
+    TotalDeaths,
+    NewDeaths,
+  } = globalData;
   const [notifications, setNotifications] = useState(12);
 
   useEffect(() => {
     async function getStatus() {
-      const response = await apiCovid.get("report/v1/brazil");
+      const response = await apiCovid.get("/summary");
       const data = await response.data;
-      setCovidData(data);
-      console.log(covidData)
+      setGlobalData(data.Global);
+      console.log(globalData);
     }
     getStatus();
-    //Nao to conseguindo utilizar esses malditos dados;
   }, []);
 
   //Open Modal
@@ -68,6 +75,27 @@ export default function Statistics() {
   function onOpen() {
     modalizeRef.current?.open();
   }
+
+  function formatarNumero(n) {
+    var n = n.toString();
+    var r = "";
+    var x = 0;
+
+    for (var i = n.length; i > 0; i--) {
+      r += n.substr(i - 1, 1) + (x == 2 && i != 1 ? "." : "");
+      x = x == 2 ? 0 : x + 1;
+    }
+
+    return r.split("").reverse().join("");
+  }
+
+  //Pega pega sempre a data de ontem para mostrar que esta atualizado
+  // const updateData = new Date();
+  // const updateApiData = `${updateData.getDate() - 1}/${
+  //   updateData.getMonth() + 1 < 9
+  //     ? `0${updateData.getMonth() + 1}`
+  //     : `${updateData.getMonth() + 1}`
+  // }/${updateData.getFullYear()}`;
 
   StatusBar.setHidden(false);
   return (
@@ -80,11 +108,7 @@ export default function Statistics() {
       <Header>
         <TextHeader>Situação atual</TextHeader>
         <ActionNotification onPress={onOpen}>
-          <MaterialCommunityIcons
-            name="notification-clear-all"
-            size={40}
-            color="#fff"
-          />
+          <MaterialIcons name="notifications" size={35} color="#fff" />
           <Badge
             status="error"
             containerStyle={{
@@ -98,15 +122,17 @@ export default function Statistics() {
         </ActionNotification>
       </Header>
       <ScrollView>
-        <TextAtualization>Atualizado em: </TextAtualization>
-        <CountryName>Brasil</CountryName>
+        <TextAtualization>Atualizado em:  </TextAtualization>
+        <CountryName>Global</CountryName>
         <CurrentDate style={{ paddingLeft: 15, color: "#fff" }} />
         <StatisticsContainer>
           <CardRecuperados style={styles.cardShadow}>
             <TitleRecovered>Casos recuperados</TitleRecovered>
-            <NumberCasesRecovered>22222</NumberCasesRecovered>
-            <TitleAcompanhamento>Em acompanhamento</TitleAcompanhamento>
-            <NumberCasesAcompanhamento>234.222</NumberCasesAcompanhamento>
+            <NumberCasesRecovered>{TotalRecovered}</NumberCasesRecovered>
+            <TitleAcompanhamento>Novos recuperados</TitleAcompanhamento>
+            <NumberCasesAcompanhamento>
+              {NewRecovered}
+            </NumberCasesAcompanhamento>
           </CardRecuperados>
           <CardConfirmados>
             <HeaderConfirmados>
@@ -121,18 +147,18 @@ export default function Statistics() {
             </HeaderConfirmados>
             <InfoConfirmadosContainer>
               <DadosContainer>
-                <NumberAcumulados>{covidData.data.confirmed}</NumberAcumulados>
+                <NumberAcumulados>{TotalConfirmed}</NumberAcumulados>
               </DadosContainer>
               <DadosContainer>
-                <NumberCasosNovos>12.111</NumberCasosNovos>
-                <TitleCasosNovos>Novos casos</TitleCasosNovos>
+                <NumberCasosNovos>{NewConfirmed}</NumberCasosNovos>
+                <TitleCasosNovos>Novos confirmados</TitleCasosNovos>
               </DadosContainer>
             </InfoConfirmadosContainer>
           </CardConfirmados>
           <CardConfirmados style={{ borderColor: "#D90909" }}>
             <HeaderConfirmados>
               <TitleConfirmados style={{ color: "#D90909" }}>
-                ÓBITOS CONFIRMADOS
+                ÓBITOS
               </TitleConfirmados>
               <Circle color="#FC9B9B">
                 <MaterialIcons
@@ -144,11 +170,11 @@ export default function Statistics() {
             </HeaderConfirmados>
             <InfoConfirmadosContainer>
               <DadosContainer>
-                <NumberAcumulados>123123</NumberAcumulados>
+                <NumberAcumulados>{TotalDeaths}</NumberAcumulados>
               </DadosContainer>
               <DadosContainer>
-                <NumberCasosNovos>12.111</NumberCasosNovos>
-                <TitleCasosNovos>Casos novos</TitleCasosNovos>
+                <NumberCasosNovos>{NewDeaths}</NumberCasosNovos>
+                <TitleCasosNovos>Óbitos recentes</TitleCasosNovos>
               </DadosContainer>
             </InfoConfirmadosContainer>
           </CardConfirmados>
