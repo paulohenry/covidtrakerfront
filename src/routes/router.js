@@ -46,7 +46,7 @@ export default function Router() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{ headerShown: true, headerTitle: "" }}
-        initialRouteName='Maps'
+        initialRouteName='Login'
       >
         <Stack.Screen
           options={{ headerShown: false }}
