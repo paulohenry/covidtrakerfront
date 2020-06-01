@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
   MaterialIcons,
-  Entypo,
-  FontAwesome5,
-  MaterialCommunityIcons,
+  FontAwesome,
+  AntDesign,
   SimpleLineIcons,
 } from "@expo/vector-icons";
 import {
   StyleSheet,
   ScrollView,
-  Text,
   FlatList,
-  View,
-  TouchableOpacity,
   StatusBar,
+  ActivityIndicator,
+  View
 } from "react-native";
 import { Badge } from "react-native-elements";
 import { Modalize } from "react-native-modalize";
@@ -40,16 +38,25 @@ import {
   NumberAcumulados,
   NumberCasosNovos,
   TitleCasosNovos,
+  TitleBrasil,
+  CityContainer,
+  CityNameContainer,
+  CityContainerDetails,
+  CityName,
+  CityDetailsContainer,
+  CityCasesNumber,
+  CityCases,
 } from "./styles";
 
 import CurrentDate from "../../components/CurrentDate";
 import Modal from "../../components/Modal";
 
 import apiCovid from "../../services/apiCovid";
+import apiCovidCity from "../../services/apiCovidCity";
 
 export default function Statistics() {
   const [globalData, setGlobalData] = useState([]);
-  const [brasilData, setBrasilData] = useState([]);
+  const [cityData, setCityData] = useState([]);
   const {
     TotalRecovered,
     NewRecovered,
@@ -65,9 +72,18 @@ export default function Statistics() {
       const response = await apiCovid.get("/summary");
       const data = await response.data;
       setGlobalData(data.Global);
-      console.log(globalData);
     }
     getStatus();
+  }, []);
+
+  useEffect( () => {
+    async function getCityStatus() {
+      const response = await apiCovidCity.get("report/v1");
+      const data = response.data;
+      setCityData(data.data);
+    }
+
+    getCityStatus();
   }, []);
 
   //Open Modal
@@ -76,8 +92,9 @@ export default function Statistics() {
     modalizeRef.current?.open();
   }
 
+  //Funcao para converter os numeros;
   function formatarNumero(n) {
-    var n = n.toString();
+    var n = n + "";
     var r = "";
     var x = 0;
 
@@ -88,14 +105,6 @@ export default function Statistics() {
 
     return r.split("").reverse().join("");
   }
-
-  //Pega pega sempre a data de ontem para mostrar que esta atualizado
-  // const updateData = new Date();
-  // const updateApiData = `${updateData.getDate() - 1}/${
-  //   updateData.getMonth() + 1 < 9
-  //     ? `0${updateData.getMonth() + 1}`
-  //     : `${updateData.getMonth() + 1}`
-  // }/${updateData.getFullYear()}`;
 
   StatusBar.setHidden(false);
   return (
@@ -108,7 +117,7 @@ export default function Statistics() {
       <Header>
         <TextHeader>Situação atual</TextHeader>
         <ActionNotification onPress={onOpen}>
-          <MaterialIcons name="notifications" size={35} color="#fff" />
+          <MaterialIcons name="notifications" size={30} color="#fff" />
           <Badge
             status="error"
             containerStyle={{
@@ -121,17 +130,21 @@ export default function Statistics() {
           />
         </ActionNotification>
       </Header>
-      <ScrollView>
-        <TextAtualization>Atualizado em:  </TextAtualization>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+      >
         <CountryName>Global</CountryName>
         <CurrentDate style={{ paddingLeft: 15, color: "#fff" }} />
         <StatisticsContainer>
           <CardRecuperados style={styles.cardShadow}>
             <TitleRecovered>Casos recuperados</TitleRecovered>
-            <NumberCasesRecovered>{TotalRecovered}</NumberCasesRecovered>
+            <NumberCasesRecovered>
+              {TotalRecovered === undefined ? '000...' : formatarNumero(TotalRecovered)}
+            </NumberCasesRecovered>
             <TitleAcompanhamento>Novos recuperados</TitleAcompanhamento>
             <NumberCasesAcompanhamento>
-              {NewRecovered}
+              {formatarNumero(NewRecovered)}
             </NumberCasesAcompanhamento>
           </CardRecuperados>
           <CardConfirmados>
@@ -147,10 +160,14 @@ export default function Statistics() {
             </HeaderConfirmados>
             <InfoConfirmadosContainer>
               <DadosContainer>
-                <NumberAcumulados>{TotalConfirmed}</NumberAcumulados>
+                <NumberAcumulados>
+                  {formatarNumero(TotalConfirmed)}
+                </NumberAcumulados>
               </DadosContainer>
               <DadosContainer>
-                <NumberCasosNovos>{NewConfirmed}</NumberCasosNovos>
+                <NumberCasosNovos>
+                  {formatarNumero(NewConfirmed)}
+                </NumberCasosNovos>
                 <TitleCasosNovos>Novos confirmados</TitleCasosNovos>
               </DadosContainer>
             </InfoConfirmadosContainer>
@@ -170,14 +187,54 @@ export default function Statistics() {
             </HeaderConfirmados>
             <InfoConfirmadosContainer>
               <DadosContainer>
-                <NumberAcumulados>{TotalDeaths}</NumberAcumulados>
+                <NumberAcumulados>
+                  {formatarNumero(TotalDeaths)}
+                </NumberAcumulados>
               </DadosContainer>
               <DadosContainer>
-                <NumberCasosNovos>{NewDeaths}</NumberCasosNovos>
+                <NumberCasosNovos>{formatarNumero(NewDeaths)}</NumberCasosNovos>
                 <TitleCasosNovos>Óbitos recentes</TitleCasosNovos>
               </DadosContainer>
             </InfoConfirmadosContainer>
           </CardConfirmados>
+          <TitleBrasil>Brasil</TitleBrasil>
+          <FlatList
+            keyExtractor={(item) => item.uid}
+            extraData={cityData}
+            data={cityData}
+            renderItem={({ item }) => (
+              <CityContainer key={item.id}>
+                <CityNameContainer>
+                  <CityName>
+                    {item.state}/{item.uf}
+                  </CityName>
+                </CityNameContainer>
+                <CityContainerDetails>
+                  <CityDetailsContainer>
+                  <FontAwesome name="users" size={24} color="#B090D8" />
+                    <CityCases>Casos</CityCases>
+                    <CityCasesNumber>
+                      {formatarNumero(item.cases)}
+                    </CityCasesNumber>
+                  </CityDetailsContainer>
+                  <CityDetailsContainer>
+                  <MaterialIcons name="local-hospital" size={24} color="#B090D8" />
+                    <CityCases>Suspeitos</CityCases>
+                    <CityCasesNumber>
+                      {formatarNumero(item.suspects)}
+                    </CityCasesNumber>
+                  </CityDetailsContainer>
+                  <CityDetailsContainer>
+                  <AntDesign name="closecircle" size={24} color="#B090D8" />
+                    <CityCases>Óbitos</CityCases>
+                    <CityCasesNumber>
+                      {formatarNumero(item.deaths)}
+                    </CityCasesNumber>
+                  </CityDetailsContainer>
+                </CityContainerDetails>
+              </CityContainer>
+            )}
+          />
         </StatisticsContainer>
       </ScrollView>
       <Modalize ref={modalizeRef}>
