@@ -34,7 +34,7 @@ const data = new Date();
 export default function CurrentDate({ style }) {
   const [atualDate, setAtualDate] = useState("");
   
-  const date = `${dias[data.getDay()]}, ${data.getDate()} de ${
+  const date = `${dias[data.getDay()]}, ${data.getDate() == 1 ? `${data.getDate()}˚` : `${data.getDate()}`} de ${
     meses[data.getMonth()]
   } ${data.getFullYear()}`;
   
