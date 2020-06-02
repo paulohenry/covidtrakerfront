@@ -41,7 +41,7 @@ function StackTabs() {
 
   return (
     <Tabs.Navigator 
-    initialRouteName="Contágio" 
+    initialRouteName="Estatisticas" 
     screenOptions={({route}) => ({
       tabBarIcon: ({focused, color, size}) => {
         let iconName

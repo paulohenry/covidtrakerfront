@@ -11,7 +11,8 @@ import {
   FlatList,
   StatusBar,
   ActivityIndicator,
-  View
+  View, 
+  Text
 } from "react-native";
 import { Badge } from "react-native-elements";
 import { Modalize } from "react-native-modalize";
@@ -52,7 +53,7 @@ import CurrentDate from "../../components/CurrentDate";
 import Modal from "../../components/Modal";
 
 import apiCovid from "../../services/apiCovid";
-import apiCovidCity from "../../services/apiCovidCity";
+import apiCovidBrasil from "../../services/apiCovidBrasil";
 
 export default function Statistics() {
   const [globalData, setGlobalData] = useState([]);
@@ -78,9 +79,10 @@ export default function Statistics() {
 
   useEffect( () => {
     async function getCityStatus() {
-      const response = await apiCovidCity.get("report/v1");
+      const response = await apiCovidBrasil.get("report/v1/brazil");
       const data = response.data;
       setCityData(data.data);
+      console.log(cityData)
     }
 
     getCityStatus();
@@ -198,43 +200,31 @@ export default function Statistics() {
             </InfoConfirmadosContainer>
           </CardConfirmados>
           <TitleBrasil>Brasil</TitleBrasil>
-          <FlatList
-            keyExtractor={(item) => item.uid}
-            extraData={cityData}
-            data={cityData}
-            renderItem={({ item }) => (
-              <CityContainer key={item.id}>
-                <CityNameContainer>
-                  <CityName>
-                    {item.state}/{item.uf}
-                  </CityName>
-                </CityNameContainer>
+              <CityContainer style={styles.cardShadow}>
                 <CityContainerDetails>
                   <CityDetailsContainer>
-                  <FontAwesome name="users" size={24} color="#B090D8" />
+                  <FontAwesome name="users" size={24} color="#fff" />
                     <CityCases>Casos</CityCases>
                     <CityCasesNumber>
-                      {formatarNumero(item.cases)}
+                      {formatarNumero(cityData.cases)}
                     </CityCasesNumber>
                   </CityDetailsContainer>
                   <CityDetailsContainer>
-                  <MaterialIcons name="local-hospital" size={24} color="#B090D8" />
+                  <MaterialIcons name="local-hospital" size={24} color="#fff" />
                     <CityCases>Suspeitos</CityCases>
                     <CityCasesNumber>
-                      {formatarNumero(item.suspects)}
+                      {formatarNumero(cityData.confirmed)}
                     </CityCasesNumber>
                   </CityDetailsContainer>
                   <CityDetailsContainer>
-                  <AntDesign name="closecircle" size={24} color="#B090D8" />
+                  <AntDesign name="closecircle" size={24} color="#fff" />
                     <CityCases>Óbitos</CityCases>
                     <CityCasesNumber>
-                      {formatarNumero(item.deaths)}
+                      {formatarNumero(cityData.deaths)}
                     </CityCasesNumber>
                   </CityDetailsContainer>
                 </CityContainerDetails>
               </CityContainer>
-            )}
-          />
         </StatisticsContainer>
       </ScrollView>
       <Modalize ref={modalizeRef}>
@@ -254,8 +244,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.43,
     shadowRadius: 9.51,
     elevation: 15,
-  },
-  iconCard: {
-    marginTop: 5,
-  },
+  }
 });
