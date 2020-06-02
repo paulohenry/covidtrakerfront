@@ -144,21 +144,13 @@ export const TitleBrasil = styled.Text`
 
 export const CityContainer = styled.View`
   padding: 15px;
-  margin: 15px;
+  margin-top: 10px;
   flex: 1;
-  background: #FBECE5;
-  border-color: #6356B5;
-  border-radius: 30px;
-  border-width: 1px;
+  background: #FA6E33;
 `;
 
 export const CityNameContainer = styled.View``;
 
-export const CityName = styled.Text`
-  font-size: 15px;
-  font-weight: bold;
-  color: #6356B5;
-`;
 
 export const CityContainerDetails = styled.View`
   flex-direction: row;
@@ -173,12 +165,12 @@ export const CityDetailsContainer = styled.View`
 
 export const CityCasesNumber = styled.Text`
   font-size: 20px;
-  color: #6356B5;
+  color: #fff;
   font-weight: bold;
 `;
 
 export const CityCases = styled.Text`
   font-size: 17px;
-  color: #B090D8;
+  color: #fff;
 
 `;
