@@ -69,4 +69,5 @@ expo && npm install
 expo start
 ```
 
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/paulohenry/covidtrakerfront.svg?style=flat-square
+[contributors-url]: https://github.com/paulohenry/covidtrakerfront/graphs/contributors
