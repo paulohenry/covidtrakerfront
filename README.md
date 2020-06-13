@@ -1,3 +1,6 @@
+[![Contributors][contributors-shield]][contributors-url]
+
+
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -65,3 +68,5 @@ expo && npm install
 ```sh
 expo start
 ```
+
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
