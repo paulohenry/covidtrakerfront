@@ -51,7 +51,7 @@ Você vai precisar instalar esses programas no seu terminal antes de prosseguir.
 npm install --global expo-cli
 ```
 
-### Installation
+### Instalação
 
 1. Clone o repositório
 ```sh
