@@ -26,9 +26,6 @@ const dias = [
   "sábado",
 ];
 
-//Paulo, nao precisa ficar em choque com a logica do pai.
-//Aqui onde a suruba acontece
-
 const data = new Date();
 
 export default function CurrentDate({ style }) {
