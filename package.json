@@ -14,7 +14,7 @@
     "appcenter": "^3.0.2",
     "appcenter-analytics": "^3.0.2",
     "appcenter-crashes": "^3.0.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "~37.0.3",
     "expo-device": "~2.1.0",
     "expo-font": "~8.1.0",
